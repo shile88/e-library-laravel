@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('name');
+            $table->text('about');
+            $table->string('picture')->default('/assets/img/user.jpg');
         });
     }
 
