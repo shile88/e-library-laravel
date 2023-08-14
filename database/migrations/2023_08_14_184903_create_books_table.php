@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('page_count');
             $table->integer('total_count');
+            $table->date('publish_date');
 
             $table->foreignId('script_id')->constrained();
             $table->foreignId('binding_id')->constrained();

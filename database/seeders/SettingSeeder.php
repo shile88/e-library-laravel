@@ -6,18 +6,17 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class BindingSeeder extends Seeder
+class SettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('bindings')->insert([
-            ['name' => 'Meki povez'],
-            ['name' => 'Tvrdi povez'],
-            ['name' => 'Plastična spirala'],
-            ['name' => 'Klamovani'],
+        DB::table('settings')->insert([
+            ['variable' => 'Holding time', 'value' => 20],
+            ['variable' => 'Reservation time', 'value' => 20],
+            ['variable' => 'Books per student', 'value' => 5],
         ]);
     }
 }
