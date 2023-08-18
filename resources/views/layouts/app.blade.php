@@ -24,9 +24,7 @@
     @vite('resources/css/app.css')
     @include('layouts.partials.styles')
     
-    @vite('resources/js/jquery.min.js')
-    @vite('resources/js/app.js')
-    
+
     
 </head>
 
@@ -46,13 +44,13 @@
             <!-- Heading of content -->
             <div class="heading">
                 <h1 class="pl-[50px] pb-[20px] text-[35px] text-[#5c5c5c] font-bold border-b-[2px] border-[#e4dfdf]">
-                    Heading of the section
+                    @yield('title')
                 </h1>
             </div>
             <!-- Space for content -->
             <div class="scroll height-content section-content">
                 <p class="pl-[50px] pt-[20px] text-[20px]">
-                    Content of the section
+                    @yield('content')
                 </p>
             </div>
         </section>
@@ -60,12 +58,14 @@
     </main>
     <!-- End Main content -->
 
+    
     <!-- Notification for small devices -->   
     @include('layouts.partials.inProgress')
 
 
     <!-- Scripts -->
-    @include('layouts.partials.scripts')
+    @vite('resources/js/jquery.min.js')
+    @vite('resources/js/app.js')
     <!-- End Scripts -->
 
     
