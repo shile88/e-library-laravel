@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Žanr')
+@section('title', $genreName)
 
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Format')
+@section('title', $formatName)
 
 @section('content')
 
