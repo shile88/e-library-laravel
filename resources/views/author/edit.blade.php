@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Autori')
+@section('title', $authorName)
 
 @section('content')
 
