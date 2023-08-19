@@ -48,11 +48,9 @@
                 </h1>
             </div>
             <!-- Space for content -->
-            <div class="scroll height-content section-content">
-                <p class="pl-[50px] pt-[20px] text-[20px]">
-                    @yield('content')
-                </p>
-            </div>
+            
+                @yield('content')
+
         </section>
         <!-- End Content -->
     </main>
