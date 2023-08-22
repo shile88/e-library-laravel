@@ -73,6 +73,12 @@
                                 <i class="far fa-address-book mr-[10px] ml-[5px] py-1"></i>
                                 <span class="px-4 py-0">Autor</span>
                             </a>
+                            <a href="{{ route('publishers.create') }}" tabindex="0"
+                               class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                               role="menuitem">
+                                <i class="far fa-address-book mr-[10px] ml-[5px] py-1"></i>
+                                <span class="px-4 py-0">Izdavac</span>
+                            </a>
                         </div>
                     </div>
                 </div>

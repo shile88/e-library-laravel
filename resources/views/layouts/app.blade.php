@@ -20,12 +20,12 @@
     <!-- Styles -->
     <!-- @include('layouts.partials.styles') -->
     <!-- End Styles -->
-    
+
     @vite('resources/css/app.css')
     @include('layouts.partials.styles')
-    
 
-    
+
+
 </head>
 
 <body class="overflow-hidden small:bg-gradient-to-r small:from-green-400 small:to-blue-500">
@@ -48,7 +48,7 @@
                 </h1>
             </div>
             <!-- Space for content -->
-            
+
                 @yield('content')
 
         </section>
@@ -56,8 +56,8 @@
     </main>
     <!-- End Main content -->
 
-    
-    <!-- Notification for small devices -->   
+
+    <!-- Notification for small devices -->
     @include('layouts.partials.inProgress')
 
 
@@ -66,7 +66,7 @@
     @vite('resources/js/app.js')
     <!-- End Scripts -->
 
-    
+
 </body>
 
 </html>
