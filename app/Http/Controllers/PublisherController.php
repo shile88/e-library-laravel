@@ -55,8 +55,6 @@ class PublisherController extends Controller
      */
     public function update(UpdatePublisherRequest $request, Publisher $publisher)
     {
-
-
         $publisher->update($request->validated());
 
         return redirect()->route('settings.publishers');

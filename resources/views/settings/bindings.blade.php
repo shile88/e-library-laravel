@@ -65,7 +65,7 @@
                 <a href="{{ route('settings.formats') }}" class="inline ml-[70px] hover:text-blue-800">
                     Format
                 </a>
-                <a href="{{ route('settings.letters') }}" class="inline ml-[70px] hover:text-blue-800">
+                <a href="{{ route('settings.scripts') }}" class="inline ml-[70px] hover:text-blue-800">
                     Pismo
                 </a>
             </div>

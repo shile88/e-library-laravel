@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publisher;
+use App\Models\Script;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -39,8 +40,10 @@ class SettingController extends Controller
         return view('settings.formats');
     }
 
-    public function showLetters()
+    public function showScripts()
     {
-        return view('settings.letters');
+        $scripts = Script::all();
+
+        return view('settings.scripts', ['scripts' => $scripts]);
     }
 }
