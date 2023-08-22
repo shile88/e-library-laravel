@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('/publishers', PublisherController::class);
+Route::resource('/scripts', ScriptController::class);
 
 Route::prefix('settings')->group(function () {
     Route::get('/policy', [SettingController::class, 'showPolicy'])->name('settings.policy');
@@ -28,7 +30,7 @@ Route::prefix('settings')->group(function () {
     Route::get('/publishers', [SettingController::class, 'showPublishers'])->name('settings.publishers');
     Route::get('/bindings', [SettingController::class, 'showBindings'])->name('settings.bindings');
     Route::get('/formats', [SettingController::class, 'showFormats'])->name('settings.formats');
-    Route::get('/letters', [SettingController::class, 'showLetters'])->name('settings.letters');
+    Route::get('/scripts', [SettingController::class, 'showScripts'])->name('settings.scripts');
 });
 
 Route::group(['middleware'=>'auth'], function(){

@@ -56,7 +56,7 @@
                 <a href="{{ route('settings.genres') }}" class="inline ml-[70px] hover:text-blue-800">
                     Zanrovi
                 </a>
-                <a href="{{ route('settings.publishers') }}" class="inline ml-[70px] hover:text-blue-800 active-book-nav">
+                <a href="{{ route('settings.publishers') }}" class="inline ml-[70px] hover:text-blue-800">
                     Izdavac
                 </a>
                 <a href="{{ route('settings.bindings') }}" class="inline ml-[70px] hover:text-blue-800 ">
@@ -65,15 +65,15 @@
                 <a href="{{ route('settings.formats') }}" class="inline ml-[70px] hover:text-blue-800">
                     Format
                 </a>
-                <a href="{{ route('settings.scripts') }}" class="inline ml-[70px] hover:text-blue-800">
+                <a href="{{ route('settings.scripts') }}" class="inline ml-[70px] hover:text-blue-800 active-book-nav">
                     Pismo
                 </a>
             </div>
             <div class="height-kategorije pb-[30px] scroll">
                 <div class="flex items-center px-[50px] py-8 space-x-3 rounded-lg">
-                    <a href="{{ route('publishers.create') }}"
+                    <a href="{{route('scripts.create')}}"
                         class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] tracking-wider text-white bg-[#3f51b5] rounded hover:bg-[#4558BE]">
-                        <i class="fas fa-plus mr-[15px]"></i> Novi izdavac
+                        <i class="fas fa-plus mr-[15px]"></i> Novo pismo
                     </a>
                 </div>
 
@@ -87,14 +87,14 @@
                                         <input type="checkbox" class="form-checkbox">
                                     </label>
                                 </th>
-                                <th class="px-4 py-4 leading-4 tracking-wider text-left">Naziv izdavaca<a href="#"><i
+                                <th class="px-4 py-4 leading-4 tracking-wider text-left">Naziv pisma<a href="#"><i
                                             class="ml-3 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a>
                                 </th>
                                 <th class="px-4 py-4"> </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white">
-                        @foreach($publishers as $publisher)
+                        @foreach($scripts as $script)
                             <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
                                 <td class="px-4 py-4 whitespace-no-wrap">
                                     <label class="inline-flex items-center">
@@ -102,33 +102,34 @@
                                     </label>
                                 </td>
                                 <td class="flex flex-row items-center px-4 py-4">
-                                    <p>{{$publisher->name}}</p>
+                                    <p>{{$script->name}}</p>
                                 </td>
                                 <td class="px-4 py-4 text-sm leading-5 text-right whitespace-no-wrap">
-                                    <p class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsPublisher hover:text-[#606FC7]">
+                                    <p class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsScript hover:text-[#606FC7]">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </p>
                                     <div
-                                        class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-publisher">
+                                        class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-script">
                                         <div class="absolute right-[25px] w-56 mt-[7px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
                                             aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
                                             <div class="py-1">
-                                                <a href="{{route('publishers.edit', $publisher)}}" tabindex="0"
+                                                <a href="{{route('scripts.edit', $script)}}" tabindex="0"
                                                     class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                     role="menuitem">
                                                     <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Izmijeni izdavaca</span>
+                                                    <span class="px-4 py-0">Izmijeni pismo</span>
                                                 </a>
-                                                <form method="POST" action="{{route('publishers.destroy', $publisher)}}">
+                                                <form method="POST" action="{{route('scripts.destroy', $script)}}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" tabindex="0"
+                                                    <button tabindex="0"
                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                        role="menuitem">
                                                         <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                                        <span class="px-4 py-0">Izbrisi izdavaca</span>
+                                                        <span class="px-4 py-0">Izbrisi pismo</span>
                                                     </button>
                                                 </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -216,7 +217,7 @@
     @vite('resources/js/jquery.min.js')
     @vite('resources/js/app.js')
     <!-- End Scripts -->
+
 </body>
 
 </html>
-
