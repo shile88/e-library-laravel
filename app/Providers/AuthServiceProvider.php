@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        '*' => \App\Policies\GlobalPolicy::class, //Ovaj policy se odnosi na sve modele
+        //
     ];
 
     /**
