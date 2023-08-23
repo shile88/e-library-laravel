@@ -21,7 +21,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view('publisher.create');
     }
 
     /**
@@ -29,7 +29,9 @@ class PublisherController extends Controller
      */
     public function store(StorePublisherRequest $request)
     {
-        //
+        Publisher::query()->create($request->validated());
+
+        return redirect()->route('settings.publishers');
     }
 
     /**
@@ -45,7 +47,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        //
+        return view('publisher.edit', ['publisher' => $publisher]);
     }
 
     /**
@@ -53,7 +55,9 @@ class PublisherController extends Controller
      */
     public function update(UpdatePublisherRequest $request, Publisher $publisher)
     {
-        //
+        $publisher->update($request->validated());
+
+        return redirect()->route('settings.publishers');
     }
 
     /**
@@ -61,6 +65,8 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        $publisher->delete();
+
+        return redirect()->route('settings.publishers');
     }
 }

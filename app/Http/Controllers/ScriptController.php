@@ -21,7 +21,7 @@ class ScriptController extends Controller
      */
     public function create()
     {
-        //
+        return view('script.create');
     }
 
     /**
@@ -29,7 +29,9 @@ class ScriptController extends Controller
      */
     public function store(StoreScriptRequest $request)
     {
-        //
+        Script::query()->create($request->validated());
+
+        return redirect()->route('settings.scripts');
     }
 
     /**
@@ -45,7 +47,7 @@ class ScriptController extends Controller
      */
     public function edit(Script $script)
     {
-        //
+        return view('script.edit', ['script' => $script]);
     }
 
     /**
@@ -53,7 +55,9 @@ class ScriptController extends Controller
      */
     public function update(UpdateScriptRequest $request, Script $script)
     {
-        //
+        $script->update($request->validated());
+
+        return redirect()->route('settings.scripts');
     }
 
     /**
@@ -61,6 +65,8 @@ class ScriptController extends Controller
      */
     public function destroy(Script $script)
     {
-        //
+        $script->delete();
+
+        return redirect()->route('settings.scripts');
     }
 }
