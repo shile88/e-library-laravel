@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -21,55 +23,29 @@ class BookController extends Controller
     {
         $book = Book::with('authors', 'bindings', 'categories', 'genre', 'languages', 'publishers', 'script', 'size')->get();
       
-        return view('books.index', compact('books'));
+        return view('book.index', compact('books'));
     }
 
     public function create()
     {
         $book = Book::with('authors', 'bindings', 'categories', 'genre', 'languages', 'publishers', 'script', 'size');
     
-        return view('books.create', compact('book'));
+        return view('book.create', compact('book'));
     }
 
-    public function store(Request $request)
+
+    public function store(StoreBookRequest $request)
 {
-    $validatedData = $request->validate([
-        'title' => 'required|max:255',
-        'isbn' => 'required|unique:books,isbn',
-        'description' => 'required|string',
-        'page_count' => 'required|numeric',
-        'total_count' => 'required|numeric',
-        'year' => 'required|string',
-        'language_id' => 'nullable|exists:languages,id',
-        'genres_id' => 'nullable|array',
-        'binding_id' => 'nullable|exists:bindings,id',
-        'script_id' => 'nullable|exists:scripts,id',
-        'size_id' => 'nullable|exists:sizes,id',
-        'publisher_id' => 'nullable|exists:publishers,id',
-        'authors.*' => 'nullable|exists:authors,id',
-        'categories.*' => 'nullable|exists:categories,id',
-    ]);
+    $validatedData = $request->validated();
     
-    try {
-        $book = Book::create([
-            'title' => $validatedData['title'],
-            'isbn' => $validatedData['isbn'],
-            'description' => $validatedData['description'],
-            'page_count' => $validatedData['page_count'],
-            'total_count' => $validatedData['total_count'],
-        ]);
-        
-        $book->authors()->attach($validatedData['authors']); 
-        $book->categories()->attach($validatedData['categories']);
-        $book->genres()->attach($validatedData['genres']);
-        
-        return redirect()->route('books.index')
-            ->with('success', 'Knjiga je uspešno dodata.');
-    } catch (\Exception $e) {
-        return redirect()->back()
-            ->withInput()
-            ->withErrors(['error' => 'Došlo je do greške prilikom dodavanja knjige.']);
-    }
+    $book = Book::create($validatedData);
+    
+    $book->authors()->attach($validatedData['authors']); 
+    $book->categories()->attach($validatedData['categories']);
+    $book->genres()->attach($validatedData['genres_id']);
+    
+    return redirect()->route('book.index');
+
 }
 
     
@@ -77,7 +53,7 @@ class BookController extends Controller
     {
         $book = Book::with('authors', 'bindings', 'categories', 'genre', 'languages', 'publishers', 'script', 'size')->findOrFail($id);
         
-        return view('books.show', compact('book'));
+        return view('book.show', compact('book'));
     }
 
     
@@ -85,71 +61,34 @@ class BookController extends Controller
     {
         $book = Book::with('authors', 'bindings', 'categories', 'genre', 'languages', 'publishers', 'script', 'size')->findOrFail($id);
     
-        return view('books.edit', compact('book'));
+        return view('book.edit', compact('book'));
     }
 
     
-    public function update(Request $request, $id)
+    public function update(UpdateBookRequest $request, Book $book)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'isbn' => 'required|unique:books,isbn,' . $id,
-            'description' => 'required|string',
-            'page_count' => 'required|numeric',
-            'total_count' => 'required|numeric',
-            'year' => 'required|string',
-            'language_id' => 'nullable|exists:languages,id',
-            'genres_id' => 'nullable|array',
-            'binding_id' => 'nullable|exists:bindings,id',
-            'script_id' => 'nullable|exists:scripts,id',
-            'size_id' => 'nullable|exists:sizes,id',
-            'publisher_id' => 'nullable|exists:publishers,id',
-            'authors.*' => 'nullable|exists:authors,id',
-            'categories.*' => 'nullable|exists:categories,id',
-        ]);
+        $validatedData = $request->validated();
 
-        try {
-            $book = Book::findOrFail($id);
+        $book->update($validatedData);
 
-            $book->update([
-                'title' => $validatedData['title'],
-                'isbn' => $validatedData['isbn'],
-                'description' => $validatedData['description'],
-                'page_count' => $validatedData['page_count'],
-                'total_count' => $validatedData['total_count'],
-            ]);
+        $book->authors()->sync($validatedData['authors']);
+        $book->categories()->sync($validatedData['categories']);
+        $book->genres()->sync($validatedData['genres']);
 
-            $book->authors()->sync($validatedData['authors']);
-            $book->categories()->sync($validatedData['categories']);
-            $book->genres()->sync($validatedData['genres']);
-
-            return redirect()->route('books.index')
-                ->with('success', 'Knjiga je uspešno ažurirana.');
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->withErrors(['error' => 'Došlo je do greške prilikom ažuriranja knjige.']);
-        }
+        return redirect()->route('books.index');
     }
 
 
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        try {
-            $book = Book::findOrFail($id);
-            
-            $book->authors()->detach();
-            $book->categories()->detach();
-            $book->genres()->detach();
-            
-            $book->delete();
-            
-            return redirect()->route('books.index')
-                ->with('success', 'Knjiga je uspešno obrisana.');
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withErrors(['error' => 'Došlo je do greške prilikom brisanja knjige.']);
-        }
+
+        $book->authors()->detach();
+        $book->categories()->detach();
+        $book->genres()->detach();
+        
+        $book->delete();
+        
+        return redirect()->route('books.index');
     }
     
 }

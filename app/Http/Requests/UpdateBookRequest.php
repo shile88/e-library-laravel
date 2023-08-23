@@ -21,8 +21,23 @@ class UpdateBookRequest extends FormRequest
      */
     public function rules(): array
     {
+        $bookId = $this->route('book');
+
         return [
-            //
+            'title' => 'required|max:255',
+            'isbn' => 'required|unique:books,isbn,'.$bookId,
+            'description' => 'required|string',
+            'page_count' => 'required|numeric',
+            'total_count' => 'required|numeric',
+            'year' => 'required|string',
+            'language_id' => 'nullable|exists:languages,id',
+            'genres_id' => 'nullable|array',
+            'binding_id' => 'nullable|exists:bindings,id',
+            'script_id' => 'nullable|exists:scripts,id',
+            'size_id' => 'nullable|exists:sizes,id',
+            'publisher_id' => 'nullable|exists:publishers,id',
+            'authors.*' => 'nullable|exists:authors,id',
+            'categories.*' => 'nullable|exists:categories,id',
         ];
     }
 }

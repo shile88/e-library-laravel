@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\SettingController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,6 @@ Route::prefix('settings')->group(function () {
 });
 
 Route::group(['middleware'=>'auth'], function(){
-    //Odje treba da budu definisane rute koje ce biti zasticene sa auth middlewareom.
+    Route::resource('/authors', AuthorController::class);
 });
 
