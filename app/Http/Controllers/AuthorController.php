@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
@@ -66,6 +67,7 @@ class AuthorController extends Controller
     {          
         $authorData = $request->validated();
 
+        //Saving author's photo in public folder
         if ($request->hasFile('photo')) {
             $photoPath = $request->file('photo')->store('author_photos', 'public');
             $authorData['photo'] = $photoPath;
@@ -81,6 +83,12 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
+        //Delete photo of author
+        if ($author->photo) {
+            Storage::disk('public')->delete($author->photo);
+        }
+
+        
         $author->delete();
 
         return redirect()->route('author.index');
