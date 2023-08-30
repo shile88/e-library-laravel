@@ -22,10 +22,7 @@ class UpdateAuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nameSurname' => 'required|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'biography' => 'nullable|string',
-            'wikipedia' => 'required|string',
+            //
         ];
     }
 }

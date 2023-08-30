@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
-use App\Models\Book;
 
 class AuthorController extends Controller
 {
@@ -15,8 +14,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
-        return view('author.index', compact('authors'));
+        //
     }
 
     /**
@@ -24,7 +22,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('author.create');
+        //
     }
 
     /**
@@ -32,16 +30,7 @@ class AuthorController extends Controller
      */
     public function store(StoreAuthorRequest $request)
     {
-        $authorData = $request->validated();
-
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('author_photos', 'public');
-            $authorData['photo'] = $photoPath;
-        }
-        
-        Author::create($authorData);
-
-        return redirect()->route('author.index');
+        //
     }
 
     /**
@@ -49,7 +38,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        return view('author.show', compact('author'));
+        //
     }
 
     /**
@@ -57,14 +46,14 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        return view('author.edit', compact('author'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateAuthorRequest $request, Author $author)
-    {          
+    {
         $authorData = $request->validated();
 
         //Saving author's photo in public folder
@@ -72,7 +61,7 @@ class AuthorController extends Controller
             $photoPath = $request->file('photo')->store('author_photos', 'public');
             $authorData['photo'] = $photoPath;
         }
-        
+
         $author->update($authorData);
 
         return redirect()->route('author.index');
@@ -88,7 +77,7 @@ class AuthorController extends Controller
             Storage::disk('public')->delete($author->photo);
         }
 
-        
+
         $author->delete();
 
         return redirect()->route('author.index');
