@@ -1,36 +1,72 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="description" content="ICT Cortex Library - project for high school students..." />
+    <meta name="keywords" content="ict cortex, cortex, bild, bildstudio, highschool, students, coding" />
+    <meta name="author" content="bildstudio" />
+    <!-- End Meta -->
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <!-- Title -->
+    <title>Library - ICT Cortex student project</title>
+    <link rel="shortcut icon" href="img/library-favicon.ico" type="image/vnd.microsoft.icon" />
+    <!-- End Title -->
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+    <!-- Styles -->
+    <!-- @include('layouts.partials.styles') -->
+    <!-- End Styles -->
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    @vite('resources/css/app.css')
+    @include('layouts.partials.styles')
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
+
+
+</head>
+
+<body class="overflow-hidden small:bg-gradient-to-r small:from-green-400 small:to-blue-500">
+    <!-- Header -->
+    @include('layouts.partials.header')
+    <!-- Header -->
+
+    <!-- Main content -->
+    <main class="flex flex-row small:hidden">
+        <!-- Sidebar -->
+        @include('layouts.partials.sidebar')
+        <!-- End Sidebar -->
+
+        <!-- Content -->
+        <section class="w-screen h-screen py-4 pl-[60px] text-[#212121]">
+            <!-- Heading of content -->
+            <div class="heading">
+                <h1 class="pl-[50px] pb-[20px] text-[35px] text-[#5c5c5c] font-bold border-b-[2px] border-[#e4dfdf]">
+                    @yield('title')
+                </h1>
+            </div>
+            <!-- Space for content -->
+
+                @yield('content')
+
+        </section>
+        <!-- End Content -->
+    </main>
+    <!-- End Main content -->
+
+
+    <!-- Notification for small devices -->
+    @include('layouts.partials.inProgress')
+
+
+    <!-- Scripts -->
+    @vite('resources/js/jquery.min.js')
+    @vite('resources/js/app.js')
+    <!-- End Scripts -->
+
+
+</body>
+
 </html>
