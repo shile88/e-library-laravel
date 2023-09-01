@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,8 +24,8 @@
 
         <section class="w-screen h-screen pl-[80px] text-[#212121]">
             <!-- Heading of Content -->
-            <div class="heading border-b-[1px] border-[#e4dfdf] mt-6">
-                <div class="pl-[30px] pb-[5px] mb-4">
+            <div class="heading border-b-[1px] border-[#e4dfdf] mt-4">
+                <div class="pl-[30px] mb-4">
                     <h1>@yield('title', 'Dashboard')</h1>
                 </div>
             </div>
