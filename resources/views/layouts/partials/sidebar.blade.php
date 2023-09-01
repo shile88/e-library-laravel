@@ -1,189 +1,160 @@
 <nav id="sidebar"
     class="fixed z-10 flex flex-col justify-between overflow-x-hidden overflow-y-auto bg-[#EFF3F6] sidebar nav-height">
     <div class="">
+
         <!-- Hamburger Icon -->
         <div
             class="cursor-pointer text-[#707070] pl-[30px] pt-[28px] pb-[27px] text-[25px] border-b-[1px] border-[#e4dfdf] ">
             <i id="hamburger" class="hamburger-btn fas fa-bars"></i>
         </div>
-        <div class="mt-[30px]">
+
+        <div class="">
             <ul class="text-[#2D3B48] sidebar-nav">
+
                 <!-- Dashboard Icon -->
-                <li class="bg-[#EAEAEA] pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA]">
-                    <div class="ml-[25px]">
+                <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
+                    <div class="ml-[30px]">
                         <span class="flex justify-between w-full fill-current whitespace-nowrap">
-                            <div class="transition duration-300 ease-in group-hover:text-[#576cdf]">
-                                <a href="dashboard.php" aria-label="Dashboard">
-                                    <i
-                                        class="text-white bg-[#3F51B5] px-[5px] pt-[4px] pb-[5px] fas fa-tachometer-alt text-[19px] rounded-[3px]"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p class="inline text-[15px] ml-[15px]">Dashboard</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Bibliotekari Icon -->
-                <li class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="bibliotekari.php" aria-label="Bibliotekari">
-                                    <i
-                                        class="text-[25px] text-[#707070] far fa-address-book transition duration-300 ease-in group-hover:text-[#576cdf]"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class=" inline text-[15px] ml-[20px] transition duration-300 ease-in group-hover:text-[#576cdf]">
-                                            Bibliotekari
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Ucenici Icon -->
-                <li class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="ucenik.php" aria-label="Ucenici">
-                                    <i
-                                        class="text-[18px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fas fa-users"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Ucenici</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Knjige Icon -->
-                <li class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="evidencijaKnjiga.php" aria-label="Knjige">
-                                    <i
-                                        class="text-[25px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] far fa-copy"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Knjige</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Autori Icon -->
-                <li class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="" aria-label="Knjige">
-                                    <i
-                                        class="text-[25px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] far fa-address-book"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Autori</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Izdavanje Icon -->
-                <li class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="izdateKnjige.php" aria-label="Knjige">
-                                    <i
-                                        class="text-[22px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fas fa-exchange-alt"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Izdavanje
-                                            knjiga
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Expand menu example -->
-                <li class="pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA]">
-                    <div class="mx-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
+                            <div class="transition duration-300 ease-in group-hover:text-blue-600" title="Dashboard">
                                 <a href="#" aria-label="Dashboard">
                                     <i
-                                        class="transition duration-300 ease-in group-hover:text-[#576cdf] text-[25px] text-[#707070] fas fa-expand"></i>
+                                        class="text-[22px] pt-[4px] pr-1 pb-[5px] fa-solid fa-chart-line rounded-[3px] text-[#707070]
+                                        transition duration-300 ease-in group-hover:text-blue-600"></i>
                                     <div class="hidden sidebar-item">
                                         <p
-                                            class="transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Expand example</p>
+                                            class="transition duration-300 ease-in group-hover:text-blue-600 inline text-[15px] ml-[20px]">
+                                            Dashboard</p>
                                     </div>
                                 </a>
-                            </div>
-                            <div id="item-collapse_1"
-                                class="asideArrow hidden sidebar-item transition duration-300 ease-in hover:text-[#576cdf] cursor-pointer">
-                                <i id="arrow-collapse_1" class="inline arrow fas fa-angle-right"></i>
                             </div>
                         </span>
                     </div>
                 </li>
-                <!-- Expand menu - items -->
-                <ul id="aside-item_1"
-                    class="aside-item hidden pl-[70px] mt-[5px] pt-[8px] pb-[10px] text-[#778089] text-[14px]">
-                    <li class="mb-[4px] py-[6px]">
-                        <div class="transition duration-300 ease-in hover:text-[#2d3b48]">
-                            <a href="#" aria-label="Dashboard">
+
+                <!-- Students Icon -->
+                <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
+                    <div class="ml-[30px]">
+                        <span class="flex justify-between w-full whitespace-nowrap" title="Students">
+                            <a href="#" aria-label="Students">
+                                <i
+                                    class="text-[22px] pt-[4px] pb-[5px] mr-1 transition duration-300 ease-in group-hover:text-blue-600 text-[#707070] fa-solid fa-user-graduate"></i>
                                 <div class="hidden sidebar-item">
-                                    <p class="inline">Basic expand</p>
+                                    <p
+                                        class="transition duration-300 ease-in group-hover:text-blue-600 inline text-[15px] ml-[20px]">
+                                        Students</p>
                                 </div>
                             </a>
-                        </div>
-                    </li>
-                    <li class="mb-[4px] py-[6px]">
-                        <div class="transition duration-300 ease-in hover:text-[#2d3b48]">
-                            <a href="#" aria-label="Dashboard">
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Authors Icon -->
+                <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
+                    <div class="ml-[30px]">
+                        <span class="flex justify-between w-full whitespace-nowrap" title="Authors">
+                            <a href="#" aria-label="Authors">
+                                <i
+                                    class="text-[22px] pt-[4px] pb-[5px] transition duration-300 ease-in group-hover:text-blue-600 text-[#707070] fas fa-user-pen"></i>
                                 <div class="hidden sidebar-item">
-                                    <p class="inline">Basic expand</p>
+                                    <p
+                                        class="transition duration-300 ease-in group-hover:text-blue-600 inline text-[15px] ml-[19px]">
+                                        Authors</p>
                                 </div>
                             </a>
-                        </div>
-                    </li>
-                    <li class="mb-[4px] py-[6px]">
-                        <div class="transition duration-300 ease-in hover:text-[#2d3b48]">
-                            <a href="#" aria-label="Dashboard">
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Books Icon -->
+                <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
+                    <div class="ml-[30px]">
+                        <span class="flex justify-between w-full whitespace-nowrap" title="Books">
+                            <a href="#" aria-label="Books">
+                                <i
+                                    class="text-[22px] pt-[4px] pb-[5px] pr-2 transition duration-300 ease-in group-hover:text-blue-600 text-[#707070] fas fa-book"></i>
                                 <div class="hidden sidebar-item">
-                                    <p class="inline">Basic expand</p>
+                                    <p
+                                        class="transition duration-300 ease-in group-hover:text-blue-600 inline text-[15px] ml-[19px]">
+                                        Books</p>
                                 </div>
                             </a>
-                        </div>
-                    </li>
-                </ul>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Transactions Icon -->
+                <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
+                    <div class="ml-[30px]">
+                        <span class="flex justify-between w-full whitespace-nowrap" title="Transactions">
+                            <a href="#" aria-label="Transactions">
+                                <i
+                                    class="text-[22px] pt-[4px] pb-[5px] pr-1 text-[#707070] fa-solid fa-repeat transition duration-300 ease-in group-hover:text-blue-600"></i>
+                                <div class="hidden sidebar-item">
+                                    <p
+                                        class="transition duration-300 ease-in group-hover:text-blue-600 inline text-[15px] ml-[20px]">
+                                        Transactions</p>
+                                </div>
+                            </a>
+                        </span>
+
+                    </div>
+                </li>
+
+                <!-- Librarian Icon -->
+                <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
+                    <div class="ml-[30px]">
+                        <span class="flex justify-between w-full whitespace-nowrap" title="Librarians">
+                            <a href="#" aria-label="Librarians">
+                                <i
+                                    class="text-[22px] pt-[4px] pb-[5px] pr-2 text-[#707070] fa-solid fa-user-tie transition duration-300 ease-in group-hover:text-blue-600"></i>
+                                <div class="hidden sidebar-item">
+                                    <p
+                                        class="transition duration-300 ease-in group-hover:text-blue-600 inline text-[15px] ml-[19px]">
+                                        Librarians</p>
+                                </div>
+                            </a>
+                        </span>
+                    </div>
+                </li>
+
+                <!-- Admin Icon -->
+                <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
+                    <div class="ml-[30px]">
+                        <span class="flex justify-between w-full whitespace-nowrap" title="Admins">
+                            <a href="#" aria-label="Admins">
+                                <i
+                                    class="text-[22px] pt-[4px] pb-[5px] transition duration-300 ease-in group-hover:text-blue-600 text-[#707070] fa-solid fa-user-shield"></i>
+                                <div class="hidden sidebar-item">
+                                    <p
+                                        class="transition duration-300 ease-in group-hover:text-blue-600 inline text-[15px] ml-[19px]">
+                                        Admins</p>
+                                </div>
+                            </a>
+                        </span>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </div>
-    <div class="sidebar-nav py-[10px] border-t-[1px] border-[#e4dfdf] pt-[23px] pb-[29px]  group hover:bg-[#EFF3F6]">
-        <!-- Settings Icon -->
-        <a href="" aria-label="Settngs" class="ml-[30px]">
-            <span class="whitespace-nowrap">
-                <i
-                    class="transition duration-300 ease-in group-hover:text-[#576cdf] text-[22px] text-[#707070] fas fa-cog"></i>
-                <div class="hidden sidebar-item">
-                    <p class="transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                        Settings</p>
-                </div>
-            </span>
-        </a>
+
+    <!-- Settings Icon -->
+    <div class="sidebar-nav py-[10px] border-t-[1px] border-[#e4dfdf] pt-[23px] pb-[29px] hover:bg-[#EAEAEA]">
+        <ul>
+            <li class="h-[60px] pt-[18px] pb-[14px]">
+                <a href="#" aria-label="Settngs" class="ml-[30px]">
+                    <span class="whitespace-nowrap" title="Settings">
+                        <i
+                            class="transition duration-300 ease-in group-hover:text-[#576cdf] text-[22px] pr-1 text-[#707070] fas fa-cog"></i>
+                        <div class="hidden sidebar-item">
+                            <p
+                                class="transition duration-300 ease-in group-hover:text-blue-600  inline text-[15px] ml-[20px]">
+                                Settings</p>
+                        </div>
+                    </span>
+                </a>
+            </li>
+        </ul>
     </div>
+
 </nav>
