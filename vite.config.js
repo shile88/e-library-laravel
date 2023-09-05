@@ -10,5 +10,18 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+
+        // Automatsko osvjezavanje stranice nakon izvrsenih izmjena
+        {
+            name: 'blade',
+            handleHotUpdate({ file, server }) {
+                if(file.endsWith('.blade.php')) {
+                    server.ws.send({
+                        type: 'full-reload',
+                        path: '*',
+                    });
+                }
+            }
+        }
     ],
 });
