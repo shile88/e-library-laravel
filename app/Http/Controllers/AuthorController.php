@@ -40,7 +40,7 @@ class AuthorController extends Controller
         
         Author::create($authorData);
 
-        return redirect()->route('author.index');
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -83,15 +83,17 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //Delete photo of author
+        // Delete photo of author
         if ($author->picture) {
             Storage::disk('public')->delete($author->picture);
         }
 
+        //Delete row in pivot table
+        $author->books()->detach();
 
         $author->delete();
 
-        return redirect()->route('author.index');
+        return redirect()->route('authors.index');
 
     }
 }

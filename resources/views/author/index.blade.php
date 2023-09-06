@@ -82,12 +82,16 @@
                                             <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                                             <span class="px-4 py-0">Izmijeni autora</span>
                                         </a>
-                                        <a href="{{ route('authors.destroy', $author->id) }}" tabindex="0"
-                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                            role="menuitem">
-                                            <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                            <span class="px-4 py-0">Izbrisi autora</span>
-                                        </a>
+                                        
+                                        <form action="{{ route('authors.destroy', $author->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            
+                                                <button type="submit">
+                                                Izbrisi autora
+                                                </button>
+                                        </form>
+                                        
                                     </div>
                                 </div>
                             </div>
