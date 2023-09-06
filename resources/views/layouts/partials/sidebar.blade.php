@@ -52,7 +52,7 @@
                 <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
                     <div class="ml-[30px]">
                         <span class="flex justify-between w-full whitespace-nowrap" title="Authors">
-                            <a href=" {{ route('authors.create') }}" aria-label="Authors">
+                            <a href=" {{ route('authors.index') }}" aria-label="Authors">
                                 <i
                                     class="text-[22px] pt-[4px] pb-[5px] transition duration-300 ease-in group-hover:text-blue-600 text-[#707070] fas fa-user-pen"></i>
                                 <div class="hidden sidebar-item">
