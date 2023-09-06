@@ -59,7 +59,7 @@
                                 <i class="fas fa-book mr-[3px] ml-[5px] py-1"></i>
                                 <span class="px-4 py-0 ml-[5px]">{{ __('Book') }}</span>
                             </a>
-                            <a href="#" tabindex="0"
+                            <a href="{{ route('authors.create') }}" tabindex="0"
                                 class="flex w-full px-4 py-2 text-sm
                             leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fas fa-user-pen mr-[3px] ml-[5px] py-1"></i>

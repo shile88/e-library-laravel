@@ -22,7 +22,10 @@ class StoreAuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'about' => 'required|string',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif',
         ];
+
     }
 }

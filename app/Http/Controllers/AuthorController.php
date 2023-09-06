@@ -14,6 +14,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
+        $authors = Author::all();
+        return view('author.index', compact('authors'));
     }
 
     /**
@@ -21,7 +23,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('author.create');
     }
 
     /**
@@ -29,7 +31,16 @@ class AuthorController extends Controller
      */
     public function store(StoreAuthorRequest $request)
     {
-        //
+        $authorData = $request->validated();
+
+        if ($request->hasFile('picture')) {
+            $photoPath = $request->file('picture')->store('author_photos', 'public');
+            $authorData['picture'] = $photoPath;
+        }
+        
+        Author::create($authorData);
+
+        return redirect()->route('author.index');
     }
 
     /**
@@ -37,7 +48,8 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        $authorName = $author->name;
+        return view('author.show', compact('author', 'authorName'));
     }
 
     /**
@@ -45,7 +57,8 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        $authorName = $author->name;
+        return view('author.edit', compact('author', 'authorName'));
     }
 
     /**
@@ -55,12 +68,11 @@ class AuthorController extends Controller
     {
         $authorData = $request->validated();
 
-        //Saving author's photo in public folder
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('author_photos', 'public');
-            $authorData['photo'] = $photoPath;
+        if ($request->hasFile('picture')) {
+            $photoPath = $request->file('picture')->store('author_photos', 'public');
+            $authorData['picture'] = $photoPath;
         }
-
+        
         $author->update($authorData);
 
         return redirect()->route('author.index');
@@ -72,8 +84,8 @@ class AuthorController extends Controller
     public function destroy(Author $author)
     {
         //Delete photo of author
-        if ($author->photo) {
-            Storage::disk('public')->delete($author->photo);
+        if ($author->picture) {
+            Storage::disk('public')->delete($author->picture);
         }
 
 
