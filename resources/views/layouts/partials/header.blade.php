@@ -19,7 +19,7 @@
             <div class="flex items-center">
 
                 <!-- Notifications Icon -->
-                <div class="relative block" title="{{ __('Activities') }}">
+                <div class="relative block" title="Activities">
                     <a href="#" class="relative inline-block px-3 py-2 focus:outline-none outline-none "
                         aria-label="Notification">
                         <div class="flex items-center h-5">
@@ -51,29 +51,29 @@
                             <a href="#" tabindex="0"
                                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fa-solid fa-user-graduate mr-[3px] ml-[4px] py-1"></i>
-                                <span class="px-4 py-0 ml-[3px]">{{ __('Student') }}</span>
+                                <span class="px-4 py-0 ml-[3px]">Student</span>
                             </a>
                             <a href="#" tabindex="0"
                                 class="flex w-full px-4 py-2 text-sm
                             leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fas fa-book mr-[3px] ml-[5px] py-1"></i>
-                                <span class="px-4 py-0 ml-[5px]">{{ __('Book') }}</span>
+                                <span class="px-4 py-0 ml-[5px]">Book</span>
                             </a>
                             <a href="#" tabindex="0"
                                 class="flex w-full px-4 py-2 text-sm
                             leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fas fa-user-pen mr-[3px] ml-[5px] py-1"></i>
-                                <span class="px-4 py-0">{{ __('Author') }}</span>
+                                <span class="px-4 py-0">Author</span>
                             </a>
                             <a href="#" tabindex="0"
                                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fas fa-user-tie mr-[5px] ml-[5px] py-1"></i>
-                                <span class="px-4 py-0 ml-[3px]">{{ __('Librarian') }}</span>
+                                <span class="px-4 py-0 ml-[3px]">Librarian</span>
                             </a>
                             <a href="#" tabindex="0"
                                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fas fa-user-shield  ml-[5px] py-1"></i>
-                                <span class="px-4 py-0 ml-[3px]">{{ __('Admin') }}</span>
+                                <span class="px-4 py-0 ml-[3px]">Admin</span>
                             </a>
                         </div>
                     </div>
