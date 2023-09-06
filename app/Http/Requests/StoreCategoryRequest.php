@@ -11,6 +11,8 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // If this method returns false, 403 error (Forbidden) will be shown
+        // Maybe we should use Auth::check() here just to be sure
         return true;
     }
 
@@ -21,8 +23,9 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Name of a category must be provided, have min. length of 3 characters and have unique value in table categories
         return [
-            'name' => 'required|string|min:3|unique:categories'
+            'name' => 'required|min:3|unique:categories'
         ];
     }
 }

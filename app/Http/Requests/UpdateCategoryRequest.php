@@ -11,6 +11,8 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // If this method returns false, 403 error (Forbidden) will be shown
+        // Maybe we should use Auth::check() here just to be sure
         return true;
     }
 
@@ -21,8 +23,10 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Name of a category must have min. length of 3 characters and have unique value in table categories except
+        // when the value IS the current category. In that case we provide it's ID and it ignores this rule
         return [
-            'name' => 'sometimes|string|min:3|unique:categories,name,' . $this->request->get('id')
+            'name' => 'min:3|unique:categories,name,' . $this->request->get('id')
         ];
     }
 }

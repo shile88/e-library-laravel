@@ -11,6 +11,7 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
+    // Returns all the books associated with this category (in the table book_category)
     public function books()
     {
         return $this->belongsToMany(Book::class);

@@ -13,6 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        // Shows all categories in one page
         $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
@@ -22,6 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        // Shows a page for creating a new category
         return view('categories.create');
     }
 
@@ -30,7 +32,9 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        // Stores new category in DB with the validated fields from StoreCategoryRequest
         Category::create($request->validated());
+        // After the operation is finished redirects to a different page
         return redirect()->route('categories.index');
     }
 
@@ -39,7 +43,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        // We do not use show method
+        // We do not use show method since there is not much to show (only a name)
     }
 
     /**
@@ -47,6 +51,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        // Shows a page for editing the category
         return view('categories.edit', compact('category'));
     }
 
@@ -55,7 +60,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
+        // Updates category fields with the validated parameters from UpdateCategoryRequest
         $category->update($request->validated());
+        // After the operation is finished redirects to a different page
         return redirect()->route('categories.index');
     }
 
@@ -64,7 +71,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        // Deletes category from the DB
         $category->delete();
+        // After the operation is finished redirects to a different page
         return redirect()->route('categories.index');
     }
 }
