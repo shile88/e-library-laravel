@@ -6,10 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name') }} - Dashboard</title>
+    <title> @yield('title') | {{ config('app.name') }}</title>
 
     <!-- Styles and fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
     @include('layouts.partials.styles')
     @vite('resources/css/app.css')
 </head>
@@ -22,9 +22,9 @@
         <!-- Sidebar -->
         @include('layouts.partials.sidebar')
 
-        <section class="w-screen h-screen pl-[80px] text-[#212121]">
+        <section class="w-screen h-screen pl-[83px] text-[#212121]">
             <!-- Heading of Content -->
-            <div class="heading border-b-[1px] border-[#e4dfdf] mt-4">
+            <div class="heading border-b-[1px] mb-[20px] border-[#e4dfdf] mt-4">
                 <div class="pl-[30px] mb-4">
                     <h1>@yield('title', 'Dashboard')</h1>
                 </div>
