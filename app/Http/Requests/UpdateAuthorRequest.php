@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateAuthorRequest extends FormRequest
@@ -11,7 +12,8 @@ class UpdateAuthorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
+
     }
 
     /**
@@ -22,7 +24,9 @@ class UpdateAuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'sometimes|string',
+            'about' => 'sometimes|string',
+            'picture' => 'sometimes|image|mimes:jpeg,png,jpg,gif',
         ];
     }
 }

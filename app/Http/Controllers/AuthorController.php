@@ -75,7 +75,7 @@ class AuthorController extends Controller
         
         $author->update($authorData);
 
-        return redirect()->route('author.index');
+        return redirect()->route('authors.index');
     }
 
     /**

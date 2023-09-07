@@ -4,47 +4,27 @@
 
 @section('content')
 
-<div>
-    <nav class="w-full rounded">
-        <ol class="flex list-reset">
-            <li>
-                <a href="autori.php" class="text-[#2196f3] hover:text-blue-600">
-                    Evidencija autora
-                </a>
-            </li>
-            <li>
-                <span class="mx-2">/</span>
-            </li>
-            <li>
-                <a href="#" class="text-gray-400 hover:text-blue-600">
-                    Izmijeni podatke
-                </a>
-            </li>
-        </ol>
-    </nav>
-</div>
+
+@include('author\includes\nav')
+  
+
 <div class="scroll height-content section-content">
-    <form class="text-gray-700 forma">
+    <form action="{{ route('authors.update', $author->id) }}" method="POST" class="text-gray-700 forma">
+        @csrf
+        @method('PUT')
         <div class="flex flex-row ml-[30px]">
             <div class="w-[50%] mb-[150px]">
                 <div class="mt-[20px]">
                     <p>Ime i prezime <span class="text-red-500">*</span></p>
-                    <input type="text" name="imePrezimeAutorEdit" id="imePrezimeAutorEdit" value="Mark Twain" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsImePrezimeAutorEdit()"/>
+                    <input type="text" name="name" id="imePrezimeAutorEdit" value="{{ $author->name }}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsImePrezimeAutorEdit()"/>
                     <div id="validateImePrezimeAutorEdit"></div>
                 </div>
 
                 <div class="mt-[20px]">
                     <p class="inline-block mb-2">Opis</p>
-                    <textarea name="opis_autor_edit"
+                    <textarea name="about"
                         class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque non aperiam voluptas
-                        expedita, laborum deleniti sit ipsum quam!
-                        Quis architecto aliquid deleniti ipsum labore ipsa mollitia aspernatur consequatur incidunt
-                        nesciunt.
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Atque non aperiam voluptas
-                        expedita, laborum deleniti sit ipsum quam!
-                        Quis architecto aliquid deleniti ipsum labore ipsa mollitia aspernatur consequatur incidunt
-                        nesciunt.
+                        {{ $author->about }}
                     </textarea>
                 </div>
             </div>

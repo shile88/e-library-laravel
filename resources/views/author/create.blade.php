@@ -5,23 +5,8 @@
 @section('content')
 
 
-    <nav class="w-full rounded ml-4">
-        <ol class="flex list-reset">
-            <li>
-                <a href=" {{ route('authors.index') }} " class="text-[#2196f3] hover:text-blue-600">
-                    Evidencija autora
-                </a>
-            </li>
-            <li>
-                <span class="mx-2">/</span>
-            </li>
-            <li>
-                <a href="#" class="text-gray-400 hover:text-blue-600">
-                    Novi autor
-                </a>
-            </li>
-        </ol>
-    </nav>
+@include('author\includes\nav')
+    
           
             <!-- Space for content -->
             <div class="scroll height-content section-content">

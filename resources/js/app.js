@@ -90,9 +90,9 @@ $(document).ready(function () {
   });
 
   // Form
-  $(".forma").submit(function (e) {
-    e.preventDefault();
-  });
+  // $(".forma").submit(function (e) {
+  //   e.preventDefault();
+  // });
 
   // Open Modal
   modal = $(".modal");
@@ -104,7 +104,7 @@ $(document).ready(function () {
     modal.addClass('hidden');
   })
 
-  // Vrati Knjigu Modal
+  // Vrati Knjigu 
   vratiModal = $(".vrati-modal");
   $(".show-vratiModal").on('click', function () {
     vratiModal.removeClass('hidden');
