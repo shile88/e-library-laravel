@@ -30,8 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::resource('/authors', AuthorController::class);
-
+    Route::delete('/authors/bulkDelete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
     Route::resource('/categories', CategoryController::class);
+
+    
 });
 
 require __DIR__.'/auth.php';

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
+use GuzzleHttp\Psr7\Request;
 
 class AuthorController extends Controller
 {
@@ -14,7 +16,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
+        $authors = Author::paginate(5);
         return view('author.index', compact('authors'));
     }
 
@@ -32,9 +34,10 @@ class AuthorController extends Controller
     public function store(StoreAuthorRequest $request)
     {
         $authorData = $request->validated();
-
+        
         if ($request->hasFile('picture')) {
-            $photoPath = $request->file('picture')->store('author_photos', 'public');
+            $file = $request->file('picture');
+            $photoPath = Storage::disk('public')->put('authors', $file);
             $authorData['picture'] = $photoPath;
         }
         
@@ -67,9 +70,10 @@ class AuthorController extends Controller
     public function update(UpdateAuthorRequest $request, Author $author)
     {
         $authorData = $request->validated();
-
+        
         if ($request->hasFile('picture')) {
-            $photoPath = $request->file('picture')->store('author_photos', 'public');
+            $file = $request->file('picture');
+            $photoPath = Storage::disk('public')->put('authors', $file);
             $authorData['picture'] = $photoPath;
         }
         
@@ -83,17 +87,17 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        // Delete photo of author
-        if ($author->picture) {
+        // Delete image of author only if it isn't default image 
+        if (!Str::contains($author->picture, 'default.jpg')) {
             Storage::disk('public')->delete($author->picture);
         }
 
         //Delete row in pivot table
         $author->books()->detach();
-
         $author->delete();
 
         return redirect()->route('authors.index');
 
     }
+
 }

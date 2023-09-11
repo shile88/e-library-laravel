@@ -4,13 +4,14 @@
 
 @section('content')
 
-<div class="height-autori pb-[30px] scroll">
+<div class="height-autori pb-[30px] scroll" style="overflow-y:auto; max-height:70vh;">
         <div class="flex items-center px-[30px] py-4 space-x-3 rounded-lg justify-between">
-            <a href="{{ route('authors.create') }}"
-                class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] tracking-wider text-white bg-[#3f51b5]hover:bg-[#4558BE]">
+            
+
+        <a href="{{ route('authors.create') }}" class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
                 <i class="fas fa-plus mr-[15px]"></i> Novi autor
             </a>
-            <div class="flex items-center">
+            <div class="inline-block items-center">
                 <div class="relative text-gray-600 focus-within:text-gray-400">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                         <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
@@ -50,11 +51,11 @@
                     <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
                         <td class="px-4 py-3 whitespace-no-wrap">
                             <label class="inline-flex items-center">
-                                <input type="checkbox" class="form-checkbox">
+                                <input type="checkbox" class="form-checkbox" id="{{$author->id}}">
                             </label>
                         </td>
                         <td class="flex flex-row items-center px-4 py-3">
-                            <img class="object-cover w-8 mr-2 h-11" src="{{ $author->picture }}" alt="" />
+                            <img class="object-cover w-8 mr-2 h-11" src="{{ asset('/storage/'.$author->picture) }}" alt="" />
                             <a href="autorProfile.php">
                                 <span class="mr-2 font-medium text-center">{{ $author->name }}</span>
                             </a>
@@ -87,7 +88,7 @@
                                             @csrf
                                             @method('DELETE')
                                             
-                                            <button type="submit"  tabindex="0"
+                                            <button id="deleteAuthors" type="submit"  tabindex="0"
                                             class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                             >
                                             <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
@@ -106,67 +107,9 @@
                 </tbody>
             </table>
 
-            <div class="flex flex-row items-center justify-end mt-2">
-                <div>
-                    <p class="inline text-md">
-                        Rows per page:
-                    </p>
-                    <select
-                        class=" text-gray-700 bg-white rounded-md w-[46px] focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-md"
-                        name="ucenici">
-                        <option value="">
-                            20
-                        </option>
-                        <option value="">
-                            Option1
-                        </option>
-                        <option value="">
-                            Option2
-                        </option>
-                        <option value="">
-                            Option3
-                        </option>
-                        <option value="">
-                            Option4
-                        </option>
-                    </select>
-                </div>
-
-                <div>
-                    <nav class="relative z-0 inline-flex">
-                        <div>
-                            <a href="#"
-                                class="relative inline-flex items-center px-4 py-2 -ml-px font-medium leading-5 transition duration-150 ease-in-out bg-white text-md focus:z-10 focus:outline-none">
-                                1 of 1
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#"
-                                class="relative inline-flex items-center px-2 py-2 font-medium leading-5 text-gray-500 transition duration-150 ease-in-out bg-white text-md rounded-l-md hover:text-gray-400 focus:z-10 focus:outline-none"
-                                aria-label="Previous"
-                                v-on:click.prevent="changePage(pagination.current_page - 1)">
-                                <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </div>
-                        <div v-if="pagination.current_page < pagination.last_page">
-                            <a href="#"
-                                class="relative inline-flex items-center px-2 py-2 -ml-px font-medium leading-5 text-gray-500 transition duration-150 ease-in-out bg-white text-md rounded-r-md hover:text-gray-400 focus:z-10 focus:outline-none"
-                                aria-label="Next">
-                                <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </div>
-                    </nav>
-                </div>
+            <div class=" flex-row items-center justify-end mt-2">
+            {{ $authors->links() }}
             </div>
-
         </div>
     </div>
 
