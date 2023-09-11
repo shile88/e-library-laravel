@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FilterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::resource('/authors', AuthorController::class);
-    Route::delete('/authors/bulkDelete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
-    Route::resource('/categories', CategoryController::class);
+    Route::get('/filter', [FilterController::class, 'filterData'])->name('filter.filterData');
 
-    
+    Route::resource('/categories', CategoryController::class);
 });
 
 require __DIR__.'/auth.php';

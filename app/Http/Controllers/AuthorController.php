@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
@@ -99,5 +99,6 @@ class AuthorController extends Controller
         return redirect()->route('authors.index');
 
     }
+
 
 }

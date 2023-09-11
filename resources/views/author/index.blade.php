@@ -11,7 +11,7 @@
         <a href="{{ route('authors.create') }}" class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
                 <i class="fas fa-plus mr-[15px]"></i> Novi autor
             </a>
-            <x-search-bar></x-search-bar>
+            <x-search-bar />
         </div>
 
         <div
