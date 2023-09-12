@@ -11,7 +11,7 @@
                 <input hidden type="number" name="id" value="{{ $category->id }}" />
 
                 {{-- Name --}}
-                <div>
+                <div class="mt-[20px]">
                     <p>Name<span class="text-red-500">*</span></p>
                     <input type="text" name="name" required value="{{ $category->name }}"
                         class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
@@ -93,7 +93,9 @@
                 </div>
 
                 {{-- Submit button --}}
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-[20px]"
+                <button
+                    class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300
+                    rounded-[5px] tracking-wider text-white bg- bg-[#3f51b5] hover:bg-[#4558BE] mt-[20px]"
                     type="submit">Submit</button>
             </div>
         </div>
@@ -104,7 +106,8 @@
         <form action="{{ route('categories.destroy', $category) }}" method="post">
             @csrf
             @method('delete')
-            <button class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mt-[20px]"
+            <button class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300
+            ease-in rounded-[5px] tracking-wider text-white bg-[#F44336] hover:bg-[#F55549] mt-[20px]"
                 type="submit">Delete</button>
             </button>
         </form>

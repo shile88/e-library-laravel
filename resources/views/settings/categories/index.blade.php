@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('settings.index')
 
 @section('title', 'Categories')
 
-@section('content')
-    <div class="flex items-center ml-[50px] py-4 space-x-3 rounded-lg justify-between">
+@section('main-settings')
+    <div class="flex items-center py-4 space-x-3 rounded-lg justify-between ml-[30px]">
         {{-- New category --}}
         <a href="{{ route('categories.create') }}"
             class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
@@ -15,7 +15,7 @@
     </div>
 
     <div
-        class="inline-block min-w-full px-[50px] mt-3 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard">
+        class="inline-block min-w-full pr-[30px] mt-3 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard ml-[30px]">
         <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
             <thead class="bg-[#EFF3F6]">
                 <tr class="border-b-[1px] border-[#e4dfdf]">

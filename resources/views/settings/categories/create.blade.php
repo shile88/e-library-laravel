@@ -9,7 +9,7 @@
             <div class="w-[50%]">
 
                 {{-- Name --}}
-                <div>
+                <div class="mt-[20px]">
                     <p>Name<span class="text-red-500">*</span></p>
                     <input type="text" name="name" required
                         class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
@@ -80,9 +80,10 @@
                 </div>
 
                 {{-- Submit button --}}
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-[20px]"
+                <button
+                    class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300
+                    rounded-[5px] tracking-wider text-white bg- bg-[#3f51b5] hover:bg-[#4558BE] mt-[20px]"
                     type="submit">Submit</button>
-
             </div>
         </div>
     </form>
