@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\PublisherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingsController::class, 'index'])->name('policy.index');
     Route::resource('/categories', CategoryController::class);
     Route::resource('/genres', GenreController::class);
+    Route::resource('/publishers', PublisherController::class);
 
 });
 

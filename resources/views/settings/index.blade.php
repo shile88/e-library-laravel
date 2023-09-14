@@ -18,7 +18,7 @@ $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'genres')) active-book-nav @endif">
             Genres
         </a>
-        <a href="{{ route('policy.index') }}"
+        <a href="{{ route('publishers.index') }}"
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'publishers')) active-book-nav @endif">
             Publishers
         </a>

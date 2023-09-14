@@ -26,7 +26,7 @@ class UpdateGenreRequest extends FormRequest
         // Name of a genre must have min. length of 3 characters and have unique value in table categories except
         // when the value IS the current genre. In that case we provide it's ID and it ignores this rule
         return [
-            'name' => 'min:3|unique:categories,name,' . $this->request->get('id')
+            'name' => 'min:3|unique:genres,name,' . $this->request->get('id')
         ];
     }
 }
