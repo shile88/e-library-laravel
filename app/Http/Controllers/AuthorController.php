@@ -50,9 +50,8 @@ class AuthorController extends Controller
             $photoPath = Storage::disk('public')->put('authors', $file);
             $authorData['picture'] = $photoPath;
         }else{
-            $photoPath = 'authors/default.jpg';
+            $photoPath =  'authors/default.jpg';
             $authorData['picture'] = $photoPath;
-            
         }
         
         Author::create($authorData);
@@ -113,6 +112,5 @@ class AuthorController extends Controller
         return redirect()->route('authors.index');
 
     }
-
 
 }
