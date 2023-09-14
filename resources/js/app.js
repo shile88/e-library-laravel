@@ -2520,3 +2520,5 @@ $('.checkOthers').change(function () {
     $('tr').children().eq(8).html('Ukupna kolicina')
   }
 });
+
+

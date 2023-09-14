@@ -21,14 +21,18 @@
                     <tr class="border-b-[1px] border-[#e4dfdf]">
                         <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
                             <label class="inline-flex items-center">
-                                <input type="checkbox" class="form-checkbox">
+                                <input id="selectAll" type="checkbox" class="form-checkbox">
                             </label>
                         </th>
-                        <th class="px-4 py-4 leading-4 tracking-wider text-left">Naziv autora<a href="#"><i
-                                    class="ml-3 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a>
+                        <th class="px-4 py-4 leading-4 tracking-wider text-left">Naziv autora
+                            <a href="{{ route('authors.index', ['order' => $order ? $order : 'asc']) }}">
+                                <i
+                                    class="ml-3 fa-lg fas
+                                    @if ($order == 'desc') fa-long-arrow-alt-down @else fa-long-arrow-alt-up @endif"></i>
+                            </a>
                         </th>
                         <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Opis</th>
-                        <th class="px-4 py-4"> </th>
+                        <th class="px-4 py-4"> </th>    
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -99,5 +103,5 @@
         </div>
     </div>
 
-
+    
 @endsection('content')

@@ -14,10 +14,20 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $authors = Author::paginate(5);
-        return view('author.index', compact('authors'));
+        // Po defaultu ce order biti asc
+        $order = $request->get('order', 'asc');
+
+        
+        $authors = Author::orderBy('name', $order)
+            ->paginate(8);
+            
+        
+        $order = ( $order == 'desc' ) ? 'asc' : 'desc';
+        
+
+        return view('author.index', compact('authors', 'order' ));
     }
 
     /**
@@ -39,6 +49,10 @@ class AuthorController extends Controller
             $file = $request->file('picture');
             $photoPath = Storage::disk('public')->put('authors', $file);
             $authorData['picture'] = $photoPath;
+        }else{
+            $photoPath = 'authors/default.jpg';
+            $authorData['picture'] = $photoPath;
+            
         }
         
         Author::create($authorData);

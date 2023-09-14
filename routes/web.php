@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('/authors', AuthorController::class);
     Route::get('/filter', [FilterController::class, 'filterData'])->name('filter.filterData');
+    Route::get('/sort', [SortController::class, 'sortData'])->name('sort.sortData');
 
     Route::resource('/categories', CategoryController::class);
 });
