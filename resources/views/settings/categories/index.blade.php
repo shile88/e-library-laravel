@@ -11,11 +11,12 @@
         </a>
 
         {{-- Search --}}
+        {{-- TODO --}}
 
     </div>
 
     <div
-        class="inline-block min-w-full pr-[30px] mt-3 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard ml-[30px]">
+        class="inline-block min-w-full pr-[50px] mt-3 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard ml-[30px]">
         <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
             <thead class="bg-[#EFF3F6]">
                 <tr class="border-b-[1px] border-[#e4dfdf]">
@@ -24,8 +25,12 @@
                             <input type="checkbox" class="form-checkbox">
                         </label>
                     </th>
-                    <th class="px-4 py-4 leading-4 tracking-wider text-left">Name<a href="#"><i
-                                class="ml-3 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a>
+                    <th class="px-4 py-4 leading-4 tracking-wider text-left">Name<a href="#">
+                            <a href="{{ route('categories.index', ['order' => $order ? $order : 'asc']) }}">
+                                <i
+                                    class="ml-3 fa-lg fas
+                                    @if ($order == 'desc') fa-long-arrow-alt-up @else fa-long-arrow-alt-down @endif"></i>
+                            </a>
                     </th>
                     <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Description</th>
                     <th class="px-4 py-4"> </th>

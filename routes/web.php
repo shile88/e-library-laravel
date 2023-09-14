@@ -32,9 +32,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/authors', AuthorController::class);
     Route::delete('/authors/bulkDelete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
-    Route::resource('/categories', CategoryController::class);
 
     Route::get('/policy', [SettingsController::class, 'index'])->name('policy.index');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('policy.index');
+    Route::resource('/categories', CategoryController::class);
 
 });
 

@@ -3,6 +3,8 @@
 $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
 ?>
 @section('content')
+
+    {{-- Navbar --}}
     <div class="py-4 text-gray-500 border-b-[1px] border-[#e4dfdf] pl-[30px]">
         <a href="{{ route('policy.index') }}"
             class="inline hover:text-blue-800 @if (str_contains($route_name, 'policy')) active-book-nav @endif">
@@ -34,7 +36,8 @@ $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
         </a>
     </div>
 
-    <div class="height-ucenikProfile pb-[30px] mt-[20px]">
+    {{-- Main settings content --}}
+    <div class="height-ucenikProfile mt-[20px]">
         @yield('main-settings')
     </div>
 @endsection

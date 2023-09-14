@@ -5,17 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Shows all categories in one page
-        $categories = Category::paginate(7);
-        return view('settings.categories.index', compact('categories'));
+        $order = $request->get('order');
+
+        if ($order == 'asc') {
+            $categories = Category::orderBy('name', 'asc')
+                ->orderBy('description', 'asc')
+                ->paginate(8);
+            $order = 'desc';
+        }
+        else {
+            $categories = Category::orderby('name', 'desc')
+                ->orderBy('description', 'desc')
+                ->paginate(8);
+            $order = 'asc';
+        }
+
+        return view('settings.categories.index', compact('categories', 'order'));
     }
 
     /**
