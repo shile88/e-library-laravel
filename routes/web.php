@@ -3,8 +3,9 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/authors', AuthorController::class);
-    Route::delete('/authors/bulkDelete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
 
+
+    // SETTINGS
     Route::get('/policy', [SettingsController::class, 'index'])->name('policy.index');
     Route::get('/settings', [SettingsController::class, 'index'])->name('policy.index');
     Route::resource('/categories', CategoryController::class);
+    Route::resource('/genres', GenreController::class);
 
 });
 

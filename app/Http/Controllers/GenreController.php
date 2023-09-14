@@ -5,15 +5,35 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 use App\Models\Genre;
+use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Get a desirable order from the request - 'asc' OR 'desc'
+        $order = $request->get('order');
+
+        // Case 1: If desirable order is descending, show it in that order
+        if ($order == 'desc') {
+            $genres = Genre::orderBy('name', 'desc')
+                ->paginate(8);
+            $order = 'asc';
+        }
+
+        // Case 2: The order is either ascending or not specified in which case
+        // we will show the default - ascending order
+        else {
+            $genres = Genre::orderby('name', 'asc')
+                ->paginate(8);
+            $order = 'desc';
+        }
+
+        // We also have to return the inverse order as a way of switching them
+        return view('settings.genres.index', compact('genres', 'order'));
     }
 
     /**
@@ -21,7 +41,8 @@ class GenreController extends Controller
      */
     public function create()
     {
-        //
+        // Shows a page for creating a new genre
+        return view('settings.genres.create');
     }
 
     /**
@@ -29,7 +50,10 @@ class GenreController extends Controller
      */
     public function store(StoreGenreRequest $request)
     {
-        //
+        // Stores new genre in DB with the validated fields from StoreGenreRequest
+        Genre::create($request->validated());
+        // After the operation is finished redirects to a different page
+        return redirect()->route('genres.index');
     }
 
     /**
@@ -37,7 +61,7 @@ class GenreController extends Controller
      */
     public function show(Genre $genre)
     {
-        //
+        // We do not use show method since there is not much to show (only a name)
     }
 
     /**
@@ -45,7 +69,8 @@ class GenreController extends Controller
      */
     public function edit(Genre $genre)
     {
-        //
+        // Shows a page for editing the genre
+        return view('settings.genres.edit', compact('genre'));
     }
 
     /**
@@ -53,7 +78,10 @@ class GenreController extends Controller
      */
     public function update(UpdateGenreRequest $request, Genre $genre)
     {
-        //
+        // Updates genre fields with the validated parameters from UpdateGenreRequest
+        $genre->update($request->validated());
+        // After the operation is finished redirects to a different page
+        return redirect()->route('genres.index');
     }
 
     /**
@@ -61,6 +89,9 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        //
+        // Deletes genre from the DB
+        $genre->delete();
+        // After the operation is finished redirects to a different page
+        return redirect()->route('genres.index');
     }
 }
