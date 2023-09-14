@@ -30,7 +30,7 @@
                 </div>
             </div>
             
-            @if(!$authors->count())
+            @if(!$authors->count() && !$books->count())
             <span class="ml-8 text-red-600">Nema rezultata</span>
             @endif
 
@@ -38,9 +38,9 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10">
             <table class="w-full text-sm text-left text-gray-500 " >
             <colgroup>
-            <col style="width: 25%;">
-            <col style="width: 50%;">
-            <col style="width: 15%;">
+            <col style="width: 20%;">
+            <col style="width: 60%;">
+            <col style="width: 30%;">
         </colgroup>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
                     <tr>
@@ -79,10 +79,10 @@
     <div class="relative overflow-x-auto shadow-md mt-10 sm:rounded-lg mx-10">
             <table class="w-full text-sm text-left text-gray-500 " >
             <colgroup>
-            <col style="width: 25%;">
+            <col style="width: 20%;">
             <col style="width: 40%;">
             <col style="width: 20%;">
-            <col style="width: 15%;">
+            <col style="width: 30%;">
         </colgroup>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
                     <tr>
