@@ -14,21 +14,27 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
+        // Get a desirable order from the request - 'asc' OR 'desc'
         $order = $request->get('order');
 
-        if ($order == 'asc') {
-            $categories = Category::orderBy('name', 'asc')
-                ->orderBy('description', 'asc')
-                ->paginate(8);
-            $order = 'desc';
-        }
-        else {
-            $categories = Category::orderby('name', 'desc')
+        // Case 1: If desirable order is descending, show it in that order
+        if ($order == 'desc') {
+            $categories = Category::orderBy('name', 'desc')
                 ->orderBy('description', 'desc')
                 ->paginate(8);
             $order = 'asc';
         }
 
+        // Case 2: The order is either ascending or not specified in which case
+        // we will show the default - ascending order
+        else {
+            $categories = Category::orderby('name', 'asc')
+                ->orderBy('description', 'asc')
+                ->paginate(8);
+            $order = 'desc';
+        }
+
+        // We also have to return the inverse order as a way of switching them
         return view('settings.categories.index', compact('categories', 'order'));
     }
 
