@@ -5,9 +5,33 @@
 @section('content')
 
 
-@include('author\includes\nav')
     
-          
+<div class="pl-[30px] py-[10px] flex flex-col">
+            <div>
+                <h1>
+                    Dodaj novog autora
+                </h1>
+            </div>
+            <div>
+                <nav class="w-full rounded">
+                    <ol class="flex list-reset">
+                        <li>
+                            <a href="{{ route('authors.index') }}" class="text-[#2196f3] hover:text-blue-600">
+                                Evidencija autora
+                            </a>
+                        </li>
+                        <li>
+                            <span class="mx-2">/</span>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 ">
+                                Novi autor
+                            </a>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
             <!-- Space for content -->
             <div class="scroll height-content section-content">
                 <form action="{{ route('authors.store') }}" method="POST" class="text-gray-700 forma" enctype="multipart/form-data">
@@ -23,7 +47,7 @@
                             <div class="mt-[20px]">
                                 <p class="inline-block mb-2">Opis</p>
                                                              
-                                <textarea id="message" name="about" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Unesite opis..."></textarea
+                                <textarea id="message" name="about" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Unesite opis..."></textarea
                             </div>
 
                             <div class="mt-[50px] inline-block">

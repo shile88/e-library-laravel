@@ -1,11 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Rezultati pretrage')
 
 @section('content')
 
 
-
+<div class="pl-[30px] pt-[10px] flex flex-col">
+            <div>
+                <h1>
+                    Rezultati pretrage
+                </h1>
+            </div>
+           
+        </div>
 <div style="overflow-y:auto; max-height:70vh;">
     
 <div class="pl-[30px] py-[10px] flex flex-col">
@@ -35,7 +41,7 @@
             @endif
 
     @foreach ($authors as $author)
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10">
+    <div class="relative overflow-x-auto shadow-md mt-10 sm:rounded-lg mx-10">
             <table class="w-full text-sm text-left text-gray-500 " >
             <colgroup>
             <col style="width: 20%;">

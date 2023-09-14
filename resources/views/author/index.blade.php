@@ -28,7 +28,7 @@
                             <a href="{{ route('authors.index', ['order' => $order ? $order : 'asc']) }}">
                                 <i
                                     class="ml-3 fa-lg fas
-                                    @if ($order == 'desc') fa-long-arrow-alt-down @else fa-long-arrow-alt-up @endif"></i>
+                                    @if ($order == 'desc') fa-long-arrow-alt-up @else fa-long-arrow-alt-down @endif"></i>
                             </a>
                         </th>
                         <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Opis</th>
@@ -38,7 +38,7 @@
                 <tbody class="bg-white">
                     
                 @foreach($authors as $author)
-                    <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
+                    <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf] ">
                         <td class="px-4 py-3 whitespace-no-wrap">
                             <label class="inline-flex items-center">
                                 <input type="checkbox" class="form-checkbox" id="{{$author->id}}">

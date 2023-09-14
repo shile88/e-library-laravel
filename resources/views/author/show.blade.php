@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
-@section('title', $authorName)
 
 @section('content')
 
-                   
+    
 <div class="heading">
     <div class="flex justify-between border-b-[1px] border-[#e4dfdf]">
         <div class="pl-[30px] py-[10px] flex flex-col">
+            <div>
+                <h1>
+                    {{ $author->name }}
+                </h1>
+            </div>
             <div>
                 <nav class="w-full rounded">
                     <ol class="flex list-reset">
@@ -20,8 +24,8 @@
                             <span class="mx-2">/</span>
                         </li>
                         <li>
-                            <a href="autorProfile.php" class="text-gray-400 hover:text-blue-600">
-                                AUTOR-124
+                            <a class="text-gray-400 ">
+                                Autor - {{ $author->name }}
                             </a>
                         </li>
                     </ol>
@@ -47,13 +51,12 @@
                         <form action="{{ route('authors.destroy', $author->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            
-                            <button type="submit"  tabindex="0"
+                            <button type="submit" style="border: none; outline: none;" 
                             class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                            >
-                                <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
+                            role="menuitem">
+                            <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
                             <span class="px-4 py-0">Izbrisi autora</span>
-                            </button>
+                        </button>
                         </form>
                     </div>
                 </div>
@@ -62,7 +65,7 @@
     </div>
 </div>
 
-            <!-- Space for content -->
+    <!-- Space for content -->
 <div class="pl-[30px] height-profile pb-[30px] scroll mt-[20px]">
     <div class="mr-[30px]">
         <div class="mt-[20px]">
