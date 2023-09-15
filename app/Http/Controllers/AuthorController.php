@@ -21,11 +21,9 @@ class AuthorController extends Controller
 
         
         $authors = Author::orderBy('name', $order)
-            ->paginate(8);
-            
-        
+            ->paginate(5);
+
         $order = ( $order == 'desc' ) ? 'asc' : 'desc';
-        
 
         return view('author.index', compact('authors', 'order' ));
     }
@@ -111,6 +109,13 @@ class AuthorController extends Controller
 
         return redirect()->route('authors.index');
 
+    }
+
+    public function bulkDelete(Request $request){
+        $selectedIds = explode(',', $request->input('selected_ids'));
+        Author::whereIn('id', $selectedIds)->delete();
+
+        return redirect()->route('authors.index');
     }
 
 }
