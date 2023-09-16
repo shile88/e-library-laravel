@@ -25,12 +25,17 @@
                             <input type="checkbox" class="form-checkbox">
                         </label>
                     </th>
-                    <th class="px-4 py-4 leading-4 tracking-wider text-left">Name<a href="#">
-                            <a href="{{ route('categories.index', ['order' => $order ? $order : 'asc']) }}">
-                                <i
-                                    class="ml-3 fa-lg fas
-                                    @if ($order == 'desc') fa-long-arrow-alt-up @else fa-long-arrow-alt-down @endif"></i>
-                            </a>
+                    <th class="px-4 py-4 leading-4 tracking-wider text-left">Name
+                        <a
+                            href="{{ route('categories.index', [
+                                'orderBy' => 'name',
+                                'orderDir' => request()->get('orderDir') == 'asc' ? 'desc' : 'asc',
+                                'page' => request()->get('page')
+                            ]) }}">
+                            <i
+                                class="ml-3 fa-lg fas
+                                    {{ request()->get('orderDir') == 'asc' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up' }}"></i>
+                        </a>
                     </th>
                     <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Description</th>
                     <th class="px-4 py-4"> </th>

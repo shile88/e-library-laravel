@@ -14,26 +14,26 @@ class GenreController extends Controller
      */
     public function index(Request $request)
     {
-        // Get a desirable order from the request - 'asc' OR 'desc'
-        $order = $request->get('order');
+        // Get variables from the request
+        $orderBy = $request->get('orderBy');
+        $orderDir = $request->get('orderDir');
 
-        // Case 1: If desirable order is descending, show it in that order
-        if ($order == 'desc') {
-            $genres = Genre::orderBy('name', 'desc')
-                ->paginate(8);
-            $order = 'asc';
+        // Set the default values if no value is provided
+        if (empty($orderBy)) {
+            $orderBy = 'name';
+        }
+        if (empty($orderDir)) {
+            $orderDir = 'asc';
         }
 
-        // Case 2: The order is either ascending or not specified in which case
-        // we will show the default - ascending order
-        else {
-            $genres = Genre::orderby('name', 'asc')
-                ->paginate(8);
-            $order = 'desc';
-        }
+        // Order genres by desired attribute and paginate
+        $genres = Genre::orderby($orderBy, $orderDir)
+            ->paginate(7);
 
-        // We also have to return the inverse order as a way of switching them
-        return view('settings.genres.index', compact('genres', 'order'));
+        // Append $orderBy and $orderDir queries to the request
+        $genres->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+
+        return view('settings.genres.index', compact('genres'));
     }
 
     /**
