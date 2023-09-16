@@ -25,7 +25,9 @@ class StoreCategoryRequest extends FormRequest
     {
         // Name of a category must be provided, have min. length of 3 characters and have unique value in table categories
         return [
-            'name' => 'required|min:3|unique:categories'
+            'name' => 'required|min:3|unique:categories',
+            'icon' => 'sometimes',
+            'description' => 'sometimes'
         ];
     }
 }

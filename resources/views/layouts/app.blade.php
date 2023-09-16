@@ -24,9 +24,9 @@
 
         <section class="w-screen h-screen pl-[83px] text-[#212121]">
             <!-- Heading of Content -->
-            <div class="heading border-b-[1px] mb-[20px] border-[#e4dfdf] mt-4">
-                <div class="pl-[30px] mb-4">
-                    <h1>@yield('title', 'Dashboard')</h1>
+            <div class="heading border-b-[1px] border-[#e4dfdf]">
+                <div class="pl-[30px] mt-[22px] mb-[23px]">
+                    <h1>@yield('title')</h1>
                 </div>
             </div>
 

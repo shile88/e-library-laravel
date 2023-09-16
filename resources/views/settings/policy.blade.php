@@ -1,151 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('settings.index')
 
-<head>
-    <!-- Meta -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="content-language" content="en" />
-    <meta name="description" content="ICT Cortex Library - project for high school students..." />
-    <meta name="keywords" content="ict cortex, cortex, bild, bildstudio, highschool, students, coding" />
-    <meta name="author" content="bildstudio" />
-    <!-- End Meta -->
+@section('title', 'Policy')
 
-    <!-- Title -->
-    <title>Polisa | Library - ICT Cortex student project</title>
-    <link rel="shortcut icon" href="img/library-favicon.ico" type="image/vnd.microsoft.icon" />
-    <!-- End Title -->
+@section('main-settings')
 
-    <!-- Styles -->
-    @include('layouts.partials.styles')
-    <!-- End Styles -->
-
-    @vite('resources/css/app.css')
-
-</head>
-
-<body class="small:bg-gradient-to-r small:from-green-400 small:to-blue-500">
-    <!-- Header -->
-    @include('layouts.partials.header')
-    <!-- Header -->
-
-    <!-- Main content -->
-    <main class="flex flex-row small:hidden">
-        <!-- Sidebar -->
-        @include('layouts.partials.sidebar')
-        <!-- End Sidebar -->
-        <!-- Content -->
-        <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
-            <!-- Heading of content -->
-            <div class="heading mt-[7px]">
-                <div class="border-b-[1px] border-[#e4dfdf]">
-                    <div class="pl-[30px] pb-[21px]">
-                        <h1>
-                            Settings
-                        </h1>
+    <form method="post" action="#">
+        @csrf
+        @method('PATCH')
+        <div class="section- mt-[5px]">
+            <div class="flex flex-col">
+                <div class="flex border-b-[1px] border-[#e4dfdf] pb-[20px] pl-[30px]">
+                    <div>
+                        <h3>Period for checkouts</h3>
+                        <p class="pt-[15px] max-w-[400px]">
+                            This value defines the time in days, a book can be checked out for a student. After this period
+                            the checkout will be overdue.
+                        </p>
+                        <p class="pt-[15px] max-w-[400px]">
+                            Current value: xxx day(s)
+                        </p>
+                    </div>
+                    <div class="relative flex ml-[60px] mt-[20px]">
+                        <input type="number" name="holding_time" value="xxx"
+                            class="h-[50px] flex-1 w-full px-4 py-2 mt-[20px] text-sm text-gray-700 placeholder-gray-400
+                               bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none
+                               focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+                        <p class="ml-[10px] mt-[35px]">day(s)</p>
                     </div>
                 </div>
-            </div>
-            <div class="py-4 text-gray-500 border-b-[1px] border-[#e4dfdf] pl-[30px]">
-                <a href="{{ route('settings.policy') }}" class="inline hover:text-blue-800 active-book-nav">
-                    Polisa
-                </a>
-                <a href="{{ route('settings.categories') }}" class="inline ml-[70px] hover:text-blue-800">
-                    Kategorije
-                </a>
-                <a href="{{ route('settings.genres') }}" class="inline ml-[70px] hover:text-blue-800">
-                    Zanrovi
-                </a>
-                <a href="{{ route('settings.publishers') }}" class="inline ml-[70px] hover:text-blue-800">
-                    Izdavac
-                </a>
-                <a href="{{ route('settings.bindings') }}" class="inline ml-[70px] hover:text-blue-800">
-                    Povez
-                </a>
-                <a href="{{ route('settings.formats') }}" class="inline ml-[70px] hover:text-blue-800">
-                    Format
-                </a>
-                <a href="{{ route('settings.scripts') }}" class="inline ml-[70px] hover:text-blue-800">
-                    Pismo
-                </a>
-            </div>
-            <div class="height-ucenikProfile pb-[30px] scroll">
-                <!-- Space for content -->
-                <div class="section- mt-[20px]">
-                    <div class="flex flex-col">
-                        <div class="pl-[30px] flex border-b-[1px] border-[#e4dfdf]  pb-[20px]">
-                            <div>
-                                <h3>
-                                    Rok za rezervaciju
-                                </h3>
-                                <p class="pt-[15px] max-w-[400px]">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum eligendi nihil, vel
-                                    necessitatibus saepe laboriosam! Perspiciatis laboriosam culpa veritatis ea
-                                    voluptatum commodi tempora unde, dolorum debitis quia id dicta vitae.
-                                </p>
-                            </div>
-                            <div class="relative flex ml-[60px] mt-[20px]">
-                                <input type="text"
-                                    class="h-[50px] flex-1 w-full px-4 py-2 text-sm text-gray-700 placeholder-gray-400 bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                    placeholder="..." />
-                                <p class="ml-[10px] mt-[10px]">dana</p>
-                            </div>
-                        </div>
-                        <div class="pl-[30px] flex border-b-[1px] border-[#e4dfdf]  py-[20px]">
-                            <div>
-                                <h3>
-                                    Rok vracanja
-                                </h3>
-                                <p class="pt-[15px] max-w-[400px]">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum eligendi nihil, vel
-                                    necessitatibus saepe laboriosam! Perspiciatis laboriosam culpa veritatis ea
-                                    voluptatum commodi tempora unde, dolorum debitis quia id dicta vitae.
-                                </p>
-                            </div>
-                            <div class="relative flex ml-[60px] mt-[20px]">
-                                <input type="text"
-                                    class="h-[50px] flex-1 w-full px-4 py-2 text-sm text-gray-700 placeholder-gray-400 bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                    placeholder="..." />
-                                <p class="ml-[10px] mt-[10px]">dana</p>
-                            </div>
-                        </div>
-                        <div class="pl-[30px] flex border-b-[1px] border-[#e4dfdf]  py-[20px]">
-                            <div>
-                                <h3>
-                                    Rok konflikta
-                                </h3>
-                                <p class="pt-[15px] max-w-[400px]">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum eligendi nihil, vel
-                                    necessitatibus saepe laboriosam! Perspiciatis laboriosam culpa veritatis ea
-                                    voluptatum commodi tempora unde, dolorum debitis quia id dicta vitae.
-                                </p>
-                            </div>
-                            <div class="relative flex ml-[60px] mt-[20px]">
-                                <input type="text"
-                                    class="h-[50px] flex-1 w-full px-4 py-2 text-sm text-gray-700 placeholder-gray-400 bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                    placeholder="..." />
-                                <p class="ml-[10px] mt-[10px]">dana</p>
-                            </div>
-                        </div>
+                <div class="mt-[20px] flex border-b-[1px] border-[#e4dfdf] pb-[20px] pl-[30px]">
+                    <div>
+                        <h3>Period for reservations</h3>
+                        <p class="pt-[15px] max-w-[400px]">
+                            This value defines the time in days, a book can be reserved for a student. In this period a
+                            student can check out the book. After this period the reservation will be canceled.
+                        </p>
+                        <p class="pt-[15px] max-w-[400px]">
+                            Current value: xxx day(s)
+                        </p>
+                    </div>
+                    <div class="relative flex ml-[60px] mt-[20px]">
+                        <input type="number" name="reservation_time" value="xxx"
+                            class="h-[50px] flex-1 w-full px-4 py-2 mt-[20px] text-sm text-gray-700 placeholder-gray-400
+                               bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none
+                               focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+                        <p class="ml-[10px] mt-[35px]">day(s)</p>
                     </div>
                 </div>
+                <div class="mt-[20px] flex border-b-[1px] border-[#e4dfdf] pb-[20px] pl-[30px]">
+                    <div>
+                        <h3>
+                            Books per student
+                        </h3>
+                        <p class="pt-[15px] max-w-[400px]">
+                            This value defines a number of books that can be checked out or reserved for a student.
+                        </p>
+                        <p class="pt-[15px] max-w-[400px]">
+                            Current value: xxx book(s)
+                        </p>
+                    </div>
+                    <div class="relative flex ml-[60px] mt-[20px]">
+                        <input type="number" name="books_per_student" value="xxx"
+                            class="h-[50px] flex-1 w-full px-4 py-2 mt-[20px] text-sm text-gray-700 placeholder-gray-400
+                               bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none
+                               focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
+                        <p class="ml-[10px] mt-[35px]">book(s)</p>
+                    </div>
+                </div>
+
+                {{-- Submit button --}}
+                <button type="submit"
+                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm ml-[30px]
+                    py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#4558BE] bg-[#3f51b5] text-white mt-[30px]">Submit</button>
+
             </div>
-        </section>
-        <!-- End Content -->
-    </main>
-    <!-- End Main content -->
+        </div>
+    </form>
 
-    <!-- Notification for small devices -->
-    @include('layouts.partials.inProgress')
-
-
-    <!-- Scripts -->
-    @include('layouts.partials.scripts')
-    @vite('resources/js/jquery.min.js')
-    @vite('resources/js/app.js')
-    <!-- End Scripts -->
-
-</body>
-
-</html>
+@endsection

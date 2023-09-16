@@ -6,7 +6,7 @@
 
 <div class="height-autori pb-[30px] scroll" style="overflow-y:auto; max-height:70vh;">
         <div class="flex items-center px-[30px] py-4 space-x-3 rounded-lg justify-between">
-            
+
 
         <a href="{{ route('authors.create') }}" class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
                 <i class="fas fa-plus mr-[15px]"></i> Novi autor
@@ -46,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white">
-                    
+
                 @foreach($authors as $author)
                     <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
                         <td class="px-4 py-3 whitespace-no-wrap">
@@ -83,11 +83,11 @@
                                             <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                                             <span class="px-4 py-0">Izmijeni autora</span>
                                         </a>
-                                        
+
                                         <form action="{{ route('authors.destroy', $author->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            
+
                                             <button id="deleteAuthors" type="submit"  tabindex="0"
                                             class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                             >
@@ -95,15 +95,15 @@
                                             <span class="px-4 py-0">Izbrisi autora</span>
                                         </button>
                                         </form>
-                                        
+
                                     </div>
                                 </div>
                             </div>
                         </td>
                     </tr>
                 @endforeach
-                    
-                    
+
+
                 </tbody>
             </table>
 
