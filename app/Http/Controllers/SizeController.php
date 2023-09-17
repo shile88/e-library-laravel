@@ -47,7 +47,7 @@ class SizeController extends Controller
     public function store(StoreSizeRequest $request)
     {
         Size::create($request->validated());
-        return redirect()->route('size.index');
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -65,7 +65,7 @@ class SizeController extends Controller
     public function update(UpdateSizeRequest $request, Size $size)
     {
         $size->update($request->validated());
-        return redirect()->route('size.index');
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -74,6 +74,6 @@ class SizeController extends Controller
     public function destroy(Size $size)
     {
            $size->delete();
-           return redirect()->route('size.index');
+           return redirect()->route('sizes.index');
     }
 }
