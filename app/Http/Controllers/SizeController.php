@@ -16,7 +16,7 @@ class SizeController extends Controller
     public function index(Request $request)
     {
         $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
+        $orderDir = $request->get('orderDir') ?? 'desc';
         $rowPerPage = $request->get('rowPerPage') ?? 7;
         
         $sizes = Size::orderby($orderBy, $orderDir)
