@@ -26,11 +26,11 @@ $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'bindings')) active-book-nav @endif">
             Bindings
         </a>
-        <a href="{{ route('policy.index') }}"
+        <a href="{{ route('sizes.index') }}"
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'sizes')) active-book-nav @endif">
             Sizes
         </a>
-        <a href="{{ route('policy.index') }}"
+        <a href="{{ route('scripts.index') }}"
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'scripts')) active-book-nav @endif">
             Scripts
         </a>

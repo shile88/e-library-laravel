@@ -3,17 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSizeRequest;
-use App\Http\Requests\UpdateSizeRequest;
+use App\Http\Requests\UpdateSizeRequest;    
 use App\Models\Size;
+use Illuminate\Http\Request;
+
 
 class SizeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $orderBy = $request->get('orderBy') ?? 'name';
+        $orderDir = $request->get('orderDir') ?? 'asc';
+        $rowPerPage = $request->get('rowPerPage') ?? 7;
+        
+        $sizes = Size::orderby($orderBy, $orderDir)
+            ->paginate($rowPerPage);
+        
+        $sizes->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+                        
+        return view('settings.size.index', compact('sizes'));
     }
 
     /**
@@ -21,23 +32,22 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('settings.size.create');
     }
-
+    
+    
+    public function show()
+    {
+    }
+    
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreSizeRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Size $size)
-    {
-        //
+        Size::create($request->validated());
+        return redirect()->route('size.index');
     }
 
     /**
@@ -45,7 +55,8 @@ class SizeController extends Controller
      */
     public function edit(Size $size)
     {
-        //
+        return view('settings.size.edit', compact('size'));
+        
     }
 
     /**
@@ -53,7 +64,8 @@ class SizeController extends Controller
      */
     public function update(UpdateSizeRequest $request, Size $size)
     {
-        //
+        $size->update($request->validated());
+        return redirect()->route('size.index');
     }
 
     /**
@@ -61,6 +73,7 @@ class SizeController extends Controller
      */
     public function destroy(Size $size)
     {
-        //
+           $size->delete();
+           return redirect()->route('size.index');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateScriptRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateScriptRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,7 @@ class UpdateScriptRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'min:3|unique:scripts,name,' . $this->request->get('id')
         ];
     }
 }

@@ -7,6 +7,8 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\ScriptController;
+use App\Http\Controllers\SizeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('/categories', CategoryController::class);
     Route::resource('/genres', GenreController::class);
     Route::resource('/publishers', PublisherController::class);
+    Route::resource('/sizes', SizeController::class);
+    Route::resource('/scripts', ScriptController::class);
 
 });
 
