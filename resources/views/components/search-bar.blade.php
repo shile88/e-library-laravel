@@ -1,4 +1,4 @@
-<form action="{{ route('filter.filterData') }}" method="GET">
+<form action="{{ route('authors.index') }}" method="GET">
     <div class="inline-block items-center">
         <div class="relative text-gray-600 focus-within:text-gray-400">
             <span class="absolute inset-y-0 left-0 flex items-center pl-2">

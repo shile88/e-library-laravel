@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="height-autori pb-[30px] scroll" style="overflow-y:auto; max-height:70vh;">
+<div class="qqqqqqqqqqqqqqqpb-[30px] scroll" style="overflow-y:auto; max-height:100vh;">
 
     <div class="flex items-center px-[30px] py-4 space-x-3 rounded-lg justify-between">
             <div>
@@ -12,6 +12,9 @@
                         class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
                         <i class="fas fa-plus mr-[15px]"></i> Novi autor
                     </a>
+                    
+            @if($authors->count())
+                    
                     <form action="{{ route('authors.bulkDelete') }}" method="POST" class="inline-block" id="bulk_delete_form">
                         @csrf
                         @method('DELETE')
@@ -20,33 +23,42 @@
                             <i class="fas fa-trash mr-[15px]"></i> Obriši sve selektovano
                         </button>
                     </form>
+            @endif
             </div>
 
-            <x-search-bar />
+                <x-search-bar />
+            
     </div>
    
 
     <div class="inline-block min-w-full px-[30px] pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard">
         <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
-                <thead class="bg-[#EFF3F6]">
-                    <tr class="border-b-[1px] border-[#e4dfdf]">
-                        <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
-                            <label class="inline-flex items-center">
-                                <input id="select_all_ids" name="" type="checkbox" class="form-checkbox">
-                            </label>
-                        </th>
-                        <th class="px-4 py-4 leading-4 tracking-wider text-left">Naziv autora
-                            <a href="{{ route('authors.index', ['order' => $order ? $order : 'asc']) }}">
-                                <i
-                                    class="ml-3 fa-lg fas
-                                    @if ($order == 'desc') fa-long-arrow-alt-up @else fa-long-arrow-alt-down @endif"></i>
-                            </a>
-                        </th>
-                        <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Opis</th>
-                        <th class="px-4 py-4"> </th>    
-                    </tr>
-                </thead>
+                @if($authors->count())
+                    <thead class="bg-[#EFF3F6]">
+                        <tr class="border-b-[1px] border-[#e4dfdf]">
+                            <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
+                                <label class="inline-flex items-center">
+                                    <input id="select_all_ids" name="" type="checkbox" class="form-checkbox">
+                                </label>
+                            </th>
+                            <th class="px-4 py-4 leading-4 tracking-wider text-left">Naziv autora
+                                <a href="{{ route('authors.index', ['order' => $order ? $order : 'asc', 'orderBy' => 'name']) }}">
+                                    <i
+                                        class="ml-3 fa-lg fas
+                                        @if ($order == 'desc') fa-long-arrow-alt-up @else fa-long-arrow-alt-down @endif"></i>
+                                </a>
+                            </th>
+                            <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Opis
+                            </th>
+                            <th class="px-4 py-4"> </th>    
+                        </tr>
+                    </thead>
+                @else 
+                    <p class="text-xl text-red-500 mb-[20px]">Nema rezultata</p>
+                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ url()->previous() }}">Vrati se nazad</a>
+                @endif
                 <tbody class="bg-white">
+                    
                     
                 @foreach($authors as $author)
                     <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf] ">
@@ -110,11 +122,14 @@
             
             </form>
 
+                
             <div class=" flex-row items-center justify-end mt-2">
                 {{ $authors->links() }}
             </div>
     </div>
 </div>
+
+
 
 @endsection('content')
 

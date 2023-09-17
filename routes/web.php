@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('authors/bulk-delete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
     Route::resource('/authors', AuthorController::class);
     
-    Route::get('/filter', [FilterController::class, 'filterData'])->name('filter.filterData');
+    // Route::get('/filter', [FilterController::class, 'filterData'])->name('filter.filterData');
 
     Route::resource('/categories', CategoryController::class);
 

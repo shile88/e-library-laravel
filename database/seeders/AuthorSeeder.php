@@ -139,6 +139,26 @@ class AuthorSeeder extends Seeder
                 'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
                 'picture' => 'authors/default.jpg'
             ],
+            [
+                'name' => 'Alber Kami',
+                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'picture' => 'authors/default.jpg'
+            ],
+            [
+                'name' => 'Alber Kami',
+                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'picture' => 'authors/default.jpg'
+            ],
+            [
+                'name' => 'Alber Kami',
+                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'picture' => 'authors/default.jpg'
+            ],
+            [
+                'name' => 'Alber Kami',
+                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'picture' => 'authors/default.jpg'
+            ],
         ]);
     }
 }

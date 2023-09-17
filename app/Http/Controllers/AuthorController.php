@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -14,19 +15,41 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
     public function index(Request $request)
-    {
-        // Po defaultu ce order biti asc
-        $order = $request->get('order', 'asc');
+{   
+    // Number of rows for displaying on one page
+    $rowsPerPage = $request->rowsPerPage ?? 7;
+    
+    // Column for search
+    $orderBy = $request->orderBy ?? 'name';
+    
+    // Direction for sort
+    $order = $request->order ?? 'asc';
+    
+    // Search param for filtering
+    $searchTerm = $request->input('q');
 
-        
-        $authors = Author::orderBy('name', $order)
-            ->paginate(5);
-
-        $order = ( $order == 'desc' ) ? 'asc' : 'desc';
-
-        return view('author.index', compact('authors', 'order' ));
+    // If search existis
+    if (!empty($searchTerm) && strlen($searchTerm) >= 3) {
+        $authors = Author::where('name', 'LIKE', $searchTerm .'%') // If it starts with a search param
+            ->orderBy($orderBy , $order)
+            ->paginate($rowsPerPage );
+    } else {
+        // If no search, only sort
+        $authors = Author::orderBy($orderBy, $order)
+            ->paginate($rowsPerPage );       
     }
+    
+    // Appends parameters to request
+    $authors->appends(['order' => $order, 'q' => $searchTerm, 'orderBy' => $orderBy, 'rowsPerPage' => $rowsPerPage]);
+ 
+    // Toggle value of sorting order
+    $order = ($order == 'desc') ? 'asc' : 'desc';
+   
+    return view('author.index', compact('authors', 'order', 'orderBy'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -118,4 +141,24 @@ class AuthorController extends Controller
         return redirect()->route('authors.index');
     }
 
+    
+    public function filterData(Request $request){
+        $request->validate([
+            'q' => 'required|string|max:50',
+        ]);
+    
+        $searchTerm = $request->input('q');
+        
+        if(strlen($searchTerm)<3){
+            return redirect()->back();
+        }
+
+        $authors = Author::where('name', 'LIKE', "%$searchTerm%")
+        ->orWhere('about', 'LIKE', "%$searchTerm%")
+        ->paginate(5);
+        
+        
+        return redirect()->route('authors.index', ['authors'=>$authors]);
+    }
+    
 }
