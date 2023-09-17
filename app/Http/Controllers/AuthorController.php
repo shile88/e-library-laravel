@@ -29,16 +29,18 @@ class AuthorController extends Controller
     
     // Search param for filtering
     $searchTerm = $request->input('q');
+    
+    // Handle ordering
+    $authorsQuery = Author::orderBy($orderBy, $order);
 
     // If search exists filter data
-    if(!empty($searchTerm) && strlen($searchTerm) >= 3)
-    {
-        $authors = $this->getAuthors($searchTerm, $orderBy, $order, $rowsPerPage);
-    }
-    else {
-        $authors =  Author::orderBy($orderBy, $order)
-            ->paginate($rowsPerPage);
-    }
+    if(!empty($searchTerm) && strlen($searchTerm) >= 3) {
+        $authorsQuery->where('name', 'LIKE', '%' . "$searchTerm%")
+        ->orWhere('about', 'LIKE', "%$searchTerm%");
+        }
+    
+    // Hangle pagination
+    $authors = $authorsQuery->paginate($rowsPerPage);
         
     // Appends parameters to request
     $authors->appends(['order' => $order, 'q' => $searchTerm, 'orderBy' => $orderBy, 'rowsPerPage' => $rowsPerPage]);
@@ -141,15 +143,4 @@ class AuthorController extends Controller
         return redirect()->route('authors.index');
     }
 
-    
-    // Filtering results
-    public function getAuthors($searchTerm, $orderBy, $order, $rowsPerPage){
-
-        return Author::where('name', 'LIKE', '%' . "$searchTerm%")
-                ->orWhere('about', 'LIKE', "%$searchTerm%")
-                ->orderBy($orderBy, $order)
-                ->paginate($rowsPerPage);
-        
-    }
-    
 }
