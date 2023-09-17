@@ -18,7 +18,7 @@ class AuthorController extends Controller
     
     public function index(Request $request)
 {   
-    // Number of rows for displaying on one page
+    // Number of data rows for displaying on one page
     $rowsPerPage = $request->rowsPerPage ?? 7;
     
     // Column for search
@@ -30,24 +30,23 @@ class AuthorController extends Controller
     // Search param for filtering
     $searchTerm = $request->input('q');
 
-    // If search existis
-    if (!empty($searchTerm) && strlen($searchTerm) >= 3) {
-        $authors = Author::where('name', 'LIKE', $searchTerm .'%') // If it starts with a search param
-            ->orderBy($orderBy , $order)
-            ->paginate($rowsPerPage );
-    } else {
-        // If no search, only sort
-        $authors = Author::orderBy($orderBy, $order)
-            ->paginate($rowsPerPage );       
+    // If search exists filter data
+    if(!empty($searchTerm) && strlen($searchTerm) >= 3)
+    {
+        $authors = $this->getAuthors($searchTerm, $orderBy, $order, $rowsPerPage);
     }
-    
+    else {
+        $authors =  Author::orderBy($orderBy, $order)
+            ->paginate($rowsPerPage);
+    }
+        
     // Appends parameters to request
     $authors->appends(['order' => $order, 'q' => $searchTerm, 'orderBy' => $orderBy, 'rowsPerPage' => $rowsPerPage]);
  
     // Toggle value of sorting order
     $order = ($order == 'desc') ? 'asc' : 'desc';
    
-    return view('author.index', compact('authors', 'order', 'orderBy'));
+    return view('author.index', compact('authors', 'order'));
 }
 
 
@@ -134,6 +133,7 @@ class AuthorController extends Controller
 
     }
 
+    // Delete all selected rows
     public function bulkDelete(Request $request){
         $selectedIds = explode(',', $request->input('selected_ids'));
         Author::whereIn('id', $selectedIds)->delete();
@@ -142,23 +142,14 @@ class AuthorController extends Controller
     }
 
     
-    public function filterData(Request $request){
-        $request->validate([
-            'q' => 'required|string|max:50',
-        ]);
-    
-        $searchTerm = $request->input('q');
-        
-        if(strlen($searchTerm)<3){
-            return redirect()->back();
-        }
+    // Filtering results
+    public function getAuthors($searchTerm, $orderBy, $order, $rowsPerPage){
 
-        $authors = Author::where('name', 'LIKE', "%$searchTerm%")
-        ->orWhere('about', 'LIKE', "%$searchTerm%")
-        ->paginate(5);
+        return Author::where('name', 'LIKE', '%' . "$searchTerm%")
+                ->orWhere('about', 'LIKE', "%$searchTerm%")
+                ->orderBy($orderBy, $order)
+                ->paginate($rowsPerPage);
         
-        
-        return redirect()->route('authors.index', ['authors'=>$authors]);
     }
     
 }

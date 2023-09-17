@@ -136,27 +136,27 @@ class AuthorSeeder extends Seeder
             ],
             [
                 'name' => 'Alber Kami',
-                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'about' => 'Sofokle (495.-406. godine p.n.e.) je rođen u Kolonu, gradu blizu Atine i potiče iz bogate porodice. Bio je starogrčki dramaturg. Takođe, on je jedan od trojice velikih tragičara, zajedno sa Eshilom i Euripidom. Iako je bio poznat pesnik, bavio se aktivno i državničkim poslovima. Napisao jKami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Fraek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
                 'picture' => 'authors/default.jpg'
             ],
             [
                 'name' => 'Alber Kami',
-                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'about' => 'Šadrvania ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
                 'picture' => 'authors/default.jpg'
             ],
             [
                 'name' => 'Alber Kami',
-                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'about' => 'Pogba apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
                 'picture' => 'authors/default.jpg'
             ],
             [
                 'name' => 'Alber Kami',
-                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'about' => 'Messi eni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
                 'picture' => 'authors/default.jpg'
             ],
             [
                 'name' => 'Alber Kami',
-                'about' => 'Alber Kami (Albert Camus) je bio francuski pisac i filozof. Rođen je u Mondovi u Alžiru, 07. novembra 1913. godine, a umro je u Vilblevenu u Francuskoj, 04. januara 1960. godine. Nobelovu nagradu za književnost Kami je dobio 1957. godine. Sva djela ovog pisca baziraju se na osnovnoj ideji apsurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
+                'about' => 'Ronaldo psurda ljudskog postojanja. Polazi od negativnog stava prema današnjem, modernom čovjeku, a nasuprot njega idealizuje stare Grke. U eseju „Pobunjeni čovjek“ iznosi neke svoje lične stavove. Njegova religioznost bila je predmet mnogih rasprava, a s tim u vezi, on je napisao „Ne vjerujem u boga i nisam ateist“. Nije imao poveznice sa ideologijama, što je potvrdio u intervjuu.',
                 'picture' => 'authors/default.jpg'
             ],
         ]);
