@@ -34,6 +34,10 @@ $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'scripts')) active-book-nav @endif">
             Scripts
         </a>
+        <a href="{{ route('languages.index') }}"
+            class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'languages')) active-book-nav @endif">
+            Languages
+        </a>
     </div>
 
     {{-- Main settings content --}}
