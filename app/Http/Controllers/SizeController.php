@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSizeRequest;
-use App\Http\Requests\UpdateSizeRequest;    
+use App\Http\Requests\UpdateSizeRequest;
 use App\Models\Size;
 use Illuminate\Http\Request;
 
@@ -16,14 +16,14 @@ class SizeController extends Controller
     public function index(Request $request)
     {
         $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'desc';
+        $orderDir = $request->get('orderDir') ?? 'asc';
         $rowPerPage = $request->get('rowPerPage') ?? 7;
-        
+
         $sizes = Size::orderby($orderBy, $orderDir)
             ->paginate($rowPerPage);
-        
+
         $sizes->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
-                        
+
         return view('settings.size.index', compact('sizes'));
     }
 
@@ -34,13 +34,13 @@ class SizeController extends Controller
     {
         return view('settings.size.create');
     }
-    
-    
+
+
     public function show()
     {
     }
-    
-    
+
+
     /**
      * Store a newly created resource in storage.
      */
@@ -56,7 +56,7 @@ class SizeController extends Controller
     public function edit(Size $size)
     {
         return view('settings.size.edit', compact('size'));
-        
+
     }
 
     /**

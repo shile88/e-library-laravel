@@ -16,14 +16,14 @@ class ScriptController extends Controller
     public function index(Request $request)
     {
         $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'desc';
+        $orderDir = $request->get('orderDir') ?? 'asc';
         $rowPerPage = $request->get('rowPerPage') ?? 7;
-        
+
         $scripts = Script::orderby($orderBy, $orderDir)
             ->paginate($rowPerPage);
-        
+
         $scripts->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
-                        
+
         return view('settings.scripts.index', compact('scripts'));
     }
 

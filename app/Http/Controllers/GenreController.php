@@ -16,7 +16,7 @@ class GenreController extends Controller
     {
         // Get variables from the request and set default values if no value is set
         $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'desc';
+        $orderDir = $request->get('orderDir') ?? 'asc';
         $rowsPerPage = $request->get('rowPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
@@ -86,7 +86,7 @@ class GenreController extends Controller
     {
         // Deletes genre from the DB
         $genre->delete();
-        
+
         // After the operation is finished redirects to a different page
         return redirect()->route('genres.index');
     }
