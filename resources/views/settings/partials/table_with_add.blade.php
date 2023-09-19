@@ -24,7 +24,7 @@
                     <a
                         href="{{ route($resource . '.index', [
                             'orderBy' => 'name',
-                            'orderDir' => request()->get('orderDir') == 'asc' ? 'desc' : 'asc',
+                            'orderDir' => request()->get('orderDir') == 'desc' ? 'asc' : 'desc',
                             'page' => request()->get('page'),
                         ]) }}">
                         <i
