@@ -14,21 +14,14 @@ class GenreController extends Controller
      */
     public function index(Request $request)
     {
-        // Get variables from the request
-        $orderBy = $request->get('orderBy');
-        $orderDir = $request->get('orderDir');
+        // Get variables from the request and set default values if no value is set
+        $orderBy = $request->get('orderBy') ?? 'name';
+        $orderDir = $request->get('orderDir') ?? 'desc';
+        $rowsPerPage = $request->get('rowPerPage') ?? 7;
 
-        // Set the default values if no value is provided
-        if (empty($orderBy)) {
-            $orderBy = 'name';
-        }
-        if (empty($orderDir)) {
-            $orderDir = 'asc';
-        }
-
-        // Order genres by desired attribute and paginate
+        // Order data by desired attribute and paginate
         $genres = Genre::orderby($orderBy, $orderDir)
-            ->paginate(7);
+            ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request
         $genres->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
@@ -52,6 +45,7 @@ class GenreController extends Controller
     {
         // Stores new genre in DB with the validated fields from StoreGenreRequest
         Genre::create($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('genres.index');
     }
@@ -80,6 +74,7 @@ class GenreController extends Controller
     {
         // Updates genre fields with the validated parameters from UpdateGenreRequest
         $genre->update($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('genres.index');
     }
@@ -91,6 +86,7 @@ class GenreController extends Controller
     {
         // Deletes genre from the DB
         $genre->delete();
+        
         // After the operation is finished redirects to a different page
         return redirect()->route('genres.index');
     }

@@ -14,26 +14,19 @@ class PublisherController extends Controller
      */
     public function index(Request $request)
     {
-        // Get a desirable order from the request - 'asc' OR 'desc'
-        $order = $request->get('order');
+        // Get variables from the request and set default values if no value is set
+        $orderBy = $request->get('orderBy') ?? 'name';
+        $orderDir = $request->get('orderDir') ?? 'desc';
+        $rowsPerPage = $request->get('rowPerPage') ?? 7;
 
-        // Case 1: If desirable order is descending, show it in that order
-        if ($order == 'desc') {
-            $publishers = Publisher::orderBy('name', 'desc')
-                ->paginate(8);
-            $order = 'asc';
-        }
+        // Order data by desired attribute and paginate
+        $publishers = Publisher::orderby($orderBy, $orderDir)
+            ->paginate($rowsPerPage);
 
-        // Case 2: The order is either ascending or not specified in which case
-        // we will show the default - ascending order
-        else {
-            $publishers = Publisher::orderby('name', 'asc')
-                ->paginate(8);
-            $order = 'desc';
-        }
+        // Append $orderBy and $orderDir queries to the request
+        $publishers->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
 
-        // We also have to return the inverse order as a way of switching them
-        return view('settings.publishers.index', compact('publishers', 'order'));
+        return view('settings.publishers.index', compact('publishers'));
     }
 
     /**
@@ -52,6 +45,7 @@ class PublisherController extends Controller
     {
         // Stores new publisher in DB with the validated fields from StorePublisherRequest
         Publisher::create($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('publishers.index');
     }
@@ -80,6 +74,7 @@ class PublisherController extends Controller
     {
         // Updates publisher fields with the validated parameters from UpdatePublisherRequest
         $publisher->update($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('publishers.index');
     }
@@ -91,6 +86,7 @@ class PublisherController extends Controller
     {
         // Deletes publisher from the DB
         $publisher->delete();
+        
         // After the operation is finished redirects to a different page
         return redirect()->route('publishers.index');
     }

@@ -14,21 +14,14 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        // Get variables from the request
-        $orderBy = $request->get('orderBy');
-        $orderDir = $request->get('orderDir');
+        // Get variables from the request and set default values if no value is set
+        $orderBy = $request->get('orderBy') ?? 'name';
+        $orderDir = $request->get('orderDir') ?? 'desc';
+        $rowsPerPage = $request->get('rowPerPage') ?? 7;
 
-        // Set the default values if no value is provided
-        if (empty($orderBy)) {
-            $orderBy = 'name';
-        }
-        if (empty($orderDir)) {
-            $orderDir = 'asc';
-        }
-
-        // Order categories by desired attribute and paginate
+        // Order data by desired attribute and paginate
         $categories = Category::orderby($orderBy, $orderDir)
-            ->paginate(7);
+            ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request
         $categories->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
@@ -52,6 +45,7 @@ class CategoryController extends Controller
     {
         // Stores new category in DB with the validated fields from StoreCategoryRequest
         Category::create($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('categories.index');
     }
@@ -80,6 +74,7 @@ class CategoryController extends Controller
     {
         // Updates category fields with the validated parameters from UpdateCategoryRequest
         $category->update($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('categories.index');
     }
@@ -91,6 +86,7 @@ class CategoryController extends Controller
     {
         // Deletes category from the DB
         $category->delete();
+
         // After the operation is finished redirects to a different page
         return redirect()->route('categories.index');
     }
