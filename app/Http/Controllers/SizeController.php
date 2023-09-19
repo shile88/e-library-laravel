@@ -24,7 +24,7 @@ class SizeController extends Controller
 
         $sizes->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
 
-        return view('settings.size.index', compact('sizes'));
+        return view('settings.sizes.index', compact('sizes'));
     }
 
     /**
@@ -32,7 +32,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        return view('settings.size.create');
+        return view('settings.sizes.create');
     }
 
 
@@ -55,7 +55,7 @@ class SizeController extends Controller
      */
     public function edit(Size $size)
     {
-        return view('settings.size.edit', compact('size'));
+        return view('settings.sizes.edit', compact('size'));
 
     }
 
