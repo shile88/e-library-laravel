@@ -1,14 +1,14 @@
 @extends('settings.index')
-
 @section('title', 'Policy')
 
 @section('main-settings')
 
-    <form method="post" action="#">
+    <form method="post" action="{{ route('policy.update') }}">
         @csrf
         @method('PATCH')
         <div class="section- mt-[5px]">
             <div class="flex flex-col">
+                {{-- Holding time --}}
                 <div class="flex border-b-[1px] border-[#e4dfdf] pb-[20px] pl-[30px]">
                     <div>
                         <h3>Period for checkouts</h3>
@@ -17,17 +17,19 @@
                             the checkout will be overdue.
                         </p>
                         <p class="pt-[15px] max-w-[400px]">
-                            Current value: xxx day(s)
+                            Current value: {{ $holding_time }} day(s)
                         </p>
                     </div>
                     <div class="relative flex ml-[60px] mt-[20px]">
-                        <input type="number" name="holding_time" value="xxx"
+                        <input type="number" name="holding_time" value="{{ $holding_time }}"
                             class="h-[50px] flex-1 w-full px-4 py-2 mt-[20px] text-sm text-gray-700 placeholder-gray-400
                                bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none
                                focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
                         <p class="ml-[10px] mt-[35px]">day(s)</p>
                     </div>
                 </div>
+
+                {{-- Reservation time --}}
                 <div class="mt-[20px] flex border-b-[1px] border-[#e4dfdf] pb-[20px] pl-[30px]">
                     <div>
                         <h3>Period for reservations</h3>
@@ -36,17 +38,19 @@
                             student can check out the book. After this period the reservation will be canceled.
                         </p>
                         <p class="pt-[15px] max-w-[400px]">
-                            Current value: xxx day(s)
+                            Current value: {{ $reservation_time }} day(s)
                         </p>
                     </div>
                     <div class="relative flex ml-[60px] mt-[20px]">
-                        <input type="number" name="reservation_time" value="xxx"
+                        <input type="number" name="reservation_time" value="{{ $reservation_time }}"
                             class="h-[50px] flex-1 w-full px-4 py-2 mt-[20px] text-sm text-gray-700 placeholder-gray-400
                                bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none
                                focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />
                         <p class="ml-[10px] mt-[35px]">day(s)</p>
                     </div>
                 </div>
+
+                {{-- Books Per Student --}}
                 <div class="mt-[20px] flex border-b-[1px] border-[#e4dfdf] pb-[20px] pl-[30px]">
                     <div>
                         <h3>
@@ -56,11 +60,11 @@
                             This value defines a number of books that can be checked out or reserved for a student.
                         </p>
                         <p class="pt-[15px] max-w-[400px]">
-                            Current value: xxx book(s)
+                            Current value: {{ $books_per_student }} book(s)
                         </p>
                     </div>
                     <div class="relative flex ml-[60px] mt-[20px]">
-                        <input type="number" name="books_per_student" value="xxx"
+                        <input type="number" name="books_per_student" value="{{ $books_per_student }}"
                             class="h-[50px] flex-1 w-full px-4 py-2 mt-[20px] text-sm text-gray-700 placeholder-gray-400
                                bg-white border-[1px]  border-[#e4dfdf]  rounded-lg shadow-sm appearance-none
                                focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" />

@@ -40,15 +40,16 @@ Route::middleware('auth')->group(function () {
 
 
     // SETTINGS
-    Route::get('/policy', [SettingsController::class, 'index'])->name('policy.index');
     Route::get('/settings', [SettingsController::class, 'index'])->name('policy.index');
+    Route::get('/policy', [SettingsController::class, 'index'])->name('policy.index');
+    Route::patch('/policy', [SettingsController::class, 'update'])->name('policy.update');
+    Route::resource('/bindings', BindingController::class);
     Route::resource('/categories', CategoryController::class);
     Route::resource('/genres', GenreController::class);
-    Route::resource('/publishers', PublisherController::class);
-    Route::resource('/sizes', SizeController::class);
-    Route::resource('/scripts', ScriptController::class);
-    Route::resource('/bindings', BindingController::class);
     Route::resource('/languages', LanguageController::class);
+    Route::resource('/publishers', PublisherController::class);
+    Route::resource('/scripts', ScriptController::class);
+    Route::resource('/sizes', SizeController::class);
 
 });
 
