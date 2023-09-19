@@ -9,6 +9,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\BindingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/publishers', PublisherController::class);
     Route::resource('/sizes', SizeController::class);
     Route::resource('/scripts', ScriptController::class);
+    Route::resource('/bindings', BindingController::class);
 
 });
 

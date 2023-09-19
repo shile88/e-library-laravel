@@ -22,7 +22,7 @@ $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'publishers')) active-book-nav @endif">
             Publishers
         </a>
-        <a href="{{ route('policy.index') }}"
+        <a href="{{ route('bindings.index') }}"
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'bindings')) active-book-nav @endif">
             Bindings
         </a>
