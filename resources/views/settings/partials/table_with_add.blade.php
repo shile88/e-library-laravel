@@ -1,6 +1,6 @@
 <div class="flex items-center py-4 space-x-3 rounded-lg justify-between ml-[30px]">
     {{-- Add button --}}
-    <a href="{{ route($resource . '.create') }}"
+    <a href="{{ route($resourcePlural . '.create') }}"
         class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
         <i class="fas fa-plus mr-[15px]"></i> New {{ $resourceName }}
     </a>
@@ -22,7 +22,7 @@
                 </th>
                 <th class="px-4 py-4 leading-4 tracking-wider text-left">Name
                     <a
-                        href="{{ route($resource . '.index', [
+                        href="{{ route($resourcePlural . '.index', [
                             'orderBy' => 'name',
                             'orderDir' => request()->get('orderDir') == 'desc' ? 'asc' : 'desc',
                             'page' => request()->get('page'),
@@ -59,7 +59,7 @@
                                 role="menu">
                                 <div class="py-1">
                                     {{-- Edit button --}}
-                                    <a href="{{ route($resource . '.edit', $item) }}" tabindex="0"
+                                    <a href="{{ route($resourcePlural . '.edit', $item) }}" tabindex="0"
                                         class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                         role="menuitem">
                                         <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
@@ -67,7 +67,7 @@
                                     </a>
 
                                     {{-- Delete button --}}
-                                    <form action="{{ route($resource . '.destroy', $item) }}" method="post">
+                                    <form action="{{ route($resourcePlural . '.destroy', $item) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" tabindex="0"

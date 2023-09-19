@@ -1,7 +1,12 @@
 @extends('settings.index')
-
-@section('title', 'Sizes')
+@section('title', 'Scripts')
 
 @section('main-settings')
-    @include('settings.partials.table_with_add', ['items' => $scripts, 'resource' => 'scripts', 'resourceName' => 'Script'])
+
+    @include('settings.partials.table_with_add', [
+        'items' => $scripts,
+        'resourceName' => 'script',
+        'resourcePlural' => 'scripts',
+    ])
+
 @endsection
