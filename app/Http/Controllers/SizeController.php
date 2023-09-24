@@ -17,7 +17,7 @@ class SizeController extends Controller
     {
         $orderBy = $request->get('orderBy') ?? 'name';
         $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowPerPage = $request->get('rowPerPage') ?? 7;
+        $rowPerPage = $request->get('rowsPerPage') ?? 7;
 
         $sizes = Size::orderby($orderBy, $orderDir)
             ->paginate($rowPerPage);
@@ -73,7 +73,7 @@ class SizeController extends Controller
      */
     public function destroy(Size $size)
     {
-           $size->delete();
-           return redirect()->route('sizes.index');
+        $size->delete();
+        return redirect()->route('sizes.index');
     }
 }

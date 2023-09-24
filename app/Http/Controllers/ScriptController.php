@@ -17,7 +17,7 @@ class ScriptController extends Controller
     {
         $orderBy = $request->get('orderBy') ?? 'name';
         $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowPerPage = $request->get('rowPerPage') ?? 7;
+        $rowPerPage = $request->get('rowsPerPage') ?? 7;
 
         $scripts = Script::orderby($orderBy, $orderDir)
             ->paginate($rowPerPage);
@@ -75,6 +75,6 @@ class ScriptController extends Controller
     public function destroy(Script $script)
     {
         $script->delete();
-           return redirect()->route('scripts.index');
+        return redirect()->route('scripts.index');
     }
 }

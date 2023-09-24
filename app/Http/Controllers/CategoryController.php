@@ -17,7 +17,7 @@ class CategoryController extends Controller
         // Get variables from the request and set default values if no value is set
         $orderBy = $request->get('orderBy') ?? 'name';
         $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowPerPage') ?? 7;
+        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
         $categories = Category::orderby($orderBy, $orderDir)
