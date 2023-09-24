@@ -9,8 +9,8 @@
                     </svg>
                 </button>
             </span>
-            <input type="search" name="q"
-                class="py-2 pl-10 text-sm text-white bg-white rounded-md focus:outline-none focus:bg-white focus:text-gray-900"
+            <input type="search" name="q" value="{{ request()->get('q') }}"
+                class="py-2 pl-10 text-sm text-black bg-white rounded-md focus:outline-none focus:bg-white focus:text-gray-900"
                 placeholder="Search..." autocomplete="off">
         </div>
     </div>
