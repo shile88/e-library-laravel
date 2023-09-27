@@ -85,8 +85,9 @@
             @endforeach
         </tbody>
     </table>
+</div>
 
-    {{-- Pagination --}}
-    <div class=" flex-row items-center justify-end mt-2">
-        {{ $items->links() }}
-    </div>
+{{-- Pagination --}}
+<div class=" flex-row items-center justify-end mt-2">
+    {{ $items->links() }}
+</div>

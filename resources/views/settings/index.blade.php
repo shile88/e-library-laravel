@@ -6,9 +6,9 @@ $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
 
     {{-- Navbar --}}
     <div class="py-4 text-gray-500 border-b-[1px] border-[#e4dfdf] pl-[30px]">
-        <a href="{{ route('policy.index') }}"
-            class="inline hover:text-blue-800 @if (str_contains($route_name, 'policy')) active-book-nav @endif">
-            Policy
+        <a href="{{ route('global_variables.index') }}"
+            class="inline hover:text-blue-800 @if (str_contains($route_name, 'global') || str_contains($route_name, 'settings')) active-book-nav @endif">
+            Global variables
         </a>
         <a href="{{ route('bindings.index') }}"
             class="inline ml-[70px] hover:text-blue-800 @if (str_contains($route_name, 'bindings')) active-book-nav @endif">
@@ -41,7 +41,7 @@ $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
     </div>
 
     {{-- Main settings content --}}
-    <div class="height-ucenikProfile mt-[20px]">
+    <div class="height-ucenikProfile">
         @yield('main-settings')
     </div>
 @endsection
