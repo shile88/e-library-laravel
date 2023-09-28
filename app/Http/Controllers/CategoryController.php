@@ -20,7 +20,7 @@ class CategoryController extends Controller
         $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
-        $categories = Category::orderby($orderBy, $orderDir)
+        $categories = Category::orderBy($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request

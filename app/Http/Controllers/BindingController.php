@@ -20,7 +20,7 @@ class BindingController extends Controller
         $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
-        $bindings = Binding::orderby($orderBy, $orderDir)
+        $bindings = Binding::orderBy($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request

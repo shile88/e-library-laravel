@@ -20,7 +20,7 @@ class LanguageController extends Controller
         $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
-        $languages = Language::orderby($orderBy, $orderDir)
+        $languages = Language::orderBy($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request

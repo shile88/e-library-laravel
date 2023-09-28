@@ -20,7 +20,7 @@ class GlobalVariableController extends Controller
         $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
-        $globalVariables = GlobalVariable::orderby($orderBy, $orderDir)
+        $globalVariables = GlobalVariable::orderBy($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request

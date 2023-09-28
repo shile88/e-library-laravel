@@ -20,7 +20,7 @@ class GenreController extends Controller
         $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
-        $genres = Genre::orderby($orderBy, $orderDir)
+        $genres = Genre::orderBy($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request

@@ -20,7 +20,7 @@ class PublisherController extends Controller
         $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
-        $publishers = Publisher::orderby($orderBy, $orderDir)
+        $publishers = Publisher::orderBy($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request

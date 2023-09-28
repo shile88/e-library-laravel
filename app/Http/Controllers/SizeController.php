@@ -19,7 +19,7 @@ class SizeController extends Controller
         $orderDir = $request->get('orderDir') ?? 'asc';
         $rowPerPage = $request->get('rowsPerPage') ?? 7;
 
-        $sizes = Size::orderby($orderBy, $orderDir)
+        $sizes = Size::orderBy($orderBy, $orderDir)
             ->paginate($rowPerPage);
 
         $sizes->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);

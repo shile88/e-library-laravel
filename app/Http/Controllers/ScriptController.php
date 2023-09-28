@@ -19,7 +19,7 @@ class ScriptController extends Controller
         $orderDir = $request->get('orderDir') ?? 'asc';
         $rowPerPage = $request->get('rowsPerPage') ?? 7;
 
-        $scripts = Script::orderby($orderBy, $orderDir)
+        $scripts = Script::orderBy($orderBy, $orderDir)
             ->paginate($rowPerPage);
 
         $scripts->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
