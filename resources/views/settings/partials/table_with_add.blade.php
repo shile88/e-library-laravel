@@ -26,13 +26,16 @@
                             'orderBy' => 'name',
                             'orderDir' => request()->get('orderDir') == 'desc' ? 'asc' : 'desc',
                             'page' => request()->get('page'),
+                             'rowsPerPage' => request()->get('rowsPerPage'),
                         ]) }}">
                         <i
                             class="ml-3 fa-lg fas
                                 {{ request()->get('orderDir') == 'asc' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up' }}"></i>
                     </a>
                 </th>
-                <th class="px-4 py-4"></th>
+                <th class="px-4 py-4">
+
+                </th>
             </tr>
         </thead>
         <tbody class="bg-white">
@@ -54,7 +57,7 @@
                         </p>
                         <div
                             class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-category">
-                            <div class="absolute right-[25px] w-56 mt-[7px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                            <div class="absolute right-[50px] w-56 mt-[-75px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
                                 aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
                                 role="menu">
                                 <div class="py-1">
@@ -70,6 +73,10 @@
                                     <form action="{{ route($resourcePlural . '.destroy', $item) }}" method="post">
                                         @csrf
                                         @method('delete')
+                                        <input type="hidden" name="currentPage" value="{{ $items->currentPage()}}">
+                                        <input type="hidden" name="total" value="{{ $items->total()}}">
+                                        <input type="hidden" name="perPage" value="{{ $items->perPage()}}">
+
                                         <button type="submit" tabindex="0"
                                             class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 hover:text-red-500"
                                             style="outline: none">
@@ -87,6 +94,19 @@
     </table>
 
     {{-- Pagination --}}
-    <div class=" flex-row items-center justify-end mt-2">
-        {{ $items->links() }}
+    <div class="inline-flex items-center w-full justify-between mt-2">
+        <div>
+            Rows per page:
+                         <form class="inline-flex" action="{{route($resourcePlural . '.index')}}">
+                            <select
+                                class="ml-2 pl-2 w-[60px] border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
+                                onchange="this.form.submit()" name="rowsPerPage">
+                                <option value="5" {{ $rowsPerPage == 5 ? 'selected' : '' }}>5</option>
+                                <option value="7" {{ $rowsPerPage == 7 ? 'selected' : '' }}>7</option>
+                                <option value="10" {{ $rowsPerPage == 10 ? 'selected' : '' }}>10</option>
+                            </select>
+                         </form>
+        </div>
+            {{ $items->links() }}
     </div>
+</div>

@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePublisherRequest;
 use App\Http\Requests\UpdatePublisherRequest;
 use App\Models\Publisher;
+use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class PublisherController extends Controller
 {
+    /**
+     * Checks page and redirects
+     */
+    use PaginationTrait;
     /**
      * Display a listing of the resource.
      */
@@ -17,16 +22,16 @@ class PublisherController extends Controller
         // Get variables from the request and set default values if no value is set
         $orderBy = $request->get('orderBy') ?? 'name';
         $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowPerPage') ?? 7;
+        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
         $publishers = Publisher::orderby($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request
-        $publishers->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+        $publishers->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
 
-        return view('settings.publishers.index', compact('publishers'));
+        return view('settings.publishers.index', compact('publishers', 'rowsPerPage'));
     }
 
     /**
@@ -82,12 +87,17 @@ class PublisherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publisher $publisher)
+    public function destroy(Publisher $publisher, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
         // Deletes publisher from the DB
         $publisher->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('publishers.index');
+        return redirect()->route('publishers.index',
+                ['page' => $redirectPage,
+                'rowsPerPage' => $request->perPage]);
     }
 }

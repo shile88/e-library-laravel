@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreScriptRequest;
 use App\Http\Requests\UpdateScriptRequest;
 use App\Models\Script;
+use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 
 class ScriptController extends Controller
 {
+    /**
+     * Checks page and redirects
+     */
+    use PaginationTrait;
     /**
      * Display a listing of the resource.
      */
@@ -17,14 +22,14 @@ class ScriptController extends Controller
     {
         $orderBy = $request->get('orderBy') ?? 'name';
         $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowPerPage = $request->get('rowPerPage') ?? 7;
+        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         $scripts = Script::orderby($orderBy, $orderDir)
-            ->paginate($rowPerPage);
+            ->paginate($rowsPerPage);
 
-        $scripts->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+        $scripts->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir,'rowsPerPage' => $rowsPerPage]);
 
-        return view('settings.scripts.index', compact('scripts'));
+        return view('settings.scripts.index', compact('scripts', 'rowsPerPage'));
     }
 
     /**
@@ -72,9 +77,17 @@ class ScriptController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Script $script)
+    public function destroy(Script $script, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
+        // Deletes genre from the DB
         $script->delete();
-           return redirect()->route('scripts.index');
+
+        // After the operation is finished redirects to a different page
+           return redirect()->route('scripts.index',
+               ['page' => $redirectPage,
+               'rowsPerPage' => $request->perPage]);
     }
 }

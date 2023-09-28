@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 use App\Models\Genre;
+use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
+    /**
+     * Checks page and redirects
+     */
+    use PaginationTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -17,16 +23,16 @@ class GenreController extends Controller
         // Get variables from the request and set default values if no value is set
         $orderBy = $request->get('orderBy') ?? 'name';
         $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowPerPage') ?? 7;
+        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
         $genres = Genre::orderby($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request
-        $genres->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+        $genres->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
 
-        return view('settings.genres.index', compact('genres'));
+        return view('settings.genres.index', compact('genres', 'rowsPerPage'));
     }
 
     /**
@@ -82,12 +88,17 @@ class GenreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Genre $genre)
+    public function destroy(Genre $genre, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
         // Deletes genre from the DB
         $genre->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('genres.index');
+        return redirect()->route('genres.index',
+                ['page' => $redirectPage,
+                'rowsPerPage' => $request->perPage]);
     }
 }

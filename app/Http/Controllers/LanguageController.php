@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLanguageRequest;
 use App\Http\Requests\UpdateLanguageRequest;
 use App\Models\Language;
+use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
+    /**
+     * Checks page and redirects
+     */
+    use PaginationTrait;
     /**
      * Display a listing of the resource.
      */
@@ -17,16 +22,16 @@ class LanguageController extends Controller
         // Get variables from the request and set default values if no value is set
         $orderBy = $request->get('orderBy') ?? 'name';
         $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowPerPage') ?? 7;
+        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
         // Order data by desired attribute and paginate
         $languages = Language::orderby($orderBy, $orderDir)
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request
-        $languages->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+        $languages->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
 
-        return view('settings.languages.index', compact('languages'));
+        return view('settings.languages.index', compact('languages', 'rowsPerPage'));
     }
 
     /**
@@ -82,12 +87,17 @@ class LanguageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Language $language)
+    public function destroy(Language $language, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
         // Deletes language from the DB
         $language->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('languages.index');
+        return redirect()->route('languages.index',
+                ['page' => $redirectPage,
+                'rowsPerPage' => $request->perPage]);
     }
 }
