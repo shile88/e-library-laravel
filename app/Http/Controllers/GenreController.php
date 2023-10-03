@@ -98,7 +98,7 @@ class GenreController extends Controller
 
         // After the operation is finished redirects to a different page
         return redirect()->route('genres.index',
-                ['page' => $redirectPage,
+            ['page' => $redirectPage,
                 'rowsPerPage' => $request->perPage]);
     }
 }
