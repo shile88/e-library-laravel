@@ -27,16 +27,3 @@
         </div>
     </div>
 </form>
-
-{{-- Delete button --}}
-<div class="flex flex-row ml-[30px]">
-    <form action="{{ route($resourcePlural . '.destroy', $resource) }}" method="post">
-        @csrf
-        @method('delete')
-        <button
-            class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300
-        ease-in rounded-[5px] tracking-wider text-white bg-[#F44336] hover:bg-[#F55549] mt-[20px]"
-            type="submit">Delete</button>
-        </button>
-    </form>
-</div>
