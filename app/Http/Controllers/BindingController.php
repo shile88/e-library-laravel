@@ -5,10 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBindingRequest;
 use App\Http\Requests\UpdateBindingRequest;
 use App\Models\Binding;
+use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class BindingController extends Controller
 {
+    /**
+     * Checks page and redirects
+     */
+    use PaginationTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -24,9 +30,9 @@ class BindingController extends Controller
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request
-        $bindings->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+        $bindings->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
 
-        return view('settings.bindings.index', compact('bindings'));
+        return view('settings.bindings.index', compact('bindings', 'rowsPerPage'));
     }
 
     /**
@@ -82,12 +88,17 @@ class BindingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Binding $binding)
+    public function destroy(Binding $binding, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
         // Deletes binding from the DB
         $binding->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('bindings.index');
+        return redirect()->route('bindings.index',
+                ['page' => $redirectPage,
+                'rowsPerPage' => $request->perPage]);
     }
 }

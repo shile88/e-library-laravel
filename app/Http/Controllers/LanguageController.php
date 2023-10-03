@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLanguageRequest;
 use App\Http\Requests\UpdateLanguageRequest;
 use App\Models\Language;
+use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
+    /**
+     * Checks page and redirects
+     */
+    use PaginationTrait;
     /**
      * Display a listing of the resource.
      */
@@ -24,9 +29,9 @@ class LanguageController extends Controller
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request
-        $languages->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+        $languages->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
 
-        return view('settings.languages.index', compact('languages'));
+        return view('settings.languages.index', compact('languages', 'rowsPerPage'));
     }
 
     /**
@@ -82,12 +87,17 @@ class LanguageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Language $language)
+    public function destroy(Language $language, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
         // Deletes language from the DB
         $language->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('languages.index');
+        return redirect()->route('languages.index',
+                ['page' => $redirectPage,
+                'rowsPerPage' => $request->perPage]);
     }
 }

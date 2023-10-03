@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSizeRequest;
 use App\Http\Requests\UpdateSizeRequest;
 use App\Models\Size;
+use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 
 class SizeController extends Controller
 {
+    /**
+     * Checks page and redirects
+     */
+    use PaginationTrait;
     /**
      * Display a listing of the resource.
      */
@@ -17,14 +22,14 @@ class SizeController extends Controller
     {
         $orderBy = $request->get('orderBy') ?? 'name';
         $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowPerPage = $request->get('rowsPerPage') ?? 7;
+        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
 
-        $sizes = Size::orderBy($orderBy, $orderDir)
-            ->paginate($rowPerPage);
+        $sizes = Size::orderby($orderBy, $orderDir)
+            ->paginate($rowsPerPage);
 
-        $sizes->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+        $sizes->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
 
-        return view('settings.sizes.index', compact('sizes'));
+        return view('settings.sizes.index', compact('sizes', 'rowsPerPage'));
     }
 
     /**
@@ -71,9 +76,17 @@ class SizeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Size $size)
+    public function destroy(Size $size, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
+        // Deletes genre from the DB
         $size->delete();
-        return redirect()->route('sizes.index');
+
+        // After the operation is finished redirects to a different page
+           return redirect()->route('sizes.index',
+               ['page' => $redirectPage,
+               'rowsPerPage' => $request->perPage]);
     }
 }

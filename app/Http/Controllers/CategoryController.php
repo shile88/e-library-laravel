@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    /**
+     * Checks page and redirects
+     */
+    use PaginationTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -24,9 +31,9 @@ class CategoryController extends Controller
             ->paginate($rowsPerPage);
 
         // Append $orderBy and $orderDir queries to the request
-        $categories->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+        $categories->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
 
-        return view('settings.categories.index', compact('categories'));
+        return view('settings.categories.index', compact('categories', 'rowsPerPage'));
     }
 
     /**
@@ -82,12 +89,16 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
         // Deletes category from the DB
         $category->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index',
+                ['page' => $redirectPage,
+                'rowsPerPage' => $request->perPage]);
     }
 }
