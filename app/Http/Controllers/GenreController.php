@@ -7,26 +7,17 @@ use App\Http\Requests\UpdateGenreRequest;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class GenreController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        // Get variables from the request and set default values if no value is set
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
+        // Sort, filter and paginate data
+        $items = $this->processIndexData($request, Genre::class);
 
-        // Order data by desired attribute and paginate
-        $genres = Genre::orderBy($orderBy, $orderDir)
-            ->paginate($rowsPerPage);
-
-        // Append $orderBy and $orderDir queries to the request
-        $genres->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
-
-        return view('settings.genres.index', compact('genres'));
+        return view('settings.genres.index', compact('items'));
     }
 
     /**
