@@ -5,18 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLanguageRequest;
 use App\Http\Requests\UpdateLanguageRequest;
 use App\Models\Language;
-use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class LanguageController extends BaseController
-{
-    /**
-     * Checks page and redirects
-     */
-    use PaginationTrait;
-    /**
-     * Display a listing of the resource.
-     */
+{ /**
+  * Display a listing of the resource.
+  */
     public function index(Request $request)
     {
         // Order, filter and paginate data
@@ -87,8 +81,12 @@ class LanguageController extends BaseController
         $language->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('languages.index',
-                ['page' => $redirectPage,
-                'rowsPerPage' => $request->perPage]);
+        return redirect()->route(
+            'languages.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }

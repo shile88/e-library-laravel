@@ -5,16 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBindingRequest;
 use App\Http\Requests\UpdateBindingRequest;
 use App\Models\Binding;
-use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class BindingController extends BaseController
 {
-    /**
-     * Checks page and redirects
-     */
-    use PaginationTrait;
-
     /**
      * Display a listing of the resource.
      */
@@ -88,8 +82,12 @@ class BindingController extends BaseController
         $binding->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('bindings.index',
-                ['page' => $redirectPage,
-                'rowsPerPage' => $request->perPage]);
+        return redirect()->route(
+            'bindings.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }

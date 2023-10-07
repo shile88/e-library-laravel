@@ -5,16 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreGenreRequest;
 use App\Http\Requests\UpdateGenreRequest;
 use App\Models\Genre;
-use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class GenreController extends BaseController
 {
-    /**
-     * Checks page and redirects
-     */
-    use PaginationTrait;
-
     /**
      * Display a listing of the resource.
      */
@@ -88,8 +82,12 @@ class GenreController extends BaseController
         $genre->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('genres.index',
-            ['page' => $redirectPage,
-                'rowsPerPage' => $request->perPage]);
+        return redirect()->route(
+            'genres.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }

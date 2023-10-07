@@ -5,18 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePublisherRequest;
 use App\Http\Requests\UpdatePublisherRequest;
 use App\Models\Publisher;
-use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class PublisherController extends BaseController
-{
-    /**
-     * Checks page and redirects
-     */
-    use PaginationTrait;
-    /**
-     * Display a listing of the resource.
-     */
+{ /**
+  * Display a listing of the resource.
+  */
     public function index(Request $request)
     {
         // Order, filter and paginate data
@@ -87,8 +81,12 @@ class PublisherController extends BaseController
         $publisher->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('publishers.index',
-                ['page' => $redirectPage,
-                'rowsPerPage' => $request->perPage]);
+        return redirect()->route(
+            'publishers.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }

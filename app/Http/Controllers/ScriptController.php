@@ -5,19 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreScriptRequest;
 use App\Http\Requests\UpdateScriptRequest;
 use App\Models\Script;
-use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 
 class ScriptController extends BaseController
-{
-    /**
-     * Checks page and redirects
-     */
-    use PaginationTrait;
-    /**
-     * Display a listing of the resource.
-     */
+{ /**
+  * Display a listing of the resource.
+  */
     public function index(Request $request)
     {
         // Order, filter and paginate data
@@ -80,8 +74,12 @@ class ScriptController extends BaseController
         $script->delete();
 
         // After the operation is finished redirects to a different page
-           return redirect()->route('scripts.index',
-               ['page' => $redirectPage,
-               'rowsPerPage' => $request->perPage]);
+        return redirect()->route(
+            'scripts.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }

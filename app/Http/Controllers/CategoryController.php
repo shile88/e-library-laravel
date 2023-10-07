@@ -5,17 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 class CategoryController extends BaseController
 {
-
-    /**
-     * Checks page and redirects
-     */
-    use PaginationTrait;
-
     /**
      * Display a listing of the resource.
      */

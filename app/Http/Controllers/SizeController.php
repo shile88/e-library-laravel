@@ -5,19 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSizeRequest;
 use App\Http\Requests\UpdateSizeRequest;
 use App\Models\Size;
-use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 
 class SizeController extends BaseController
-{
-    /**
-     * Checks page and redirects
-     */
-    use PaginationTrait;
-    /**
-     * Display a listing of the resource.
-     */
+{ /**
+  * Display a listing of the resource.
+  */
     public function index(Request $request)
     {
         // Order, filter and paginate data
@@ -79,8 +73,12 @@ class SizeController extends BaseController
         $size->delete();
 
         // After the operation is finished redirects to a different page
-           return redirect()->route('sizes.index',
-               ['page' => $redirectPage,
-               'rowsPerPage' => $request->perPage]);
+        return redirect()->route(
+            'sizes.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }

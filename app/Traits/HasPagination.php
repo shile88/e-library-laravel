@@ -6,6 +6,23 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 trait HasPagination
 {
+    /**
+     * After item is deleted calculates what page to redirect to.
+     */
+    function calculateRedirectPage($perPage, $total, $currentPage)
+    {
+        if ($total < $perPage)
+            return 1;
+        $numberOfElementsCurrentPage = $total - ($currentPage - 1) * $perPage;
+        if ($numberOfElementsCurrentPage == 1)
+            return $currentPage - 1;
+
+        return $currentPage;
+    }
+
+    /**
+     * Processes data for index page for following resources binding, genre, categories, language, publisher, script, size.
+     */
     public function processIndexData(Request $request, $query)
     {
         // Get values from request or set default
@@ -17,7 +34,7 @@ trait HasPagination
 
         // Order, filter and paginate data
         // TODO: Ovdje se javlja greska `Call to a member function orderBy() on string`
-        $this->orderBy($query, $orderBy, $orderDir);
+        $this->order($query, $orderBy, $orderDir);
 
         $this->filter($query, $searchTerm);
         $paginator = $this->paginate($query, $rowsPerPage);
@@ -34,16 +51,25 @@ trait HasPagination
         return $paginator;
     }
 
+    /**
+     * Paginates data for index page.
+     */
     protected function paginate($query, $rowsPerPage): LengthAwarePaginator
     {
         return $query->paginate($rowsPerPage);
     }
 
-    protected function orderBy($query, $orderBy, $orderDir)
+    /**
+     * Orders data for index page.
+     */
+    protected function order($query, $orderBy, $orderDir)
     {
         $query->orderBy($orderBy, $orderDir);
     }
 
+    /**
+     * Filters data for index page only for one field - name.
+     */
     protected function filter($query, $searchTerm)
     {
         if (!empty($searchTerm)){
