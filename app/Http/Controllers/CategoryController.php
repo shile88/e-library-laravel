@@ -89,4 +89,15 @@ class CategoryController extends BaseController
             ]
         );
     }
+
+    /**
+     * Filters data for index page.
+     */
+    protected function filter($query, $searchTerm)
+    {
+        if (!empty($searchTerm)){
+            $query->where('name', 'LIKE', "%$searchTerm%");
+            $query->where('description', 'LIKE', "%$searchTerm%");
+        }
+    }
 }
