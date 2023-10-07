@@ -42,7 +42,7 @@
                             'rowsPerPage' => request()->get('rowsPerPage'),
                             'searchTerm' => request()->get('searchTerm'),
                             'page' => request()->get('page'),
-                             'rowsPerPage' => request()->get('rowsPerPage'),
+                            'rowsPerPage' => request()->get('rowsPerPage'),
                         ]) }}">
                         <i
                             class="ml-3 fa-lg fas
@@ -64,7 +64,6 @@
                     </td>
                     <td class="flex flex-row items-center px-4 py-4">
                         <p class="ml-4 text-center">{{ $item->name }}</p>
-
                     </td>
                     <td class="px-4 py-4 text-sm leading-5 text-right whitespace-no-wrap">
                         <p
@@ -89,9 +88,9 @@
                                     <form action="{{ route($resourcePlural . '.destroy', $item) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <input type="hidden" name="currentPage" value="{{ $items->currentPage()}}">
-                                        <input type="hidden" name="total" value="{{ $items->total()}}">
-                                        <input type="hidden" name="perPage" value="{{ $items->perPage()}}">
+                                        <input type="hidden" name="currentPage" value="{{ $items->currentPage() }}">
+                                        <input type="hidden" name="total" value="{{ $items->total() }}">
+                                        <input type="hidden" name="perPage" value="{{ $items->perPage() }}">
 
                                         <button type="submit" tabindex="0"
                                             class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 hover:text-red-500"
@@ -113,16 +112,16 @@
     <div class="inline-flex items-center w-full justify-between mt-2">
         <div>
             Rows per page:
-                         <form class="inline-flex" action="{{route($resourcePlural . '.index')}}">
-                            <select
-                                class="ml-2 pl-2 w-[60px] border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                onchange="this.form.submit()" name="rowsPerPage">
-                                <option value="5" {{ $rowsPerPage == 5 ? 'selected' : '' }}>5</option>
-                                <option value="7" {{ $rowsPerPage == 7 ? 'selected' : '' }}>7</option>
-                                <option value="10" {{ $rowsPerPage == 10 ? 'selected' : '' }}>10</option>
-                            </select>
-                         </form>
+            <form class="inline-flex" action="{{ route($resourcePlural . '.index') }}">
+                <select
+                    class="ml-2 pl-2 w-[60px] border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
+                    onchange="this.form.submit()" name="rowsPerPage">
+                    <option value="5" {{ $rowsPerPage == 5 ? 'selected' : '' }}>5</option>
+                    <option value="7" {{ $rowsPerPage == 7 ? 'selected' : '' }}>7</option>
+                    <option value="10" {{ $rowsPerPage == 10 ? 'selected' : '' }}>10</option>
+                </select>
+            </form>
         </div>
-            {{ $items->links() }}
+        {{ $items->links() }}
     </div>
 </div>
