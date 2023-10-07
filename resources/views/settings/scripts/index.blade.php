@@ -4,7 +4,7 @@
 @section('main-settings')
 
     @include('settings.partials.table_with_add', [
-        'items' => $scripts,
+        'items' => $items,
         'resourceName' => 'script',
         'resourcePlural' => 'scripts',
     ])

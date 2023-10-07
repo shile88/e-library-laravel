@@ -14,8 +14,8 @@ class GenreController extends BaseController
      */
     public function index(Request $request)
     {
-        // Sort, filter and paginate data
-        $items = $this->processIndexData($request, Genre::class);
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Genre::query());
 
         return view('settings.genres.index', compact('items'));
     }

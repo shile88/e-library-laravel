@@ -7,26 +7,17 @@ use App\Http\Requests\UpdateLanguageRequest;
 use App\Models\Language;
 use Illuminate\Http\Request;
 
-class LanguageController extends Controller
+class LanguageController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        // Get variables from the request and set default values if no value is set
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Language::query());
 
-        // Order data by desired attribute and paginate
-        $languages = Language::orderBy($orderBy, $orderDir)
-            ->paginate($rowsPerPage);
-
-        // Append $orderBy and $orderDir queries to the request
-        $languages->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
-
-        return view('settings.languages.index', compact('languages'));
+        return view('settings.languages.index', compact('items'));
     }
 
     /**

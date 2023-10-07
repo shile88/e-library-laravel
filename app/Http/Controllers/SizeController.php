@@ -8,23 +8,17 @@ use App\Models\Size;
 use Illuminate\Http\Request;
 
 
-class SizeController extends Controller
+class SizeController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowPerPage = $request->get('rowsPerPage') ?? 7;
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Size::query());
 
-        $sizes = Size::orderBy($orderBy, $orderDir)
-            ->paginate($rowPerPage);
-
-        $sizes->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
-
-        return view('settings.sizes.index', compact('sizes'));
+        return view('settings.sizes.index', compact('items'));
     }
 
     /**

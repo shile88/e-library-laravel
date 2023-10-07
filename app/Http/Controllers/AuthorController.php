@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
-use GuzzleHttp\Psr7\Request;
 
 class AuthorController extends Controller
 {
@@ -34,13 +33,13 @@ class AuthorController extends Controller
     public function store(StoreAuthorRequest $request)
     {
         $authorData = $request->validated();
-        
+
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $photoPath = Storage::disk('public')->put('authors', $file);
             $authorData['picture'] = $photoPath;
         }
-        
+
         Author::create($authorData);
 
         return redirect()->route('authors.index');
@@ -70,13 +69,13 @@ class AuthorController extends Controller
     public function update(UpdateAuthorRequest $request, Author $author)
     {
         $authorData = $request->validated();
-        
+
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $photoPath = Storage::disk('public')->put('authors', $file);
             $authorData['picture'] = $photoPath;
         }
-        
+
         $author->update($authorData);
 
         return redirect()->route('authors.index');
@@ -87,7 +86,7 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        // Delete image of author only if it isn't default image 
+        // Delete image of author only if it isn't default image
         if (!Str::contains($author->picture, 'default.jpg')) {
             Storage::disk('public')->delete($author->picture);
         }
