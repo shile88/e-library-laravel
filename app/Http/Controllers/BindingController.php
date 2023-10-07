@@ -8,7 +8,7 @@ use App\Models\Binding;
 use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
-class BindingController extends Controller
+class BindingController extends BaseController
 {
     /**
      * Checks page and redirects
@@ -20,19 +20,10 @@ class BindingController extends Controller
      */
     public function index(Request $request)
     {
-        // Get variables from the request and set default values if no value is set
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Binding::query());
 
-        // Order data by desired attribute and paginate
-        $bindings = Binding::orderBy($orderBy, $orderDir)
-            ->paginate($rowsPerPage);
-
-        // Append $orderBy and $orderDir queries to the request
-        $bindings->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
-
-        return view('settings.bindings.index', compact('bindings', 'rowsPerPage'));
+        return view('settings.bindings.index', compact('items'));
     }
 
     /**

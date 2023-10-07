@@ -4,7 +4,7 @@
 @section('main-settings')
 
     @include('settings.partials.table_with_add', [
-        'items' => $bindings,
+        'items' => $items,
         'resourceName' => 'binding',
         'resourcePlural' => 'bindings',
     ])

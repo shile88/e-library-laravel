@@ -9,7 +9,7 @@ use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 
-class ScriptController extends Controller
+class ScriptController extends BaseController
 {
     /**
      * Checks page and redirects
@@ -20,18 +20,10 @@ class ScriptController extends Controller
      */
     public function index(Request $request)
     {
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Script::query());
 
-        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
-
-        $scripts = Script::orderby($orderBy, $orderDir)
-            ->paginate($rowsPerPage);
-
-
-        $scripts->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir,'rowsPerPage' => $rowsPerPage]);
-
-        return view('settings.scripts.index', compact('scripts', 'rowsPerPage'));
+        return view('settings.scripts.index', compact('items'));
     }
 
     /**

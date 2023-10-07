@@ -8,7 +8,7 @@ use App\Models\Genre;
 use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class GenreController extends BaseController
 {
     /**
      * Checks page and redirects
@@ -20,19 +20,10 @@ class GenreController extends Controller
      */
     public function index(Request $request)
     {
-        // Get variables from the request and set default values if no value is set
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Genre::query());
 
-        // Order data by desired attribute and paginate
-        $genres = Genre::orderBy($orderBy, $orderDir)
-            ->paginate($rowsPerPage);
-
-        // Append $orderBy and $orderDir queries to the request
-        $genres->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
-
-        return view('settings.genres.index', compact('genres', 'rowsPerPage'));
+        return view('settings.genres.index', compact('items'));
     }
 
     /**

@@ -9,7 +9,7 @@ use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
 
-class SizeController extends Controller
+class SizeController extends BaseController
 {
     /**
      * Checks page and redirects
@@ -20,16 +20,10 @@ class SizeController extends Controller
      */
     public function index(Request $request)
     {
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Size::query());
 
-        $sizes = Size::orderby($orderBy, $orderDir)
-            ->paginate($rowsPerPage);
-
-        $sizes->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
-
-        return view('settings.sizes.index', compact('sizes', 'rowsPerPage'));
+        return view('settings.sizes.index', compact('items'));
     }
 
     /**

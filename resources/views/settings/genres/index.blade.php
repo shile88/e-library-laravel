@@ -4,7 +4,7 @@
 @section('main-settings')
 
     @include('settings.partials.table_with_add', [
-        'items' => $genres,
+        'items' => $items,
         'resourceName' => 'genre',
         'resourcePlural' => 'genres',
     ])

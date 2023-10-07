@@ -8,7 +8,7 @@ use App\Models\Category;
 use App\Traits\PaginationTrait;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
 
     /**
@@ -21,17 +21,8 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        // Get variables from the request and set default values if no value is set
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
-
-        // Order data by desired attribute and paginate
-        $categories = Category::orderBy($orderBy, $orderDir)
-            ->paginate($rowsPerPage);
-
-        // Append $orderBy and $orderDir queries to the request
-        $categories->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir, 'rowsPerPage' => $rowsPerPage]);
+        // Sort, filter and paginate data
+        $categories = $this->processIndexData($request, Category::class);
 
         return view('settings.categories.index', compact('categories', 'rowsPerPage'));
     }
@@ -97,8 +88,12 @@ class CategoryController extends Controller
         $category->delete();
 
         // After the operation is finished redirects to a different page
-        return redirect()->route('categories.index',
-                ['page' => $redirectPage,
-                'rowsPerPage' => $request->perPage]);
+        return redirect()->route(
+            'categories.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }
