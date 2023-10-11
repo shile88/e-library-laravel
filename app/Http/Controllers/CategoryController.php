@@ -15,9 +15,9 @@ class CategoryController extends BaseController
     public function index(Request $request)
     {
         // Sort, filter and paginate data
-        $categories = $this->processIndexData($request, Category::class);
+        $categories = $this->processIndexData($request, Category::query());
 
-        return view('settings.categories.index', compact('categories', 'rowsPerPage'));
+        return view('settings.categories.index', compact('categories'));
     }
 
     /**
