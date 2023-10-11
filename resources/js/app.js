@@ -104,7 +104,7 @@ $(document).ready(function () {
     modal.addClass('hidden');
   })
 
-  // Vrati Knjigu 
+  // Vrati Knjigu
   vratiModal = $(".vrati-modal");
   $(".show-vratiModal").on('click', function () {
     vratiModal.removeClass('hidden');
@@ -2519,4 +2519,41 @@ $('.checkOthers').change(function () {
     $('tr').children().eq(7).html('U prekoracenju')
     $('tr').children().eq(8).html('Ukupna kolicina')
   }
+});
+
+$(function() {
+  $("#select_all_ids").click(function() {
+      $('.form-checkbox').prop('checked', $(this).prop('checked'));
+
+      // If "select all" is checked, remove it from the selected checkboxes
+      if ($(this).prop('checked')) {
+          $('.form-checkbox[value="on"]').prop('checked', false);
+      }
+  });
+
+  $("#bulk_delete_button").click(function(e) {
+      e.preventDefault(); // Prevent the default form submission
+
+      if ($('.form-checkbox:checked').length === 0) {
+        alert('Mora biti selektovano minimum jedno polje.');
+        return;
+    }
+
+      // Create an array to store the selected IDs
+      var selectedIds = [];
+
+      // Loop through the selected checkboxes and add their values to the array
+      $('.form-checkbox:checked').each(function() {
+          var value = $(this).val();
+          if (value !== 'on') { // Exclude the "on" value
+              selectedIds.push(value);
+          }
+      });
+
+      // Set the selected IDs as a comma-separated string in the hidden input field
+      $('#selected_ids_input').val(selectedIds.join(','));
+
+      // Submit the form
+      $('form#bulk_delete_form').submit();
+  });
 });

@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role_id' => 1,
                 'jmbg' => '1',
-                'picture' => '/assets/img/user.jpg'
+                'picture' => User::DEFAULT_USER_PICTURE_PATH
             ],
             [
                 'name' => 'Librarian',
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role_id' => 2,
                 'jmbg' => '2',
-                'picture' => '/assets/img/user.jpg'
+                'picture' => User::DEFAULT_USER_PICTURE_PATH
             ],
             [
                 'name' => 'Customer',
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role_id' => 3,
                 'jmbg' => '3',
-                'picture' => '/assets/img/user.jpg'
+                'picture' => User::DEFAULT_USER_PICTURE_PATH
             ]
         ]);
     }
