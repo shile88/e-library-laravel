@@ -3,10 +3,14 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\GlobalVariableController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\ScriptController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\BindingController;
+use App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,25 +27,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
 
-Route::middleware('auth')->group(function () {
+    // DASHBOARD
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    // PROFILE
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // CRUDS
     Route::resource('/authors', AuthorController::class);
 
-
     // SETTINGS
-    Route::get('/policy', [SettingsController::class, 'index'])->name('policy.index');
-    Route::get('/settings', [SettingsController::class, 'index'])->name('policy.index');
+    Route::get('/settings', [GlobalVariableController::class, 'index'])->name('settings.index');
+    Route::resource('/global_variables', GlobalVariableController::class);
+    Route::resource('/bindings', BindingController::class);
     Route::resource('/categories', CategoryController::class);
     Route::resource('/genres', GenreController::class);
+    Route::resource('/languages', LanguageController::class);
     Route::resource('/publishers', PublisherController::class);
+    Route::resource('/scripts', ScriptController::class);
+    Route::resource('/sizes', SizeController::class);
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

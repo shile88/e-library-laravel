@@ -7,35 +7,17 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        // Get a desirable order from the request - 'asc' OR 'desc'
-        $order = $request->get('order');
+        // Sort, filter and paginate data
+        $categories = $this->processIndexData($request, Category::query());
 
-        // Case 1: If desirable order is descending, show it in that order
-        if ($order == 'desc') {
-            $categories = Category::orderBy('name', 'desc')
-                ->orderBy('description', 'desc')
-                ->paginate(8);
-            $order = 'asc';
-        }
-
-        // Case 2: The order is either ascending or not specified in which case
-        // we will show the default - ascending order
-        else {
-            $categories = Category::orderby('name', 'asc')
-                ->orderBy('description', 'asc')
-                ->paginate(8);
-            $order = 'desc';
-        }
-
-        // We also have to return the inverse order as a way of switching them
-        return view('settings.categories.index', compact('categories', 'order'));
+        return view('settings.categories.index', compact('categories'));
     }
 
     /**
@@ -54,6 +36,7 @@ class CategoryController extends Controller
     {
         // Stores new category in DB with the validated fields from StoreCategoryRequest
         Category::create($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('categories.index');
     }
@@ -82,6 +65,7 @@ class CategoryController extends Controller
     {
         // Updates category fields with the validated parameters from UpdateCategoryRequest
         $category->update($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('categories.index');
     }
@@ -89,11 +73,31 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
         // Deletes category from the DB
         $category->delete();
+
         // After the operation is finished redirects to a different page
-        return redirect()->route('categories.index');
+        return redirect()->route(
+            'categories.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
+    }
+
+    /**
+     * Filters data for index page.
+     */
+    protected function filter($query, $searchTerm)
+    {
+        if (!empty($searchTerm)){
+            $query->where('name', 'LIKE', "%$searchTerm%");
+            $query->where('description', 'LIKE', "%$searchTerm%");
+        }
     }
 }

@@ -7,33 +7,17 @@ use App\Http\Requests\UpdateGenreRequest;
 use App\Models\Genre;
 use Illuminate\Http\Request;
 
-class GenreController extends Controller
+class GenreController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        // Get a desirable order from the request - 'asc' OR 'desc'
-        $order = $request->get('order');
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Genre::query());
 
-        // Case 1: If desirable order is descending, show it in that order
-        if ($order == 'desc') {
-            $genres = Genre::orderBy('name', 'desc')
-                ->paginate(8);
-            $order = 'asc';
-        }
-
-        // Case 2: The order is either ascending or not specified in which case
-        // we will show the default - ascending order
-        else {
-            $genres = Genre::orderby('name', 'asc')
-                ->paginate(8);
-            $order = 'desc';
-        }
-
-        // We also have to return the inverse order as a way of switching them
-        return view('settings.genres.index', compact('genres', 'order'));
+        return view('settings.genres.index', compact('items'));
     }
 
     /**
@@ -52,6 +36,7 @@ class GenreController extends Controller
     {
         // Stores new genre in DB with the validated fields from StoreGenreRequest
         Genre::create($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('genres.index');
     }
@@ -80,6 +65,7 @@ class GenreController extends Controller
     {
         // Updates genre fields with the validated parameters from UpdateGenreRequest
         $genre->update($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('genres.index');
     }
@@ -87,11 +73,21 @@ class GenreController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Genre $genre)
+    public function destroy(Genre $genre, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
         // Deletes genre from the DB
         $genre->delete();
+
         // After the operation is finished redirects to a different page
-        return redirect()->route('genres.index');
+        return redirect()->route(
+            'genres.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }

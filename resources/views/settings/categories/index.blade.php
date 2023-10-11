@@ -1,5 +1,4 @@
 @extends('settings.index')
-
 @section('title', 'Categories')
 
 @section('main-settings')
@@ -11,7 +10,21 @@
         </a>
 
         {{-- Search --}}
-        {{-- TODO --}}
+        <form action="{{ route('categories.index') }}" method="get">
+            <div class="relative text-gray-600 focus-within:text-gray-400 mr-[30px]">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                    <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
+                            <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </span>
+                <input type="search" name="searchTerm" value="{{ request()->get('searchTerm') }}"
+                    class="py-2 pl-10 text-sm text-black bg-white rounded-md focus:outline-none focus:bg-white focus:text-black"
+                    placeholder="Search..." autocomplete="off">
+            </div>
+        </form>
 
     </div>
 
@@ -25,12 +38,19 @@
                             <input type="checkbox" class="form-checkbox">
                         </label>
                     </th>
-                    <th class="px-4 py-4 leading-4 tracking-wider text-left">Name<a href="#">
-                            <a href="{{ route('categories.index', ['order' => $order ? $order : 'asc']) }}">
-                                <i
-                                    class="ml-3 fa-lg fas
-                                    @if ($order == 'desc') fa-long-arrow-alt-up @else fa-long-arrow-alt-down @endif"></i>
-                            </a>
+                    <th class="px-4 py-4 leading-4 tracking-wider text-left">Name
+                        <a
+                            href="{{ route('categories.index', [
+                                'orderBy' => 'name',
+                                'orderDir' => request()->get('orderDir') == 'desc' ? 'asc' : 'desc',
+                                'rowsPerPage' => request()->get('rowsPerPage'),
+                                'searchTerm' => request()->get('searchTerm'),
+                                'page' => request()->get('page'),
+                            ]) }}">
+                            <i
+                                class="ml-3 fa-lg fas
+                                    {{ request()->get('orderDir') == 'asc' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up' }}"></i>
+                        </a>
                     </th>
                     <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Description</th>
                     <th class="px-4 py-4"> </th>
@@ -92,4 +112,6 @@
         <div class=" flex-row items-center justify-end mt-2">
             {{ $categories->links() }}
         </div>
-    @endsection
+    </div>
+
+@endsection

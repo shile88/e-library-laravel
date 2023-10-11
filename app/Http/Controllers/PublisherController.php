@@ -7,33 +7,16 @@ use App\Http\Requests\UpdatePublisherRequest;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 
-class PublisherController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
+class PublisherController extends BaseController
+{ /**
+  * Display a listing of the resource.
+  */
     public function index(Request $request)
     {
-        // Get a desirable order from the request - 'asc' OR 'desc'
-        $order = $request->get('order');
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Publisher::query());
 
-        // Case 1: If desirable order is descending, show it in that order
-        if ($order == 'desc') {
-            $publishers = Publisher::orderBy('name', 'desc')
-                ->paginate(8);
-            $order = 'asc';
-        }
-
-        // Case 2: The order is either ascending or not specified in which case
-        // we will show the default - ascending order
-        else {
-            $publishers = Publisher::orderby('name', 'asc')
-                ->paginate(8);
-            $order = 'desc';
-        }
-
-        // We also have to return the inverse order as a way of switching them
-        return view('settings.publishers.index', compact('publishers', 'order'));
+        return view('settings.publishers.index', compact('items'));
     }
 
     /**
@@ -52,6 +35,7 @@ class PublisherController extends Controller
     {
         // Stores new publisher in DB with the validated fields from StorePublisherRequest
         Publisher::create($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('publishers.index');
     }
@@ -80,6 +64,7 @@ class PublisherController extends Controller
     {
         // Updates publisher fields with the validated parameters from UpdatePublisherRequest
         $publisher->update($request->validated());
+
         // After the operation is finished redirects to a different page
         return redirect()->route('publishers.index');
     }
@@ -87,11 +72,21 @@ class PublisherController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publisher $publisher)
+    public function destroy(Publisher $publisher, Request $request)
     {
+        //Checks on what page to redirect
+        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
+
         // Deletes publisher from the DB
         $publisher->delete();
+
         // After the operation is finished redirects to a different page
-        return redirect()->route('publishers.index');
+        return redirect()->route(
+            'publishers.index',
+            [
+                'page' => $redirectPage,
+                'rowsPerPage' => $request->perPage
+            ]
+        );
     }
 }

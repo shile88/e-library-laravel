@@ -142,7 +142,7 @@
     <div class="sidebar-nav py-[10px] border-t-[1px] border-[#e4dfdf] pt-[23px] pb-[29px] hover:bg-[#EAEAEA]">
         <ul>
             <li class="h-[60px] pt-[18px] pb-[14px]">
-                <a href="{{  route('policy.index') }}" aria-label="Settngs" class="ml-[30px]">
+                <a href="{{  route('settings.index') }}" aria-label="Settngs" class="ml-[30px]">
                     <span class="whitespace-nowrap" title="Settings">
                         <i
                             class="transition duration-300 ease-in group-hover:text-[#576cdf] text-[22px] pr-1 text-[#707070] fas fa-cog"></i>

@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             PublisherSeeder::class,
             ScriptSeeder::class,
             SizeSeeder::class,
-            SettingSeeder::class,
+            LanguageSeeder::class,
+            GlobalVariableSeeder::class,
             RoleSeeder::class,
 
             BookSeeder::class,

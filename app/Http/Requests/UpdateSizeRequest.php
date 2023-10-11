@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateSizeRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateSizeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,7 @@ class UpdateSizeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'min:2|unique:sizes,name,' . $this->request->get('id')
         ];
     }
 }
