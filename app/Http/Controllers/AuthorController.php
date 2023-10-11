@@ -15,41 +15,41 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
-    public function index(Request $request)
-{   
-    // Number of data rows for displaying on one page
-    $rowsPerPage = $request->rowsPerPage ?? 7;
-    
-    // Column for search
-    $orderBy = $request->orderBy ?? 'name';
-    
-    // Direction for sort
-    $order = $request->order ?? 'asc';
-    
-    // Search param for filtering
-    $searchTerm = $request->input('q');
-    
-    // Handle ordering
-    $authorsQuery = Author::orderBy($orderBy, $order);
 
-    // If search exists filter data
-    if(!empty($searchTerm) && strlen($searchTerm) >= 3) {
-        $authorsQuery->where('name', 'LIKE', '%' . "$searchTerm%")
-        ->orWhere('about', 'LIKE', "%$searchTerm%");
+    public function index(Request $request)
+    {
+        // Number of data rows for displaying on one page
+        $rowsPerPage = $request->rowsPerPage ?? 7;
+
+        // Column for search
+        $orderBy = $request->orderBy ?? 'name';
+
+        // Direction for sort
+        $order = $request->order ?? 'asc';
+
+        // Search param for filtering
+        $searchTerm = $request->input('q');
+
+        // Handle ordering
+        $authorsQuery = Author::orderBy($orderBy, $order);
+
+        // If search exists filter data
+        if (!empty($searchTerm) && strlen($searchTerm) >= 3) {
+            $authorsQuery->where('name', 'LIKE', '%' . "$searchTerm%")
+                ->orWhere('about', 'LIKE', "%$searchTerm%");
         }
-    
-    // Hangle pagination
-    $authors = $authorsQuery->paginate($rowsPerPage);
-        
-    // Appends parameters to request
-    $authors->appends(['order' => $order, 'q' => $searchTerm, 'orderBy' => $orderBy, 'rowsPerPage' => $rowsPerPage]);
- 
-    // Toggle value of sorting order
-    $order = ($order == 'desc') ? 'asc' : 'desc';
-   
-    return view('author.index', compact('authors', 'order'));
-}
+
+        // Hangle pagination
+        $authors = $authorsQuery->paginate($rowsPerPage);
+
+        // Appends parameters to request
+        $authors->appends(['order' => $order, 'q' => $searchTerm, 'orderBy' => $orderBy, 'rowsPerPage' => $rowsPerPage]);
+
+        // Toggle value of sorting order
+        $order = ($order == 'desc') ? 'asc' : 'desc';
+
+        return view('author.index', compact('authors', 'order'));
+    }
 
 
     /**
@@ -66,16 +66,16 @@ class AuthorController extends Controller
     public function store(StoreAuthorRequest $request)
     {
         $authorData = $request->validated();
-        
+
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $photoPath = Storage::disk('public')->put('authors', $file);
             $authorData['picture'] = $photoPath;
-        }else{
-            $photoPath =  'authors/default.jpg';
+        } else {
+            $photoPath = Author::DEFAULT_AUTHOR_PICTURE_PATH;
             $authorData['picture'] = $photoPath;
         }
-        
+
         Author::create($authorData);
 
         return redirect()->route('authors.index');
@@ -86,8 +86,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        $authorName = $author->name;
-        return view('author.show', compact('author', 'authorName'));
+        return view('author.show', compact('author'));
     }
 
     /**
@@ -95,8 +94,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        $authorName = $author->name;
-        return view('author.edit', compact('author', 'authorName'));
+        return view('author.edit', compact('author'));
     }
 
     /**
@@ -105,13 +103,13 @@ class AuthorController extends Controller
     public function update(UpdateAuthorRequest $request, Author $author)
     {
         $authorData = $request->validated();
-        
+
         if ($request->hasFile('picture')) {
             $file = $request->file('picture');
             $photoPath = Storage::disk('public')->put('authors', $file);
             $authorData['picture'] = $photoPath;
         }
-        
+
         $author->update($authorData);
 
         return redirect()->route('authors.index');
@@ -122,10 +120,8 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        // Delete image of author only if it isn't default image 
-        if (!Str::contains($author->picture, 'default.jpg')) {
-            Storage::disk('public')->delete($author->picture);
-        }
+        // Delete author image
+        Storage::disk('public')->delete($author->picture);
 
         //Delete row in pivot table
         $author->books()->detach();
@@ -135,9 +131,15 @@ class AuthorController extends Controller
 
     }
 
-    // Delete all selected rows
-    public function bulkDelete(Request $request){
+    /**
+     * Delete all selected rows
+     */
+    public function bulkDelete(Request $request)
+    {
+        // From string make array of IDs
         $selectedIds = explode(',', $request->input('selected_ids'));
+
+        // Delete all authors with selected IDs
         Author::whereIn('id', $selectedIds)->delete();
 
         return redirect()->route('authors.index');

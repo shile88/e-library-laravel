@@ -9,15 +9,14 @@ use App\Models\Book;
 class Author extends Model
 {
     use HasFactory;
-    
+
+    const DEFAULT_AUTHOR_PICTURE_PATH = '/images/user.jpg';
+
     protected $fillable = ['name', 'about', 'picture'];
-    
-    
-    
+
     public function books()
     {
         return $this->belongsToMany(Book::class);
     }
-
 
 }
