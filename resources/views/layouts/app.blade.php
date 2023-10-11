@@ -23,7 +23,7 @@
         @include('layouts.partials.sidebar')
 
         <section class="w-screen h-screen pl-[83px] text-[#212121]">
-            
+
             <!-- Main Content -->
             @yield('content')
 

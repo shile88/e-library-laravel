@@ -1,11 +1,30 @@
 @extends('layouts.app')
-
 @section('title', 'Autori')
-
 @section('content')
+    <div class="heading">
+        <div class="flex justify-between border-b-[1px] border-[#e4dfdf]">
+            <div class="pl-[30px] py-[10px] flex flex-col">
+                {{-- Title --}}
+                <h1>Autori</h1>
 
-    <div class="qqqqqqqqqqqqqqqpb-[30px] scroll" style="overflow-y:auto; max-height:100vh;">
+                {{-- Breadcrumbs --}}
+                <div>
+                    <nav class="w-full rounded">
+                        <ol class="flex list-reset">
+                            <li>
+                                <a href="{{ route('authors.index') }}" class="text-[#2196f3] hover:text-blue-600">
+                                    Evidencija autora
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="pb-[30px] scroll" style="overflow-y:auto; max-height:100vh;">
         <div class="flex items-center px-[30px] py-4 space-x-3 rounded-lg justify-between">
             <div>
                 <a href="{{ route('authors.create') }}"
@@ -14,7 +33,8 @@
                 </a>
 
                 @if ($authors->count())
-                    <form action="{{ route('authors.bulkDelete') }}" method="POST" class="inline-block" id="bulk_delete_form">
+                    <form action="{{ route('authors.bulkDelete') }}" method="POST" class="inline-block"
+                        id="bulk_delete_form">
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="selected_ids" id="selected_ids_input" value="">
@@ -28,7 +48,6 @@
             </div>
 
             <x-search-bar />
-
         </div>
 
 
@@ -72,7 +91,7 @@
                                 </label>
                             </td>
                             <td class="flex flex-row items-center px-4 py-3">
-                                <img class="object-cover w-8 mr-2 h-11" src="{{ asset('/storage/' . $author->picture) }}"
+                                <img class="object-cover w-8 mr-2 h-11" src="{{ getPicturePath($author->picture) }}"
                                     alt="" />
                                 <a href="{{ route('authors.show', $author) }}">
                                     <span class="mr-2 font-medium text-center">{{ $author->name }}</span>
@@ -129,9 +148,6 @@
                 {{ $authors->links() }}
             </div>
         </div>
-
     </div>
-
-
 
 @endsection('content')

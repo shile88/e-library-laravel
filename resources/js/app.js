@@ -104,7 +104,7 @@ $(document).ready(function () {
     modal.addClass('hidden');
   })
 
-  // Vrati Knjigu 
+  // Vrati Knjigu
   vratiModal = $(".vrati-modal");
   $(".show-vratiModal").on('click', function () {
     vratiModal.removeClass('hidden');
