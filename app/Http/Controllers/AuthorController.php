@@ -28,7 +28,7 @@ class AuthorController extends BaseController
      */
     public function create()
     {
-        return view('author.create');
+        return view('authors.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class AuthorController extends BaseController
      */
     public function show(Author $author)
     {
-        return view('author.show', compact('author'));
+        return view('authors.show', compact('author'));
     }
 
     /**
@@ -65,7 +65,7 @@ class AuthorController extends BaseController
      */
     public function edit(Author $author)
     {
-        return view('author.edit', compact('author'));
+        return view('authors.edit', compact('author'));
     }
 
     /**
