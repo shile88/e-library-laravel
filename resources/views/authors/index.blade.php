@@ -73,7 +73,7 @@
                                     ]) }}">
                                     <i
                                         class="ml-3 fa-lg fas
-                                        @if ($order == 'desc') fa-long-arrow-alt-up @else fa-long-arrow-alt-down @endif"></i>
+                                {{ request()->get('orderDir') == 'asc' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up' }}"></i>
                                 </a>
                             </th>
                             <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Opis

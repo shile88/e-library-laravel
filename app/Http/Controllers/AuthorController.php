@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
-class AuthorController extends Controller
+class AuthorController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,37 +16,43 @@ class AuthorController extends Controller
 
     public function index(Request $request)
     {
-        // Number of data rows for displaying on one page
-        $rowsPerPage = $request->rowsPerPage ?? 7;
+        // Sort, filter and paginate data
+        $authors = $this->processIndexData($request, Author::query());
 
-        // Column for search
-        $orderBy = $request->orderBy ?? 'name';
+        return view('authors.index', compact('authors'));
 
-        // Direction for sort
-        $order = $request->order ?? 'asc';
 
-        // Search param for filtering
-        $searchTerm = $request->input('q');
+        // // Number of data rows for displaying on one page
+        // $rowsPerPage = $request->rowsPerPage ?? 7;
 
-        // Handle ordering
-        $authorsQuery = Author::orderBy($orderBy, $order);
+        // // Column for search
+        // $orderBy = $request->orderBy ?? 'name';
 
-        // If search exists filter data
-        if (!empty($searchTerm) && strlen($searchTerm) >= 3) {
-            $authorsQuery->where('name', 'LIKE', '%' . "$searchTerm%")
-                ->orWhere('about', 'LIKE', "%$searchTerm%");
-        }
+        // // Direction for sort
+        // $order = $request->order ?? 'asc';
 
-        // Hangle pagination
-        $authors = $authorsQuery->paginate($rowsPerPage);
+        // // Search param for filtering
+        // $searchTerm = $request->input('q');
 
-        // Appends parameters to request
-        $authors->appends(['order' => $order, 'q' => $searchTerm, 'orderBy' => $orderBy, 'rowsPerPage' => $rowsPerPage]);
+        // // Handle ordering
+        // $authorsQuery = Author::orderBy($orderBy, $order);
 
-        // Toggle value of sorting order
-        $order = ($order == 'desc') ? 'asc' : 'desc';
+        // // If search exists filter data
+        // if (!empty($searchTerm) && strlen($searchTerm) >= 3) {
+        //     $authorsQuery->where('name', 'LIKE', '%' . "$searchTerm%")
+        //         ->orWhere('about', 'LIKE', "%$searchTerm%");
+        // }
 
-        return view('author.index', compact('authors', 'order'));
+        // // Hangle pagination
+        // $authors = $authorsQuery->paginate($rowsPerPage);
+
+        // // Appends parameters to request
+        // $authors->appends(['order' => $order, 'q' => $searchTerm, 'orderBy' => $orderBy, 'rowsPerPage' => $rowsPerPage]);
+
+        // // Toggle value of sorting order
+        // $order = ($order == 'desc') ? 'asc' : 'desc';
+
+        // return view('author.index', compact('authors', 'order'));
     }
 
 
@@ -124,10 +129,11 @@ class AuthorController extends Controller
 
         //Delete row in pivot table
         $author->books()->detach();
+
+        // Delete author
         $author->delete();
 
         return redirect()->route('authors.index');
-
     }
 
     /**
@@ -142,6 +148,17 @@ class AuthorController extends Controller
         Author::whereIn('id', $selectedIds)->delete();
 
         return redirect()->route('authors.index');
+    }
+
+    /**
+     * Filters data for index page.
+     */
+    protected function filter($query, $searchTerm)
+    {
+        if (!empty($searchTerm)) {
+            $query->where('name', 'LIKE', "%$searchTerm%");
+            $query->orWhere('about', 'LIKE', "%$searchTerm%");
+        }
     }
 
 }

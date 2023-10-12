@@ -33,7 +33,6 @@ trait HasPagination
         $page = $request->page;
 
         // Order, filter and paginate data
-        // TODO: Ovdje se javlja greska `Call to a member function orderBy() on string`
         $this->order($query, $orderBy, $orderDir);
 
         $this->filter($query, $searchTerm);
