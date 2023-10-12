@@ -8,14 +8,14 @@
 
             {{-- Name --}}
             <div class="mt-[20px]">
-                <p>Name<span class="text-red-500">*</span></p>
+                <p>Name <span class="text-red-500">*</span></p>
                 <input type="text" name="name" required value="{{ $resource->name }}"
                     class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
                                shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                     placeholder="{{ 'Enter a ' . $resourceName . ' name' }}" />
 
                 @if ($errors->first('name'))
-                    <p class="text-red-600 mt-[5px]">{{ $errors->first('name') }}</p>
+                    <p class="text-red-500 mt-[5px]">{{ $errors->first('name') }}</p>
                 @endif
             </div>
 

@@ -3,6 +3,12 @@
 $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
 ?>
 @section('content')
+    {{-- Header --}}
+    <div class="heading border-b-[1px] border-[#e4dfdf]">
+        <div class="pl-[30px] mt-[22px] mb-[23px]">
+            <h1>@yield('title')</h1>
+        </div>
+    </div>
 
     {{-- Navbar --}}
     <div class="py-4 text-gray-500 border-b-[1px] border-[#e4dfdf] pl-[30px]">

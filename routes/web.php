@@ -25,7 +25,7 @@ use App\Http\Controllers\SizeController;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('welcome');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
