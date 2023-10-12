@@ -75,19 +75,10 @@ class BindingController extends BaseController
      */
     public function destroy(Binding $binding, Request $request)
     {
-        //Checks on what page to redirect
-        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
-
         // Deletes binding from the DB
         $binding->delete();
 
-        // After the operation is finished redirects to a different page
-        return redirect()->route(
-            'bindings.index',
-            [
-                'page' => $redirectPage,
-                'rowsPerPage' => $request->perPage
-            ]
-        );
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

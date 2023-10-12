@@ -28,11 +28,13 @@ class SizeController extends BaseController
         return view('settings.sizes.create');
     }
 
-
-    public function show()
+    /**
+     * Display the specified resource.
+     */
+    public function show(Size $size)
     {
+        // We do not use show method since there is not much to show (only a name)
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -66,19 +68,10 @@ class SizeController extends BaseController
      */
     public function destroy(Size $size, Request $request)
     {
-        //Checks on what page to redirect
-        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
-
         // Deletes genre from the DB
         $size->delete();
 
-        // After the operation is finished redirects to a different page
-        return redirect()->route(
-            'sizes.index',
-            [
-                'page' => $redirectPage,
-                'rowsPerPage' => $request->perPage
-            ]
-        );
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

@@ -75,19 +75,10 @@ class GenreController extends BaseController
      */
     public function destroy(Genre $genre, Request $request)
     {
-        //Checks on what page to redirect
-        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
-
         // Deletes genre from the DB
         $genre->delete();
 
-        // After the operation is finished redirects to a different page
-        return redirect()->route(
-            'genres.index',
-            [
-                'page' => $redirectPage,
-                'rowsPerPage' => $request->perPage
-            ]
-        );
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

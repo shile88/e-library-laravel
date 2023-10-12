@@ -80,13 +80,7 @@ class PublisherController extends BaseController
         // Deletes publisher from the DB
         $publisher->delete();
 
-        // After the operation is finished redirects to a different page
-        return redirect()->route(
-            'publishers.index',
-            [
-                'page' => $redirectPage,
-                'rowsPerPage' => $request->perPage
-            ]
-        );
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

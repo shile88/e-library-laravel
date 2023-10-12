@@ -75,19 +75,11 @@ class CategoryController extends BaseController
      */
     public function destroy(Category $category, Request $request)
     {
-        //Checks on what page to redirect
-        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
         // Deletes category from the DB
         $category->delete();
 
-        // After the operation is finished redirects to a different page
-        return redirect()->route(
-            'categories.index',
-            [
-                'page' => $redirectPage,
-                'rowsPerPage' => $request->perPage
-            ]
-        );
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 
     /**
@@ -95,7 +87,7 @@ class CategoryController extends BaseController
      */
     protected function filter($query, $searchTerm)
     {
-        if (!empty($searchTerm)){
+        if (!empty($searchTerm)) {
             $query->where('name', 'LIKE', "%$searchTerm%");
             $query->orWhere('description', 'LIKE', "%$searchTerm%");
         }

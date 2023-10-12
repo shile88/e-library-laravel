@@ -74,19 +74,10 @@ class LanguageController extends BaseController
      */
     public function destroy(Language $language, Request $request)
     {
-        //Checks on what page to redirect
-        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
-
         // Deletes language from the DB
         $language->delete();
 
-        // After the operation is finished redirects to a different page
-        return redirect()->route(
-            'languages.index',
-            [
-                'page' => $redirectPage,
-                'rowsPerPage' => $request->perPage
-            ]
-        );
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

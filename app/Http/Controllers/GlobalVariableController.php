@@ -88,7 +88,7 @@ class GlobalVariableController extends Controller
         // Deletes global variable from the DB
         $globalVariable->delete();
 
-        // After the operation is finished redirects to a different page
-        return redirect()->route('global_variables.index');
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

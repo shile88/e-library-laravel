@@ -20,39 +20,6 @@ class AuthorController extends BaseController
         $authors = $this->processIndexData($request, Author::query());
 
         return view('authors.index', compact('authors'));
-
-
-        // // Number of data rows for displaying on one page
-        // $rowsPerPage = $request->rowsPerPage ?? 7;
-
-        // // Column for search
-        // $orderBy = $request->orderBy ?? 'name';
-
-        // // Direction for sort
-        // $order = $request->order ?? 'asc';
-
-        // // Search param for filtering
-        // $searchTerm = $request->input('q');
-
-        // // Handle ordering
-        // $authorsQuery = Author::orderBy($orderBy, $order);
-
-        // // If search exists filter data
-        // if (!empty($searchTerm) && strlen($searchTerm) >= 3) {
-        //     $authorsQuery->where('name', 'LIKE', '%' . "$searchTerm%")
-        //         ->orWhere('about', 'LIKE', "%$searchTerm%");
-        // }
-
-        // // Hangle pagination
-        // $authors = $authorsQuery->paginate($rowsPerPage);
-
-        // // Appends parameters to request
-        // $authors->appends(['order' => $order, 'q' => $searchTerm, 'orderBy' => $orderBy, 'rowsPerPage' => $rowsPerPage]);
-
-        // // Toggle value of sorting order
-        // $order = ($order == 'desc') ? 'asc' : 'desc';
-
-        // return view('author.index', compact('authors', 'order'));
     }
 
 
@@ -133,7 +100,8 @@ class AuthorController extends BaseController
         // Delete author
         $author->delete();
 
-        return redirect()->route('authors.index');
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 
     /**
