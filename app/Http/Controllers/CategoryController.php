@@ -97,7 +97,7 @@ class CategoryController extends BaseController
     {
         if (!empty($searchTerm)){
             $query->where('name', 'LIKE', "%$searchTerm%");
-            $query->where('description', 'LIKE', "%$searchTerm%");
+            $query->orWhere('description', 'LIKE', "%$searchTerm%");
         }
     }
 }

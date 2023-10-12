@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <div class="pb-[30px] scroll" style="overflow-y:auto; max-height:100vh;">
+    <div class="pb-[180px] scroll" style="overflow-y:auto; max-height:100vh;">
         <div class="flex items-center px-[30px] py-4 space-x-3 rounded-lg justify-between">
             <div>
                 <a href="{{ route('authors.create') }}"
@@ -50,7 +50,6 @@
             <x-search-bar />
         </div>
 
-
         <div
             class="inline-block min-w-full px-[30px] pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard">
             <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
@@ -64,7 +63,14 @@
                             </th>
                             <th class="px-4 py-4 leading-4 tracking-wider text-left">Naziv autora
                                 <a
-                                    href="{{ route('authors.index', ['order' => $order ? $order : 'asc', 'orderBy' => 'name', 'q' => request()->get('q')]) }}">
+                                    href="{{ route('authors.index', [
+                                        'orderBy' => 'name',
+                                        'orderDir' => request()->get('orderDir') == 'desc' ? 'asc' : 'desc',
+                                        'rowsPerPage' => request()->get('rowsPerPage'),
+                                        'searchTerm' => request()->get('searchTerm'),
+                                        'page' => request()->get('page'),
+                                        'rowsPerPage' => request()->get('rowsPerPage'),
+                                    ]) }}">
                                     <i
                                         class="ml-3 fa-lg fas
                                         @if ($order == 'desc') fa-long-arrow-alt-up @else fa-long-arrow-alt-down @endif"></i>
@@ -144,8 +150,25 @@
                 </tbody>
             </table>
 
-            <div class=" flex-row items-center justify-end mt-2">
+            {{-- Pagination --}}
+            <div class="mt-2">
                 {{ $authors->links() }}
+            </div>
+
+            {{-- Rows per page form --}}
+            <div class="inline-flex items-center w-full justify-end mt-4">
+                <div>
+                    Rows per page:
+                    <form class="inline-flex" action="{{ route('authors.index') }}">
+                        <select
+                            class="ml-2 pl-2 w-[60px] border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
+                            onchange="this.form.submit()" name="rowsPerPage">
+                            <option value="5" {{ request()->get('rowsPerPage') == 5 ? 'selected' : '' }}>5</option>
+                            <option value="7" {{ request()->get('rowsPerPage') == 7 ? 'selected' : '' }}>7</option>
+                            <option value="10" {{ request()->get('rowsPerPage') == 10 ? 'selected' : '' }}>10</option>
+                        </select>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -2120,6 +2120,9 @@ h4 {
 .pb-\[30px\]{
   padding-bottom: 30px;
 }
+.pb-\[100px\]{
+  padding-bottom: 180px;
+}
 .pl-10{
   padding-left: 2.5rem;
 }
