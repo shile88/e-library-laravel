@@ -7,6 +7,7 @@
         'resource' => $category,
         'resourceName' => 'category',
         'resourcePlural' => 'categories',
+        'hasDescription' => true
     ])
 
 @endsection

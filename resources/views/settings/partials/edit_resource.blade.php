@@ -1,3 +1,11 @@
+{{-- Header --}}
+<div class="heading border-b-[1px] border-[#e4dfdf]">
+    <div class="pl-[30px] mt-[22px] mb-[23px]">
+        <h1>@yield('title')</h1>
+    </div>
+</div>
+
+{{-- Form --}}
 <form class="text-gray-700" method="post" action="{{ route($resourcePlural . '.update', $resource) }}">
     @csrf
     @method('put')
@@ -18,6 +26,20 @@
                     <p class="text-red-500 mt-[5px]">{{ $errors->first('name') }}</p>
                 @endif
             </div>
+
+            {{-- Description --}}
+            @if (isset($hasDescription))
+                <div class="mt-[20px]">
+                    <p class="inline-block mb-2">Description</p>
+
+                    <textarea id="message" name="description" rows="10"
+                        class="block p-2.5 w-full text-gray-900 bg-white border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter description"></textarea>
+                    @if ($errors->first('description'))
+                        <p class="text-red-500 mt-[5px]">{{ $errors->first('description') }}</p>
+                    @endif
+                </div>
+            @endif
 
             {{-- Submit button --}}
             <button
