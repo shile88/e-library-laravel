@@ -56,7 +56,7 @@
                         <p class="inline-block mb-2">Opis <span class="text-red-500">*</span></p>
 
                         <textarea id="message" name="about" rows="10" required
-                            class="block p-2.5 w-full text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                            class="block p-2.5 w-full text-gray-900 bg-white border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Unesite opis"></textarea>
                         @if ($errors->first('about'))
                             <p class="text-red-600 mt-[5px]">{{ $errors->first('about') }}</p>
