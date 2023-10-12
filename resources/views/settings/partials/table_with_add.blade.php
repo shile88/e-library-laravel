@@ -109,7 +109,12 @@
     </table>
 
     {{-- Pagination --}}
-    <div class="inline-flex items-center w-full justify-between mt-2">
+    <div class="mt-2">
+        {{ $items->links() }}
+    </div>
+
+    {{-- Rows per page form --}}
+    <div class="inline-flex items-center w-full justify-end mt-4">
         <div>
             Rows per page:
             <form class="inline-flex" action="{{ route($resourcePlural . '.index') }}">
@@ -122,6 +127,6 @@
                 </select>
             </form>
         </div>
-        {{ $items->links() }}
     </div>
+
 </div>

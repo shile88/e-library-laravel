@@ -41,7 +41,7 @@ $route_name = \Illuminate\Support\Facades\Route::currentRouteName();
     </div>
 
     {{-- Main settings content --}}
-    <div class="height-ucenikProfile">
+    <div class="height-ucenikProfile scroll pb-[30px]">
         @yield('main-settings')
     </div>
 @endsection
