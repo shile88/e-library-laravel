@@ -24,6 +24,9 @@
 
         <section class="w-screen h-screen pl-[83px] text-[#212121]">
 
+            {{-- Header Title --}}
+            @include('settings.partials.header_title')
+
             <!-- Main Content -->
             @yield('content')
 

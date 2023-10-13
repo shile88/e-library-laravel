@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'hasHeaderTitle' => true,
+])
 @section('title', 'Edit genre')
 
 @section('content')
