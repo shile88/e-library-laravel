@@ -17,9 +17,9 @@ class AuthorController extends BaseController
     public function index(Request $request)
     {
         // Sort, filter and paginate data
-        $authors = $this->processIndexData($request, Author::query());
+        $items  = $this->processIndexData($request, Author::query());
 
-        return view('authors.index', compact('authors'));
+        return view('authors.index', compact('items'));
     }
 
 

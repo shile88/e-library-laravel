@@ -4,16 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
+use App\Models\Genre;
+use App\Models\Publisher;
+use Illuminate\Http\Request;
 
-class BookController extends Controller
+class BookController extends BaseController
 {
+    protected $orderBy = 'title';
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $items = $this->processIndexData($request, Book::query());
+
+        return view('book.index', compact('items' ));
     }
 
     /**
@@ -21,7 +29,12 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $genres = Genre::all();
+        $authors = Author::all();
+        $publishers = Publisher::all();
+
+        return view('book.create', compact('categories', 'genres', 'authors', 'publishers'));
     }
 
     /**

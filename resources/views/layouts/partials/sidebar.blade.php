@@ -69,7 +69,7 @@
                 <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
                     <div class="ml-[30px]">
                         <span class="flex justify-between w-full whitespace-nowrap" title="Books">
-                            <a href="#" aria-label="Books">
+                            <a href="{{ route('books.index') }}" aria-label="Books">
                                 <i
                                     class="text-[22px] pt-[4px] pb-[5px] pr-2 transition duration-300 ease-in group-hover:text-blue-600 text-[#707070] fas fa-book"></i>
                                 <div class="hidden sidebar-item">
