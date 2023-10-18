@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
+use Illuminate\Http\Request;
 
-class BookController extends Controller
+class BookController extends BaseController
 {
+
+    // protected $orderBy = 'title';
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $request['orderBy'] = 'title';
+        // Sort, filter and paginate data
+        $books = $this->processIndexData($request, Book::query());
+
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -37,7 +45,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -62,5 +70,16 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         //
+    }
+
+    /**
+     * Filters data for index page.
+     */
+    protected function filter($query, $searchTerm)
+    {
+        if (!empty($searchTerm)) {
+            $query->where('title', 'LIKE', "%$searchTerm%");
+            $query->orWhere('description', 'LIKE', "%$searchTerm%");
+        }
     }
 }

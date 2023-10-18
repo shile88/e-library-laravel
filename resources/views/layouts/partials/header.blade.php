@@ -53,7 +53,7 @@
                                 <i class="fa-solid fa-user-graduate mr-[3px] ml-[4px] py-1"></i>
                                 <span class="px-4 py-0 ml-[3px]">Student</span>
                             </a>
-                            <a href="#" tabindex="0"
+                            <a href="{{ route('books.create') }}" tabindex="0"
                                 class="flex w-full px-4 py-2 text-sm
                             leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
                                 <i class="fas fa-book mr-[3px] ml-[5px] py-1"></i>

@@ -1,5 +1,7 @@
-@extends('layouts.app')
-@section('title', 'books')
+@extends('layouts.app', [
+    'hasHeaderTitle' => true
+])
+@section('title', 'Books')
 
 @section('content')
     <div class="flex items-center py-4 space-x-3 rounded-lg justify-between ml-[30px]">
@@ -29,7 +31,7 @@
     </div>
 
     <div
-        class="inline-block min-w-full pr-[50px] mt-3 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard ml-[30px]">
+        class="inline-block min-w-full height-ucenikProfile scroll pb-36 pr-[50px] mt-3 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard ml-[30px]">
         <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
             <thead class="bg-[#EFF3F6]">
                 <tr class="border-b-[1px] border-[#e4dfdf]">
@@ -126,7 +128,7 @@
                         class="ml-2 pl-2 w-[60px] border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                         onchange="this.form.submit()" name="rowsPerPage">
                         <option value="5" {{ request()->get('rowsPerPage') == 5 ? 'selected' : '' }}>5</option>
-                        <option value="7" {{ request()->get('rowsPerPage') == 7 ? 'selected' : '' }}>7</option>
+                        <option selected value="7" {{ request()->get('rowsPerPage') == 7 ? 'selected' : '' }}>7</option>
                         <option value="10" {{ request()->get('rowsPerPage') == 10 ? 'selected' : '' }}>10</option>
                     </select>
                 </form>

@@ -25,4 +25,24 @@ class Book extends Model
     {
         return $this->belongsToMany(Genre::class);
     }
+
+    public function publisher()
+    {
+        return $this->belongsTo(Publisher::class);
+    }
+
+    public function script()
+    {
+        return $this->belongsTo(Script::class);
+    }
+
+    public function binding()
+    {
+        return $this->belongsTo(Binding::class);
+    }
+
+    public function size()
+    {
+        return $this->belongsTo(Size::class);
+    }
 }
