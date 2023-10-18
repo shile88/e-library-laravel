@@ -6,15 +6,24 @@ use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
+use App\Models\Genre;
+use App\Models\Publisher;
+use Illuminate\Http\Request;
 
 class BookController extends BaseController
 {
+    protected $orderBy = 'title';
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        //
+        $request['orderBy'] = 'title';
+        // Sort, filter and paginate data
+        $books = $this->processIndexData($request, Book::query());
+
+        return view('books.index', compact('books'));
     }
 
     /**
