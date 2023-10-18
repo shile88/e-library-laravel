@@ -11,7 +11,7 @@
     <!-- Styles and fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
     @include('layouts.partials.styles')
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="/css/app.css" />
 </head>
 
 <body class="overflow-hidden small:bg-gradient-to-r small:from-green-400 small:to-blue-500">
@@ -37,8 +37,15 @@
     @include('layouts.partials.inProgress')
 
     <!-- Scripts -->
-    @vite('resources/js/jquery.min.js')
-    @vite('resources/js/app.js')
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+    <!-- File upload -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://unpkg.com/create-file-list"></script>
+
+    @yield('page-scripts')
 </body>
 
 </html>

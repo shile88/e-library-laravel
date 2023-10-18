@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthorController;
@@ -45,6 +46,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/authors', AuthorController::class);
     Route::resource('/books', BookController::class);
     Route::delete('authors/bulk-delete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
+    Route::resource('/books', BookController::class);
+
 
     // SETTINGS
     Route::get('/settings', [GlobalVariableController::class, 'index'])->name('settings.index');
