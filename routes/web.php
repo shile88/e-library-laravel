@@ -43,7 +43,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // CRUDS
     Route::resource('/authors', AuthorController::class);
-    Route::resource('/books', BookController::class);
     Route::delete('authors/bulk-delete', [AuthorController::class, 'bulkDelete'])->name('authors.bulkDelete');
     Route::resource('/books', BookController::class);
 

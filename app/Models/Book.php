@@ -11,6 +11,7 @@ class Book extends Model
 
     const DEFAULT_BOOK_PICTURE_PATH = '/images/book.jpg';
 
+    protected $guarded = ['id'];
     public function authors()
     {
         return $this->belongsToMany(Author::class);
