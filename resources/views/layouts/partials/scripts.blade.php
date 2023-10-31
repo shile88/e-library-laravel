@@ -1,7 +1,31 @@
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/multiple-select.min.js"></script>
+<script src="/js/app.js"></script>
 
-<!-- File upload -->
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-<script src="https://unpkg.com/create-file-list"></script>
+
+{{-- Custom scripts --}}
+<script>
+    $('.multiple-select').multipleSelect();
+
+    function loadBookImage(event) {
+        var imgOut = document.getElementById('image-upload-output');
+        imgOut.style.display = "block";
+
+        if (event.target.files[0]) {
+            imgOut.src = URL.createObjectURL(event.target.files[0]);
+        } else {
+            imgOut.src = "{{ asset(\App\Models\Book::DEFAULT_BOOK_PICTURE_PATH) }}";
+        }
+    };
+
+    function removeUploadedBookImage() {
+        var imgIn = document.getElementById('image-upload-input');
+        var imgOut = document.getElementById('image-upload-output');
+
+        if (imgIn.files.length) {
+            imgIn.value = null;
+            // imgOut.src = '/images/book.jpg';
+            imgOut.src = "{{ asset(\App\Models\Book::DEFAULT_BOOK_PICTURE_PATH) }}";
+        }
+    }
+</script>

@@ -156,7 +156,7 @@
                                     alt="Book image" src="{{ asset(\App\Models\Book::DEFAULT_BOOK_PICTURE_PATH) }}" />
                             </div>
                             <h5 class="shadow-lg mt-2 py-2 text-white px-5 w-[150px] text-sm bg-[#F44336] rounded-[5px]"
-                                onclick="removeUploadedImage(event)">Remove picture</h5>
+                                onclick="removeUploadedBookImage(event)">Remove picture</h5>
                         </div>
 
                         {{-- Buttons --}}
@@ -168,29 +168,4 @@
         </form>
     </div>
 
-@endsection
-
-@section('page-scripts')
-    <script>
-        function loadBookImage(event) {
-            var imgOut = document.getElementById('image-upload-output');
-            imgOut.style.display = "block";
-
-            if (event.target.files[0]) {
-                imgOut.src = URL.createObjectURL(event.target.files[0]);
-            } else {
-                imgOut.src = '/images/book.jpg';
-            }
-        };
-
-        function removeUploadedImage() {
-            var imgIn = document.getElementById('image-upload-input');
-            var imgOut = document.getElementById('image-upload-output');
-
-            if (imgIn.files.length) {
-                imgIn.value = null;
-                imgOut.src = '/images/book.jpg';
-            }
-        }
-    </script>
 @endsection
