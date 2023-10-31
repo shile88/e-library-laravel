@@ -60,7 +60,7 @@ class BookController extends BaseController
         $inputs = $request->validated();
 
         if ($request['picture']) {
-            $file = time() . "-" . $request->file('picture');
+            $file = $request->file('picture');
             $photoPath = Storage::disk('public')->put('books', $file);
             $inputs['picture'] = $photoPath;
         } else {
