@@ -138,7 +138,7 @@
 
             {{-- Second column --}}
             <div class="mx-[30px]">
-                <img src="{{ getPicturePath($book->picture) }}" alt="Book picture" width="500">
+                <img src="{{ getBookPicturePath($book->picture) }}" alt="Book picture" width="500">
             </div>
 
             {{-- Third column --}}

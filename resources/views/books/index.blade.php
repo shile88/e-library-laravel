@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true
+    'hasHeaderTitle' => true,
 ])
 @section('title', 'Books')
 
@@ -67,7 +67,7 @@
                             </label>
                         </td>
                         <td class="flex flex-row items-center px-4 py-4">
-                            <img class="object-cover w-8 mr-2 h-11" src="{{ getPicturePath('') }}"
+                            <img class="object-cover w-8 mr-2 h-11" src="{{ getBookPicturePath('') }}"
                                 onerror="this.onerror=null; this.src='{{ \App\Models\Book::DEFAULT_BOOK_PICTURE_PATH }}'"
                                 alt="" />
                             <a href="{{ route('books.show', $book) }}">
@@ -128,7 +128,8 @@
                         class="ml-2 pl-2 w-[60px] border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                         onchange="this.form.submit()" name="rowsPerPage">
                         <option value="5" {{ request()->get('rowsPerPage') == 5 ? 'selected' : '' }}>5</option>
-                        <option selected value="7" {{ request()->get('rowsPerPage') == 7 ? 'selected' : '' }}>7</option>
+                        <option selected value="7" {{ request()->get('rowsPerPage') == 7 ? 'selected' : '' }}>7
+                        </option>
                         <option value="10" {{ request()->get('rowsPerPage') == 10 ? 'selected' : '' }}>10</option>
                     </select>
                 </form>

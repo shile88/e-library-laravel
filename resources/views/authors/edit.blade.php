@@ -32,8 +32,8 @@
                                     Izmijeni
                                 </a>
                             </li>
-                                <a class="text-gray-400 ">
-                                </a>
+                            <a class="text-gray-400 ">
+                            </a>
                             </li>
                         </ol>
                     </nav>
@@ -83,7 +83,7 @@
 
                                     {{-- Display of picture --}}
                                     <img id="image-output-author" name="picture" alt="Author picture"
-                                        src="{{ getPicturePath($author->picture) }}"
+                                        src="{{ getBookPicturePath($author->picture) }}"
                                         onerror="this.onerror=null; this.src='{{ \App\Models\Author::DEFAULT_AUTHOR_PICTURE_PATH }}'"
                                         class="w-[300px] h-[300px] absolute top-0 left-0 transition-opacity opacity-100 hover:opacity-80" />
                                 </div>

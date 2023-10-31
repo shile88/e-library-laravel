@@ -1,7 +1,7 @@
 <header
     class="z-20 small:hidden  flex items-center text-white justify-between w-full h-[71px] pr-[30px] mx-auto bg-[#4558BE]">
     <!-- Logo and Title -->
-    <div class="logo-font inline-flex py-[18px]">
+    <div class="logo-font inline-flex py-[18px] ml-[20px]">
         <div class="block">
             <a href="{{ route('dashboard') }}" class="text-[20px] font-medium">
                 <div class="flex items-center">
@@ -84,7 +84,8 @@
                     <a href="#" class="relative inline-block px-3 py-2 focus:outline-none " id="dropdownProfile"
                         aria-label="User profile">
                         <div class="flex items-center h-5 my-2">
-                            <img class="h-[50px] rounded-full" src="#" width="50" alt="User image">
+                            <img class="h-[50px] rounded-full" src="{{ getUserPicturePath(auth()->user()->picture) }}"
+                                width="50" alt="User image">
                         </div>
                     </a>
                 </div>
