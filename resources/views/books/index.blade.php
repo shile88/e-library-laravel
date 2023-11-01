@@ -26,7 +26,8 @@
                         </th>
                         {{-- Title --}}
                         <th class="flex items-center px-4 py-4 tracking-wider text-left">
-                            Title<i class="ml-2 fa-lg fas fa-long-arrow-alt-down"></i>
+                            Title
+                            @include('layouts.partials.order-arrow-link', ['plural' => 'books'])
                         </th>
                         {{-- Authors --}}
                         <th id="autoriMenu" class="relative px-4 py-4 text-sm tracking-wider text-left">

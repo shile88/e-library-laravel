@@ -7,30 +7,21 @@ use Illuminate\Pagination\LengthAwarePaginator;
 trait HasPagination
 {
     /**
-     * After item is deleted calculates what page to redirect to.
-     */
-    function calculateRedirectPage($perPage, $total, $currentPage)
-    {
-        if ($total < $perPage)
-            return 1;
-        $numberOfElementsCurrentPage = $total - ($currentPage - 1) * $perPage;
-        if ($numberOfElementsCurrentPage == 1)
-            return $currentPage - 1;
-
-        return $currentPage;
-    }
-
-    /**
      * Processes data for index page for following resources binding, genre, categories, language, publisher, script, size.
      */
     public function processIndexData(Request $request, $query)
     {
-        // Get values from request or set default
-        $searchTerm = $request->searchTerm;
-        $rowsPerPage = $request->rowsPerPage ?? $this->rowsPerPage;
+        // Get values from request or set default ones
         $orderBy = $request->orderBy ?? $this->orderBy;
-        $orderDir = $request->orderDir ?? $this->orderDir;
+        $orderDir = $request->orderDir ?? $this->orderDirArray[0];
+        $rowsPerPage = $request->rowsPerPage ?? $this->rowsPerPage;
+        $searchTerm = $request->searchTerm;
         $page = $request->page;
+
+        // Validate orderBy and orderDir
+        $orderBy = ($orderBy == $this->orderBy) ? $orderBy : $this->orderBy;
+        $orderDir = (in_array($orderDir, $this->orderDirArray)) ? $orderDir : $this->orderDirArray[0];
+
 
         // Order, filter and paginate data
         $this->order($query, $orderBy, $orderDir);
@@ -71,7 +62,7 @@ trait HasPagination
      */
     protected function filter($query, $searchTerm)
     {
-        if (!empty($searchTerm)){
+        if (!empty($searchTerm)) {
             $query->where('name', 'LIKE', "%$searchTerm%");
         }
     }

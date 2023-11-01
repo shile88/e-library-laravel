@@ -74,9 +74,6 @@ class PublisherController extends BaseController
      */
     public function destroy(Publisher $publisher, Request $request)
     {
-        //Checks on what page to redirect
-        $redirectPage = $this->calculateRedirectPage($request->perPage, $request->total, $request->currentPage);
-
         // Deletes publisher from the DB
         $publisher->delete();
 

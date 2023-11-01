@@ -10,6 +10,6 @@ class BaseController extends Controller
     use HasPagination;
 
     protected $orderBy = 'name';
-    protected $orderDir = 'asc';
+    protected $orderDirArray = ['asc', 'desc'];
     protected $rowsPerPage = 7;
 }
