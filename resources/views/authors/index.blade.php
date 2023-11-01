@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Autori')
 @section('content')
-    @include('layouts.partials.mainContentAndTable', [
+    @include('partials.custom.mainContentAndTable', [
            'items' => $items,
            'resourceName' => 'author',
            'resourcePlural' => 'authors',

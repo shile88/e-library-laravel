@@ -9,21 +9,21 @@
     <title> @yield('title') | {{ config('app.name') }}</title>
 
     {{-- Styles and fonts --}}
-    @include('layouts.partials.styles')
+    @include('partials.general.styles')
 </head>
 
 <body class="overflow-hidden small:bg-gradient-to-r small:from-green-400 small:to-blue-500">
     {{-- Header --}}
-    @include('layouts.partials.header')
+    @include('partials.general.header')
 
     <main class="flex flex-row small:hidden">
         {{-- Sidebar --}}
-        @include('layouts.partials.sidebar')
+        @include('partials.general.sidebar')
 
         <section class="w-screen h-screen pl-[83px] text-[#212121]">
 
             {{-- Header Title --}}
-            @include('settings.partials.header_title')
+            @include('partials.custom.title-header')
 
             {{-- Main Content --}}
             @yield('content')
@@ -32,10 +32,10 @@
     </main>
 
     {{-- Notification for small devices --}}
-    @include('layouts.partials.inProgress')
+    @include('partials.general.inProgress')
 
     {{-- Scripts --}}
-    @include('layouts.partials.scripts')
+    @include('partials.general.scripts')
 
     {{-- Custom page cripts --}}
     @yield('page-scripts')

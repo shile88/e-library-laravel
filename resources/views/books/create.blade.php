@@ -43,21 +43,21 @@
                     <div class="grid grid-cols-3">
                         <div class="row-1">
                             {{-- Title input --}}
-                            @include('layouts.partials.text-input', [
+                            @include('partials.inputs.text-input', [
                                 'label' => 'Title',
                                 'field_name' => 'title',
                                 'placeholder' => 'Enter a title',
                             ])
 
                             {{-- ISBN input --}}
-                            @include('layouts.partials.text-input', [
+                            @include('partials.inputs.text-input', [
                                 'label' => 'ISBN',
                                 'field_name' => 'isbn',
                                 'placeholder' => 'Enter an ISBN',
                             ])
 
                             {{-- Binding input --}}
-                            @include('layouts.partials.single-select-input', [
+                            @include('partials.inputs.single-select-input', [
                                 'items' => $bindings,
                                 'label' => 'Binding',
                                 'placeholder' => 'Choose a binding',
@@ -65,7 +65,7 @@
                             ])
 
                             {{-- Size input --}}
-                            @include('layouts.partials.single-select-input', [
+                            @include('partials.inputs.single-select-input', [
                                 'items' => $sizes,
                                 'label' => 'Size',
                                 'placeholder' => 'Choose a size',
@@ -73,7 +73,7 @@
                             ])
 
                             {{-- Script input --}}
-                            @include('layouts.partials.single-select-input', [
+                            @include('partials.inputs.single-select-input', [
                                 'items' => $scripts,
                                 'label' => 'Script',
                                 'placeholder' => 'Choose a script',
@@ -81,7 +81,7 @@
                             ])
 
                             {{-- Publisher input --}}
-                            @include('layouts.partials.single-select-input', [
+                            @include('partials.inputs.single-select-input', [
                                 'items' => $publishers,
                                 'label' => 'Publisher',
                                 'placeholder' => 'Choose a publisher',
@@ -91,7 +91,7 @@
 
                         <div class="row-2">
                             {{-- Authors input --}}
-                            @include('layouts.partials.multiple-select-input', [
+                            @include('partials.inputs.multiple-select-input', [
                                 'items' => $authors,
                                 'label' => 'Authors',
                                 'placeholder' => 'Choose authors',
@@ -99,7 +99,7 @@
                             ])
 
                             {{-- Genres input --}}
-                            @include('layouts.partials.multiple-select-input', [
+                            @include('partials.inputs.multiple-select-input', [
                                 'items' => $genres,
                                 'label' => 'Genres',
                                 'placeholder' => 'Choose genres',
@@ -107,7 +107,7 @@
                             ])
 
                             {{-- Categories input --}}
-                            @include('layouts.partials.multiple-select-input', [
+                            @include('partials.inputs.multiple-select-input', [
                                 'items' => $categories,
                                 'label' => 'Categories',
                                 'placeholder' => 'Choose categories',
@@ -115,21 +115,21 @@
                             ])
 
                             {{-- Number of pages input --}}
-                            @include('layouts.partials.number-input', [
+                            @include('partials.inputs.number-input', [
                                 'label' => 'Number of pages',
                                 'placeholder' => 'Choose a number of pages',
                                 'field_name' => 'page_count',
                             ])
 
                             {{-- Number of copies input --}}
-                            @include('layouts.partials.number-input', [
+                            @include('partials.inputs.number-input', [
                                 'label' => 'Number of copies',
                                 'placeholder' => 'Choose a number of copies',
                                 'field_name' => 'total_count',
                             ])
 
                             {{-- Date of publishing input --}}
-                            @include('layouts.partials.date-input', [
+                            @include('partials.inputs.date-input', [
                                 'label' => 'Date of publishing',
                                 'field_name' => 'publish_date',
                             ])
@@ -160,7 +160,7 @@
                         </div>
 
                         {{-- Buttons --}}
-                        @include('layouts.partials.submit-cancel-buttons')
+                        @include('partials.custom.submit-cancel-buttons')
 
                     </div>
                 </div>

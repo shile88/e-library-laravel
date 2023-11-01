@@ -101,7 +101,7 @@
             </div>
 
             {{-- Buttons --}}
-            @include('layouts.partials.submit-cancel-buttons')
+            @include('partials.custom.submit-cancel-buttons')
 
         </form>
     </div>
