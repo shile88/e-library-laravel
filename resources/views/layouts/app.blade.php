@@ -13,7 +13,7 @@
 </head>
 
 <body class="overflow-hidden small:bg-gradient-to-r small:from-green-400 small:to-blue-500">
-    {{-- Header --}}
+    {{-- App Header --}}
     @include('partials.general.header')
 
     <main class="flex flex-row small:hidden">
@@ -22,7 +22,7 @@
 
         <section class="w-screen h-screen pl-[83px] text-[#212121]">
 
-            {{-- Header Title --}}
+            {{-- Title Header --}}
             @include('partials.custom.title-header')
 
             {{-- Main Content --}}

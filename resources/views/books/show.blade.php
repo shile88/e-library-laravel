@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+{{-- @extends('layouts.app', [
+    'hasHeaderTitle' => true,
+    'title' => $book->title,
+    'breadcrumbs' => [
+        ['name' => 'Books', 'href' => route('books.index')],
+        ['name' => $book->title, 'href' => route('books.show', $book)],
+    ]
+]) --}}
 @section('title', $book->title)
 
 @section('content')

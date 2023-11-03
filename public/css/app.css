@@ -1103,6 +1103,10 @@ h4 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
+.mx-1{
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -1294,6 +1298,9 @@ h4 {
 }
 .mb-\[23px\]{
   margin-bottom: 23px;
+}
+.mb-\[1px\]{
+  margin-bottom: 1px;
 }
 .mt-\[75px\]{
   margin-top: 75px;
@@ -2006,6 +2013,10 @@ h4 {
 .py-\[10px\]{
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.py-\[11px\]{
+  padding-top: 10px;
+  padding-bottom: 11px;
 }
 .px-\[30px\]{
   padding-left: 30px;

@@ -1,39 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.app', [
+    'hasHeaderTitle' => true,
+    'title' => 'New book',
+    'breadcrumbs' => [
+        ['name' => 'Books', 'href' => route('books.index')],
+        ['name' => 'New book', 'href' => route('books.create')],
+    ]
+])
+
 @section('title', 'Books')
 
 @section('content')
-    {{-- Heading --}}
-    <div class="heading">
-        <div class="flex justify-between border-b-[1px] border-[#e4dfdf]">
-            <div class="pl-[30px] py-[10px] flex flex-col">
-                {{-- Name --}}
-                <h1>New book</h1>
-
-                {{-- Breadcrumbs --}}
-                <div>
-                    <nav class="w-full rounded">
-                        <ol class="flex list-reset">
-                            <li>
-                                <a href="{{ route('books.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                    Books
-                                </a>
-                            </li>
-                            <li>
-                                <span class="mx-2">/</span>
-                            </li>
-                            <li>
-                                <a href="{{ route('books.create') }}" class="text-[#2196f3] hover:text-blue-600">
-                                    New book
-                                </a>
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
     <div class="scroll height-content pb-[100px] section-content">
         <form class="text-gray-700 forma" method="post" action="{{ route('books.store') }}" enctype="multipart/form-data">
             @csrf

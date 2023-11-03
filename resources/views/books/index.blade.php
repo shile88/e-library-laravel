@@ -1,5 +1,7 @@
 @extends('layouts.app', [
     'hasHeaderTitle' => true,
+    'title' => 'Books',
+    'breadcrumbs' => [['name' => 'Books', 'href' => route('books.index')]],
 ])
 
 @section('title', 'Books')
@@ -37,10 +39,10 @@
                         <th id="kategorijeMenu" class="relative px-4 py-4 text-sm tracking-wider text-left">
                             Categories<i class="ml-2 fas fa-filter"></i>
                         </th>
-                        <th class="px-4 py-4 text-sm tracking-wider text-left">Available</th>
                         <th class="px-4 py-4 text-sm tracking-wider text-left">Reserved</th>
                         <th class="px-4 py-4 text-sm tracking-wider text-left">Checked out</th>
                         <th class="px-4 py-4 text-sm tracking-wider text-left">Overdue</th>
+                        <th class="px-4 py-4 text-sm tracking-wider text-left">Available</th>
                         <th class="px-4 py-4 text-sm tracking-wider text-left">Total</th>
                         <th class="px-4 py-4"></th>
                     </tr>
@@ -79,12 +81,12 @@
                             {{ $book->categories[$i]->name }}<br>
                         @endfor
                     </td>
-                    <td class="px-4 py-4 text-sm ">6</td>
-                    <td class="px-4 py-4 text-sm text-blue-800 "><a href="">5</a></td>
-                    <td class="px-4 py-4 text-sm text-blue-800 "><a href="">5</a></td>
-                    <td class="px-4 py-4 text-sm text-blue-800 "><a href="">2</a></td>
-                    <td class="px-4 py-4 text-sm ">11</td>
-                    <td class="px-6 py-4 text-sm leading-5 text-right ">
+                    <td class="px-4 py-4 text-sm text-blue-800"><a href="#">#</a></td>
+                    <td class="px-4 py-4 text-sm text-blue-800"><a href="#">#</a></td>
+                    <td class="px-4 py-4 text-sm text-blue-800"><a href="#">#</a></td>
+                    <td class="px-4 py-4 text-sm">x</td>
+                    <td class="px-4 py-4 text-sm">x</td>
+                    <td class="px-6 py-4 text-sm leading-5 text-right">
                         <p
                             class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsKnjige hover:text-[#606FC7]">
                             <i class="fas fa-ellipsis-v"></i>
@@ -162,7 +164,6 @@
         'plural' => 'books',
     ])
 
-</div>
 </div>
 
 @endsection
