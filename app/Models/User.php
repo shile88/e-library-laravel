@@ -12,7 +12,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const DEFAULT_USER_PICTURE_PATH = '/images/user.jpg';
+    const DEFAULT_USER_PICTURE_PATH = '/storage/images/user.jpg';
 
     /**
      * The attributes that are mass assignable.

@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\Imageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
     use HasFactory;
-
-    const DEFAULT_BOOK_PICTURE_PATH = '/images/book.jpg';
+    use Imageable;
+    const DEFAULT_BOOK_PICTURE_PATH = '/storage/images/book.jpg';
 
     protected $guarded = ['id'];
     public function authors()
@@ -50,20 +51,5 @@ class Book extends Model
  
     public function images(){
         return $this->morphMany(Image::class,'imageable');
-    }
-
-    //Image handling
-    public function defaultIamge(){
-        return $this->DEFAULT_BOOK_PICTURE_PATH;
-    }
-
-
-    public function profileImage()
-    {
-        return $this->morphOne(Image::class, 'imageable')
-                    ->where('is_profile', true)
-                    ->withDefault([
-                        'path' => $this->defaultIamge(),
-                    ]);
-    }
+    }   
 }
