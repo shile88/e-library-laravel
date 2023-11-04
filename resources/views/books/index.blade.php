@@ -58,7 +58,7 @@
                                 </label>
                             </td>
                             <td class="flex flex-row items-center px-4 py-4">
-                                <img class="object-cover w-8 mr-2 h-11" src="{{ getBookPicturePath($book->picture) }}">
+                                <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getBookPicturePath($book->profileImage->path)) }}">
                                 <a href="{{ route('books.show', $book) }}">
                                     <span class="font-medium text-center">{{ $book->title }}</span>
                                 </a>
@@ -141,8 +141,7 @@
                                         @csrf
                                         @method('delete')
                                         <p tabindex="0"
-                                            class="flex w-full px-4 text-sm leading-5 text-left
-                                                             text-gray-700 hover:text-red-500 z-50">
+                                            class="z-50 flex w-full px-4 text-sm leading-5 text-left text-gray-700 hover:text-red-500">
                                             <button type="submit" class="py-2 ml-[5px]" style="outline: none">
                                                 <i class="fa fa-trash mr-[1px]"></i>
                                                 <span class="px-4 py-0">Destroy book</span>

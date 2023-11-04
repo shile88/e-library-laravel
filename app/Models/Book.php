@@ -46,4 +46,24 @@ class Book extends Model
     {
         return $this->belongsTo(Size::class);
     }
+
+ 
+    public function images(){
+        return $this->morphMany(Image::class,'imageable');
+    }
+
+    //Image handling
+    public function defaultIamge(){
+        return $this->DEFAULT_BOOK_PICTURE_PATH;
+    }
+
+
+    public function profileImage()
+    {
+        return $this->morphOne(Image::class, 'imageable')
+                    ->where('is_profile', true)
+                    ->withDefault([
+                        'path' => $this->defaultIamge(),
+                    ]);
+    }
 }

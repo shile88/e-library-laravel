@@ -14,6 +14,7 @@ use App\Models\Script;
 use App\Models\Size;
 use App\Models\Binding;
 use App\Models\Publisher;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class BookController extends BaseController
@@ -56,21 +57,34 @@ class BookController extends BaseController
      */
     public function store(StoreBookRequest $request)
     {
-        $inputs = $request->validated();
-
-        if ($request['picture']) {
-            $file = $request->file('picture');
-            $photoPath = Storage::disk('public')->put('books', $file);
-            $inputs['picture'] = $photoPath;
-        } else {
-            $photoPath = Author::DEFAULT_AUTHOR_PICTURE_PATH;
-            $inputs['picture'] = $photoPath;
-        }
+        $inputs = $request->validated();      
 
         $book = Book::create($inputs);
         $book->authors()->attach($inputs['authors']);
         $book->categories()->attach($inputs['categories']);
         $book->genres()->attach($inputs['genres']);
+
+        if ($request['picture']) {
+            $file = $request->file('picture');
+            $photoPath = Storage::disk('public')->put('books', $file);
+
+
+            $image = new Image([
+                'path' => $photoPath,
+                'is_profile' => true, 
+            ]);
+            $book->images()->save($image);
+
+
+        } else {
+            $photoPath = Author::DEFAULT_AUTHOR_PICTURE_PATH;
+            
+            $image = new Image([
+                'path' => $photoPath,
+                'is_profile' => true, 
+            ]);
+            $book->images()->save($image);
+        }
 
         return redirect()->route('books.index');
     }
