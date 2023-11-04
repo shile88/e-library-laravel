@@ -17,7 +17,7 @@ class GenreController extends BaseController
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Genre::query());
 
-        return view('settings.genres.index', compact('items'));
+        return view('cruds.settings.genres.index', compact('items'));
     }
 
     /**
@@ -26,7 +26,7 @@ class GenreController extends BaseController
     public function create()
     {
         // Shows a page for creating a new genre
-        return view('settings.genres.create');
+        return view('cruds.settings.genres.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class GenreController extends BaseController
     public function edit(Genre $genre)
     {
         // Shows a page for editing the genre
-        return view('settings.genres.edit', compact('genre'));
+        return view('cruds.settings.genres.edit', compact('genre'));
     }
 
     /**

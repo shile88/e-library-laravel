@@ -1,11 +1,11 @@
 @include('partials.custom.search-bar', [
     'resourceName' => $resourceName,
-    'plural' => $resourcePlural,
+    'resourcePlural' => $resourcePlural,
 ])
 
-<div
-    class="inline-block min-w-full pr-[50px] mt-3 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard ml-[30px]">
-    <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
+<div class="px-[30px] pt-2 bg-white w-full mt-2">
+    {{-- Table --}}
+    <table class="w-full overflow-hidden shadow-lg rounded-xl" id="myTable">
         <thead class="bg-[#EFF3F6]">
             <tr class="border-b-[1px] border-[#e4dfdf]">
                 <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
@@ -13,24 +13,51 @@
                         <input type="checkbox" class="form-checkbox">
                     </label>
                 </th>
+                
+                {{-- Name --}}
                 <th class="px-4 py-4 leading-4 tracking-wider text-left">Name
-                    @include('partials.custom.order-arrow-link', ['plural' => $resourcePlural])
+                    @include('partials.custom.order-arrow-link', ['resourcePlural' => $resourcePlural])
                 </th>
+
+                {{-- Value --}}
+                @if (isset($hasValue) && $hasValue == true)
+                    <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Value</th>
+                @endif
+
+                {{-- Description --}}
+                @if (isset($hasDescription) && $hasDescription == true)
+                    <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Description</th>
+                @endif
                 <th class="px-4 py-4"></th>
             </tr>
         </thead>
         <tbody class="bg-white">
             @foreach ($items as $item)
                 <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
-                    <td class="px-4 py-4 whitespace-no-wrap">
+                    <td class="px-4 py-4 whitespace-nowrap">
                         <label class="inline-flex items-center">
                             <input type="checkbox" class="form-checkbox">
                         </label>
                     </td>
+
+                    {{-- Name --}}
                     <td class="flex flex-row items-center px-4 py-4">
                         <p class="ml-4 text-center">{{ $item->name }}</p>
                     </td>
-                    <td class="px-4 py-4 text-sm leading-5 text-right whitespace-no-wrap">
+
+                    {{-- Value --}}
+                    @if (isset($hasValue) && $hasValue == true)
+                        <td class="px-4 py-4 text-sm leading-5 whitespace-nowrap">
+                            {{ $item->value . ' ' . $item->unit . '(s)' }}</td>
+                    @endif
+
+                    {{-- Description --}}
+                    @if (isset($hasDescription) && $hasDescription == true)
+                        <td class="px-4 py-4 text-sm leading-5 whitespace-nowrap">{{ $item->description }}</td>
+                    @endif
+
+                    {{-- Dropdown menu options --}}
+                    <td class="px-4 py-4 text-sm leading-5 text-right whitespace-nowrap">
                         <p
                             class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsCategory hover:text-[#606FC7]">
                             <i class="fas fa-ellipsis-v"></i>
@@ -53,10 +80,6 @@
                                     <form action="{{ route($resourcePlural . '.destroy', $item) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <input type="hidden" name="currentPage" value="{{ $items->currentPage() }}">
-                                        <input type="hidden" name="total" value="{{ $items->total() }}">
-                                        <input type="hidden" name="perPage" value="{{ $items->perPage() }}">
-
                                         <button type="submit" tabindex="0"
                                             class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 hover:text-red-500"
                                             style="outline: none">
@@ -68,6 +91,7 @@
                             </div>
                         </div>
                     </td>
+
                 </tr>
             @endforeach
         </tbody>
@@ -75,7 +99,7 @@
 
     @include('partials.custom.pagination', [
         'items' => $items,
-        'plural' => $resourcePlural,
+        'resourcePlural' => $resourcePlural,
     ])
 
 </div>

@@ -17,7 +17,7 @@ class SizeController extends BaseController
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Size::query());
 
-        return view('settings.sizes.index', compact('items'));
+        return view('cruds.settings.sizes.index', compact('items'));
     }
 
     /**
@@ -25,7 +25,7 @@ class SizeController extends BaseController
      */
     public function create()
     {
-        return view('settings.sizes.create');
+        return view('cruds.settings.sizes.create');
     }
 
     /**
@@ -50,7 +50,7 @@ class SizeController extends BaseController
      */
     public function edit(Size $size)
     {
-        return view('settings.sizes.edit', compact('size'));
+        return view('cruds.settings.sizes.edit', compact('size'));
 
     }
 

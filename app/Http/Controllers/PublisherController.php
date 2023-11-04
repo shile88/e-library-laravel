@@ -16,7 +16,7 @@ class PublisherController extends BaseController
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Publisher::query());
 
-        return view('settings.publishers.index', compact('items'));
+        return view('cruds.settings.publishers.index', compact('items'));
     }
 
     /**
@@ -25,7 +25,7 @@ class PublisherController extends BaseController
     public function create()
     {
         // Shows a page for creating a new publisher
-        return view('settings.publishers.create');
+        return view('cruds.settings.publishers.create');
     }
 
     /**
@@ -54,7 +54,7 @@ class PublisherController extends BaseController
     public function edit(Publisher $publisher)
     {
         // Shows a page for editing the publisher
-        return view('settings.publishers.edit', compact('publisher'));
+        return view('cruds.settings.publishers.edit', compact('publisher'));
     }
 
     /**

@@ -1,12 +1,12 @@
 <div class="flex items-center py-4 space-x-3 rounded-lg justify-between ml-[30px]">
     {{-- Create new item --}}
-    <a href="{{ route($resourceName . 's.create') }}"
+    <a href="{{ route($resourcePlural . '.create') }}"
         class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
         <i class="fas fa-plus mr-[15px]"></i>New {{ $resourceName }}
     </a>
 
     {{-- Search --}}
-    <form action="{{ route($resourceName . 's.index') }}" method="get">
+    <form action="{{ route($resourcePlural . '.index') }}" method="get">
         <div class="relative text-gray-600 focus-within:text-gray-400 mr-[30px]">
             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                 <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">

@@ -1,7 +1,12 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
+    'title' => 'New publisher',
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Publishers', 'href' => route('publishers.index')],
+        ['name' => 'New publisher', 'href' => route('publishers.create')],
+    ],
 ])
-@section('title', 'New publisher')
 
 @section('content')
 

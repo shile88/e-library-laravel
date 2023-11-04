@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
     'title' => $book->title,
     'breadcrumbs' => [
         ['name' => 'Books', 'href' => route('books.index')],
@@ -104,12 +104,17 @@
     {{-- Main content --}}
     <div class="pl-[30px] section- mt-[20px]">
         <div class="flex flex-row justify-between">
+
             {{-- First column --}}
             <div class="mr-[30px]">
+
+                {{-- Title --}}
                 <div class="mt-[20px]">
                     <span class="text-gray-500 text-[14px]">Title</span>
                     <p class="font-medium">{{ $book->title }}</p>
                 </div>
+
+                {{-- Authors --}}
                 <div class="mt-[40px]">
                     <span class="text-gray-500 text-[14px]">Authors</span>
                     <p class="font-medium">
@@ -118,6 +123,8 @@
                         @endforeach
                     </p>
                 </div>
+
+                {{-- Genres --}}
                 <div class="mt-[40px]">
                     <span class="text-gray-500 text-[14px]">Genres</span>
                     <p class="font-medium">
@@ -126,6 +133,8 @@
                         @endforeach
                     </p>
                 </div>
+
+                {{-- Categories --}}
                 <div class="mt-[40px]">
                     <span class="text-gray-500 text-[14px]">Categories</span>
                     <p class="font-medium">
@@ -134,10 +143,14 @@
                         @endforeach
                     </p>
                 </div>
+
+                {{-- Publisher --}}
                 <div class="mt-[40px]">
                     <span class="text-gray-500 text-[14px]">Publisher</span>
                     <p class="font-medium">{{ $book->publisher->name }}</p>
                 </div>
+
+                {{-- Publish date --}}
                 <div class="mt-[40px]">
                     <span class="text-gray-500 text-[14px]">Publish date</span>
                     <p class="font-medium">{{ $book->publish_date }}</p>
@@ -146,37 +159,52 @@
 
             {{-- Second column --}}
             <div class="mx-[30px]">
+                {{-- Main picture --}}
                 <img src="{{ getBookPicturePath($book->picture) }}" alt="Book picture" width="500">
             </div>
 
             {{-- Third column --}}
             <div class="mr-[70px] mt-[20px] flex flex-col max-w-[600px]">
+
+                {{-- Description --}}
                 <div>
                     <h4 class="text-gray-500 ">
                         Description
                     </h4>
                     <p class="addReadMore showlesscontent my-[10px]">{{ $book->description }}</p>
                 </div>
+
+                {{-- ISBN --}}
                 <div class="mt-[20px]">
                     <span class="text-gray-500 text-[14px]">ISBN</span>
                     <p class="font-medium">{{ $book->isbn }}</p>
                 </div>
+
+                {{-- Number of pages --}}
                 <div class="mt-[20px]">
                     <span class="text-gray-500 text-[14px]">Number of pages</span>
                     <p class="font-medium">{{ $book->page_count }}</p>
                 </div>
+
+                {{-- Number of copies --}}
                 <div class="mt-[20px]">
                     <span class="text-gray-500 text-[14px]">Number of copies</span>
                     <p class="font-medium">{{ $book->total_count }}</p>
                 </div>
+
+                {{-- Script --}}
                 <div class="mt-[20px]">
                     <span class="text-gray-500 text-[14px]">Script</span>
                     <p class="font-medium">{{ $book->script->name }}</p>
                 </div>
+
+                {{-- Size --}}
                 <div class="mt-[20px]">
                     <span class="text-gray-500 text-[14px]">Size</span>
                     <p class="font-medium">{{ $book->size->name }}</p>
                 </div>
+
+                {{-- Binding --}}
                 <div class="mt-[20px]">
                     <span class="text-gray-500 text-[14px]">Binding</span>
                     <p class="font-medium">{{ $book->binding->name }}</p>

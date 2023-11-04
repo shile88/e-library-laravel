@@ -16,7 +16,7 @@ class LanguageController extends BaseController
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Language::query());
 
-        return view('settings.languages.index', compact('items'));
+        return view('cruds.settings.languages.index', compact('items'));
     }
 
     /**
@@ -25,7 +25,7 @@ class LanguageController extends BaseController
     public function create()
     {
         // Shows a page for creating a new language
-        return view('settings.languages.create');
+        return view('cruds.settings.languages.create');
     }
 
     /**
@@ -54,7 +54,7 @@ class LanguageController extends BaseController
     public function edit(Language $language)
     {
         // Shows a page for editing the language
-        return view('settings.languages.edit', compact('language'));
+        return view('cruds.settings.languages.edit', compact('language'));
     }
 
     /**

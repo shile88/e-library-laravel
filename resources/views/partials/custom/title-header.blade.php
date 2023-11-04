@@ -1,5 +1,5 @@
 {{-- Title Header --}}
-@if (isset($hasHeaderTitle))
+@if (isset($hasTitleHeader) && $hasTitleHeader == true)
 
     <div class="heading border-b-[1px] border-[#e4dfdf]">
         {{-- Set margins and padding whether $breadrumbs is set or not --}}

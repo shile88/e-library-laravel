@@ -1,7 +1,12 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
+    'title' => 'Edit - '. $language->name,
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Languages', 'href' => route('languages.index')],
+        ['name' => 'Edit - '. $language->name, 'href' => route('languages.edit', $language)],
+    ],
 ])
-@section('title', 'Edit language')
 
 @section('content')
 

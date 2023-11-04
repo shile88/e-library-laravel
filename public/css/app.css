@@ -1485,6 +1485,9 @@ h4 {
 .w-\[150px\]{
   width: 150px;
 }
+.w-\[100px\]{
+  width: 100px;
+}
 .w-\[60px\]{
   width: 60px;
 }
@@ -1499,6 +1502,9 @@ h4 {
 }
 .w-auto{
   width: auto;
+}
+.w-\[30\%\]{
+  width: 30%;
 }
 .w-\[50\%\]{
   width: 50%;

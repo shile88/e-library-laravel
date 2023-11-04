@@ -28,7 +28,7 @@ class BookController extends BaseController
         // Sort, filter and paginate data
         $books = $this->processIndexData($request, Book::query());
 
-        return view('books.index', compact('books'));
+        return view('cruds.books.index', compact('books'));
     }
 
     /**
@@ -80,7 +80,7 @@ class BookController extends BaseController
      */
     public function show(Book $book)
     {
-        return view('books.show', compact('book'));
+        return view('cruds.books.show', compact('book'));
     }
 
     /**

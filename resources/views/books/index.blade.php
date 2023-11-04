@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
     'title' => 'Books',
     'breadcrumbs' => [['name' => 'Books', 'href' => route('books.index')]],
 ])
@@ -10,7 +10,7 @@
 
     @include('partials.custom.search-bar', [
         'resourceName' => 'book',
-        'plural' => 'books',
+        'resourcePlural' => 'books',
     ])
 
     <div class="px-[30px] pt-2 bg-white">
@@ -29,7 +29,7 @@
                         {{-- Title --}}
                         <th class="flex items-center px-4 py-4 tracking-wider text-left">
                             Title
-                            @include('partials.custom.order-arrow-link', ['plural' => 'books'])
+                            @include('partials.custom.order-arrow-link', ['resourcePlural' => 'books'])
                         </th>
                         {{-- Authors --}}
                         <th id="autoriMenu" class="relative px-4 py-4 text-sm tracking-wider text-left">
@@ -161,7 +161,7 @@
 
     @include('partials.custom.pagination', [
         'items' => $books,
-        'plural' => 'books',
+        'resourcePlural' => 'books',
     ])
 
 </div>

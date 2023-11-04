@@ -1,7 +1,12 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
+    'title' => 'New genre',
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Genres', 'href' => route('genres.index')],
+        ['name' => 'New genre', 'href' => route('genres.create')],
+    ],
 ])
-@section('title', 'New genre')
 
 @section('content')
 

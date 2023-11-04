@@ -1,5 +1,6 @@
+{{-- Order by arrow link --}}
 <a
-    href="{{ route($plural . '.index', [
+    href="{{ route($resourcePlural . '.index', [
         'orderBy' => 'name',
         'orderDir' => request()->get('orderDir') == 'desc' ? 'asc' : 'desc',
         'rowsPerPage' => request()->get('rowsPerPage'),
@@ -10,6 +11,6 @@
 
     <i
         class="ml-3 fa-lg fas
-        {{ request()->get('orderDir') == 'asc' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up' }}">
+        {{ request()->get('orderDir') == 'desc' ? 'fa-long-arrow-alt-up' : 'fa-long-arrow-alt-down' }}">
     </i>
 </a>

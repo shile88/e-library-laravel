@@ -14,10 +14,10 @@ class CategoryController extends BaseController
      */
     public function index(Request $request)
     {
-        // Sort, filter and paginate data
-        $categories = $this->processIndexData($request, Category::query());
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Category::query());
 
-        return view('settings.categories.index', compact('categories'));
+        return view('cruds.settings.categories.index', compact('items'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryController extends BaseController
     public function create()
     {
         // Shows a page for creating a new category
-        return view('settings.categories.create');
+        return view('cruds.settings.categories.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class CategoryController extends BaseController
     public function edit(Category $category)
     {
         // Shows a page for editing the category
-        return view('settings.categories.edit', compact('category'));
+        return view('cruds.settings.categories.edit', compact('category'));
     }
 
     /**

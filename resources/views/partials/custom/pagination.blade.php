@@ -8,7 +8,7 @@
     <div>
 
         Rows per page:
-        <form class="inline-flex" action="{{ route($plural . '.index') }}">
+        <form class="inline-flex" action="{{ route($resourcePlural . '.index') }}">
             <input type="hidden" name="orderBy" value="{{ request()->get('orderBy') }}">
             <input type="hidden" name="orderDir" value="{{ request()->get('orderDir') }}">
             <input type="hidden" name="searchTerm" value="{{ request()->get('searchTerm') }}">

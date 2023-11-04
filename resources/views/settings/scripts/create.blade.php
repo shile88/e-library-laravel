@@ -1,7 +1,12 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
+    'title' => 'New script',
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Scripts', 'href' => route('scripts.index')],
+        ['name' => 'New script', 'href' => route('scripts.create')],
+    ],
 ])
-@section('title', 'New script')
 
 @section('content')
 

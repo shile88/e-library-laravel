@@ -1,104 +1,20 @@
-@extends('settings.index')
-@section('title', 'Global variables')
+@extends('settings.index', [
+    'hasTitleHeader' => true,
+    'title' => 'Global variables',
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Global variables', 'href' => route('global_variables.index')],
+    ],
+])
 
 @section('main-settings')
 
-    <div class="py-4 ml-[30px]">
-        {{-- Add button --}}
-        <a href="{{ route('global_variables.create') }}"
-            class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
-            <i class="fas fa-plus mr-[15px]"></i> New global variable
-        </a>
-    </div>
-
-    <div
-        class="inline-block min-w-full pr-[50px] mt-3 pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard ml-[30px]">
-        <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
-            <thead class="bg-[#EFF3F6]">
-                <tr class="border-b-[1px] border-[#e4dfdf]">
-                    <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
-                        <label class="inline-flex items-center">
-                            <input type="checkbox" class="form-checkbox">
-                        </label>
-                    </th>
-                    <th class="px-4 py-4 leading-4 tracking-wider text-left">Name
-                        <a
-                            href="{{ route('global_variables.index', [
-                                'orderBy' => 'name',
-                                'orderDir' => request()->get('orderDir') == 'desc' ? 'asc' : 'desc',
-                                'page' => request()->get('page'),
-                            ]) }}">
-                            <i
-                                class="ml-3 fa-lg fas
-                                    {{ request()->get('orderDir') == 'asc' ? 'fa-long-arrow-alt-down' : 'fa-long-arrow-alt-up' }}"></i>
-                        </a>
-                    </th>
-                    <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Value</th>
-                    <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Description</th>
-                    <th class="px-4 py-4"> </th>
-                </tr>
-            </thead>
-
-            <tbody class="bg-white">
-                @foreach ($globalVariables as $gv)
-                    <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
-                        <td class="px-4 py-4 whitespace-no-wrap">
-                            <label class="inline-flex items-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </label>
-                        </td>
-                        <td class="flex flex-row items-center px-4 py-4">
-                            <p class="ml-4 text-center">{{ $gv->name }}</p>
-                        </td>
-                        <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
-                            {{ $gv->value . ' ' . $gv->unit . '(s)' }}</td>
-                        <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $gv->description }}</td>
-                        <td class="px-4 py-4 text-sm leading-5 text-right whitespace-no-wrap">
-                            <p
-                                class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsCategory hover:text-[#606FC7]">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </p>
-                            <div
-                                class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-category">
-                                <div class="absolute right-[25px] w-56 mt-[7px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                                    aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
-                                    role="menu">
-                                    <div class="py-1">
-                                        {{-- Edit button --}}
-                                        <a href="{{ route('global_variables.edit', $gv) }}" tabindex="0"
-                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                            role="menuitem">
-                                            <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
-                                            <span class="px-4 py-0">Edit variable</span>
-                                        </a>
-
-                                        {{-- Delete button --}}
-                                        <form action="{{ route('global_variables.destroy', $gv) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" tabindex="0"
-                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 hover:text-red-500"
-                                                style="outline: none">
-                                                <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                                <span class="px-4 py-0">Delete variable</span>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-
-        </table>
-
-        {{-- Pagination --}}
-        <div class=" flex-row items-center justify-end mt-2">
-            {{ $globalVariables->links() }}
-        </div>
-
-    </div>
-
+    @include('settings.partials.index_resource', [
+        'items' => $items,
+        'resourceName' => 'global variable',
+        'resourcePlural' => 'global_variables',
+        'hasValue' => true,
+        'hasDescription' => true,
+    ])
 
 @endsection

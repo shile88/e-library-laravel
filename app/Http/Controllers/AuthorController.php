@@ -17,9 +17,9 @@ class AuthorController extends BaseController
     public function index(Request $request)
     {
         // Sort, filter and paginate data
-        $items  = $this->processIndexData($request, Author::query());
+        $items = $this->processIndexData($request, Author::query());
 
-        return view('authors.index', compact('items'));
+        return view('cruds.authors.index', compact('items'));
     }
 
 
@@ -28,7 +28,7 @@ class AuthorController extends BaseController
      */
     public function create()
     {
-        return view('authors.create');
+        return view('cruds.authors.create');
     }
 
     /**
@@ -57,7 +57,7 @@ class AuthorController extends BaseController
      */
     public function show(Author $author)
     {
-        return view('authors.show', compact('author'));
+        return view('cruds.authors.show', compact('author'));
     }
 
     /**
@@ -65,7 +65,7 @@ class AuthorController extends BaseController
      */
     public function edit(Author $author)
     {
-        return view('authors.edit', compact('author'));
+        return view('cruds.authors.edit', compact('author'));
     }
 
     /**

@@ -17,7 +17,7 @@ class BindingController extends BaseController
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Binding::query());
 
-        return view('settings.bindings.index', compact('items'));
+        return view('cruds.settings.bindings.index', compact('items'));
     }
 
     /**
@@ -26,7 +26,7 @@ class BindingController extends BaseController
     public function create()
     {
         // Shows a page for creating a new binding
-        return view('settings.bindings.create');
+        return view('cruds.settings.bindings.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class BindingController extends BaseController
     public function edit(Binding $binding)
     {
         // Shows a page for editing the binding
-        return view('settings.bindings.edit', compact('binding'));
+        return view('cruds.settings.bindings.edit', compact('binding'));
     }
 
     /**

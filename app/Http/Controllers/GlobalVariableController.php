@@ -7,27 +7,17 @@ use App\Http\Requests\StoreGlobalVariableRequest;
 use App\Http\Requests\UpdateGlobalVariableRequest;
 use Illuminate\Http\Request;
 
-class GlobalVariableController extends Controller
+class GlobalVariableController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        // Get variables from the request and set default values if no value is set
-        $orderBy = $request->get('orderBy') ?? 'name';
-        $orderDir = $request->get('orderDir') ?? 'asc';
-        $rowsPerPage = $request->get('rowsPerPage') ?? 7;
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, GlobalVariable::query());
 
-        // Order data by desired attribute and paginate
-        $globalVariables = GlobalVariable::orderBy($orderBy, $orderDir)
-            ->paginate($rowsPerPage);
-
-        // Append $orderBy and $orderDir queries to the request
-        $globalVariables->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
-
-        // Shows appropriate page with selected data
-        return view('settings.global_variables.index', compact('globalVariables'));
+        return view('cruds.settings.global_variables.index', compact('items'));
     }
 
     /**
@@ -36,7 +26,7 @@ class GlobalVariableController extends Controller
     public function create()
     {
         // Shows a page for creating a new global variable
-        return view('settings.global_variables.create');
+        return view('cruds.settings.global_variables.create');
     }
 
     /**
@@ -65,7 +55,7 @@ class GlobalVariableController extends Controller
     public function edit(GlobalVariable $globalVariable)
     {
         // Shows a page for editing the global variable
-        return view('settings.global_variables.edit', compact('globalVariable'));
+        return view('cruds.settings.global_variables.edit', compact('globalVariable'));
     }
 
     /**
@@ -90,5 +80,16 @@ class GlobalVariableController extends Controller
 
         // After the operation is finished redirects back
         return redirect()->back();
+    }
+
+    /**
+     * Filters data for index page.
+     */
+    protected function filter($query, $searchTerm)
+    {
+        if (!empty($searchTerm)) {
+            $query->where('name', 'LIKE', "%$searchTerm%");
+            $query->orWhere('description', 'LIKE', "%$searchTerm%");
+        }
     }
 }

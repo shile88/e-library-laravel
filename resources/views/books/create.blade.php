@@ -1,10 +1,7 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
     'title' => 'New book',
-    'breadcrumbs' => [
-        ['name' => 'Books', 'href' => route('books.index')],
-        ['name' => 'New book', 'href' => route('books.create')],
-    ]
+    'breadcrumbs' => [['name' => 'Books', 'href' => route('books.index')], ['name' => 'New book', 'href' => route('books.create')]],
 ])
 
 @section('title', 'Books')
@@ -71,7 +68,7 @@
                                 'items' => $authors,
                                 'label' => 'Authors',
                                 'placeholder' => 'Choose authors',
-                                'plural' => 'authors',
+                                'resourcePlural' => 'authors',
                             ])
 
                             {{-- Genres input --}}
@@ -79,7 +76,7 @@
                                 'items' => $genres,
                                 'label' => 'Genres',
                                 'placeholder' => 'Choose genres',
-                                'plural' => 'genres',
+                                'resourcePlural' => 'genres',
                             ])
 
                             {{-- Categories input --}}
@@ -87,7 +84,7 @@
                                 'items' => $categories,
                                 'label' => 'Categories',
                                 'placeholder' => 'Choose categories',
-                                'plural' => 'categories',
+                                'resourcePlural' => 'categories',
                             ])
 
                             {{-- Number of pages input --}}

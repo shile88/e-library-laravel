@@ -17,7 +17,7 @@ class ScriptController extends BaseController
         // Order, filter and paginate data
         $items = $this->processIndexData($request, Script::query());
 
-        return view('settings.scripts.index', compact('items'));
+        return view('cruds.settings.scripts.index', compact('items'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ScriptController extends BaseController
      */
     public function create()
     {
-        return view('settings.scripts.create');
+        return view('cruds.settings.scripts.create');
     }
 
     /**
@@ -50,7 +50,7 @@ class ScriptController extends BaseController
      */
     public function edit(Script $script)
     {
-        return view('settings.scripts.edit', compact('script'));
+        return view('cruds.settings.scripts.edit', compact('script'));
     }
 
     /**

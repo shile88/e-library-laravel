@@ -1,7 +1,12 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
+    'title' => 'Edit - '. $category->name,
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Categories', 'href' => route('categories.index')],
+        ['name' => 'Edit - '. $category->name, 'href' => route('categories.edit', $category)],
+    ],
 ])
-@section('title', 'Edit category')
 
 @section('content')
 
@@ -9,7 +14,7 @@
         'resource' => $category,
         'resourceName' => 'category',
         'resourcePlural' => 'categories',
-        'hasDescription' => true
+        'hasDescription' => true,
     ])
 
 @endsection

@@ -1,7 +1,12 @@
 @extends('layouts.app', [
-    'hasHeaderTitle' => true,
+    'hasTitleHeader' => true,
+    'title' => 'Edit - '. $binding->name,
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Bindings', 'href' => route('bindings.index')],
+        ['name' => 'Edit - '. $binding->name, 'href' => route('bindings.edit', $binding)],
+    ],
 ])
-@section('title', 'Edit binding')
 
 @section('content')
 

@@ -1,7 +1,12 @@
-@extends('layouts.app', [
-    'hasHeaderTitle' => true,
+@extends('settings.index', [
+    'hasTitleHeader' => true,
+    'title' => 'Edit - ' . $globalVariable->name,
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Global variables', 'href' => route('global_variables.index')],
+        ['name' => 'Edit - ' . $globalVariable->name, 'href' => route('global_variables.edit', $globalVariable)],
+    ]
 ])
-@section('title', 'Edit global variable')
 
 @section('content')
     <form class="text-gray-700 forma" method="post" action="{{ route('global_variables.update', $globalVariable) }}">
@@ -16,7 +21,7 @@
                 <div class="mt-[20px]">
                     <p>Display name <span class="text-red-500">*</span></p>
                     <input type="text" name="name" required value="{{ $globalVariable->name }}"
-                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
+                        class="flex w-[100%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
                                shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                         placeholder="Enter a variable display name" />
                     @if ($errors->first('name'))
@@ -28,7 +33,7 @@
                 <div class="mt-[20px]">
                     <p>Variable name <span class="text-red-500">*</span></p>
                     <input type="text" name="variable_name" required value="{{ $globalVariable->variable_name }}"
-                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
+                        class="flex w-[100%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
                                shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                         placeholder="Enter a variable name (eg. books_per_student)" />
                     @if ($errors->first('variable_name'))
@@ -40,7 +45,7 @@
                 <div class="mt-[20px]">
                     <p>Value <span class="text-red-500">*</span></p>
                     <input type="number" name="value" required value="{{ $globalVariable->value }}"
-                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
+                        class="flex w-[100%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
                                shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                         placeholder="Enter a variable value" />
                     @if ($errors->first('value'))
@@ -52,7 +57,7 @@
                 <div class="mt-[20px]">
                     <p>Unit <span class="text-red-500">*</span></p>
                     <input type="text" name="unit" required value="{{ $globalVariable->unit }}"
-                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
+                        class="flex w-[100%] mt-2 px-2 py-2 text-base bg-white border border-gray-300
                                shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                         placeholder="Enter a variable unit (eg. day, book, year)" />
                     @if ($errors->first('unit'))
@@ -64,18 +69,15 @@
                 <div class="mt-[20px]">
                     <p class="inline-block">Description <span class="text-red-500">*</span></p>
                     <textarea name="description" required rows="5" placeholder="Write a variable description"
-                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm
+                        class="flex w-[100%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm
                         appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">{{ $globalVariable->description }}</textarea>
                     @if ($errors->first('description'))
                         <span class="text-red-500">{{ $errors->first('description') }}</span>
                     @endif
                 </div>
 
-                {{-- Submit button --}}
-                <button
-                    class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300
-                    rounded-[5px] tracking-wider text-white bg- bg-[#3f51b5] hover:bg-[#4558BE] mt-[20px]"
-                    type="submit">Submit</button>
+                {{-- Buttons --}}
+                @include('partials.custom.submit-cancel-settings-buttons')
             </div>
         </div>
     </form>

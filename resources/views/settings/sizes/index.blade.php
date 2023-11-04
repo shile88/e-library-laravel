@@ -1,5 +1,11 @@
-@extends('settings.index')
-@section('title', 'Sizes')
+@extends('settings.index', [
+    'hasTitleHeader' => true,
+    'title' => 'Sizes',
+    'breadcrumbs' => [
+        ['name' => 'Settings', 'href' => route('settings.index')],
+        ['name' => 'Sizes', 'href' => route('sizes.index')],
+    ],
+])
 
 @section('main-settings')
 

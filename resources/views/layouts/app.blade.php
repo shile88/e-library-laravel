@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title> @yield('title') | {{ config('app.name') }}</title>
+    <title> {{ isset($title) ? $title : 'Dashboard' }} | {{ config('app.name') }}</title>
 
     {{-- Styles and fonts --}}
     @include('partials.general.styles')
