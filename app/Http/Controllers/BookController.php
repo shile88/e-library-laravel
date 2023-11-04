@@ -46,7 +46,7 @@ class BookController extends BaseController
         $bindings = Binding::all();
 
         return view(
-            'books.create',
+            'cruds.books.create',
             compact('authors', 'categories', 'genres', 'languages', 'publishers', 'scripts', 'sizes', 'bindings')
         );
     }
@@ -98,7 +98,7 @@ class BookController extends BaseController
         $bindings = Binding::all();
 
         return view(
-            'books.edit',
+            'cruds.books.edit',
             compact('book', 'authors', 'categories', 'genres', 'languages', 'publishers', 'scripts', 'sizes', 'bindings')
         );
     }
@@ -117,7 +117,7 @@ class BookController extends BaseController
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect()->back();
+        return redirect()->route('books.index');
     }
 
     /**

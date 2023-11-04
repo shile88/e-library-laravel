@@ -64,17 +64,26 @@
                 <div class="ml-[30px]">
                     <span class="flex justify-between w-full whitespace-nowrap" title="Settings">
                         <a href="{{ route('settings.index') }}">
-                            <i class="text-[22px] pt-[4px] pr-1 pb-[5px] fas fa-cog group-hover:text-blue-600
-                            @if (str_contains(request()->route()->getName(),'settings') ||
-                                str_contains(request()->route()->getName(), 'global_variables')||
-                                str_contains(request()->route()->getName(), 'categories')||
-                                str_contains(request()->route()->getName(), 'genres')||
-                                str_contains(request()->route()->getName(), 'languages')||
-                                str_contains(request()->route()->getName(), 'publishers')||
-                                str_contains(request()->route()->getName(), 'bindings')||
-                                str_contains(request()->route()->getName(), 'sizes')||
-                                str_contains(request()->route()->getName(), 'scripts'))
-                            text-[#576cdf] @else text-[#707070]@endif"></i>
+                            <i
+                                class="text-[22px] pt-[4px] pr-1 pb-[5px] fas fa-cog group-hover:text-blue-600
+                            @if (str_contains(request()->route()->getName(),
+                                    'settings') ||
+                                    str_contains(request()->route()->getName(),
+                                        'global_variables') ||
+                                    str_contains(request()->route()->getName(),
+                                        'categories') ||
+                                    str_contains(request()->route()->getName(),
+                                        'genres') ||
+                                    str_contains(request()->route()->getName(),
+                                        'languages') ||
+                                    str_contains(request()->route()->getName(),
+                                        'publishers') ||
+                                    str_contains(request()->route()->getName(),
+                                        'bindings') ||
+                                    str_contains(request()->route()->getName(),
+                                        'sizes') ||
+                                    str_contains(request()->route()->getName(),
+                                        'scripts')) text-[#576cdf] @else text-[#707070] @endif"></i>
 
                             <div class="hidden sidebar-item">
                                 <p class="group-hover:text-blue-600 inline text-[15px] ml-[20px]">
