@@ -1,15 +1,22 @@
-@extends('layouts.app')
-@section('title', 'Autori')
-@section('content')
-    @include('partials.custom.mainContentAndTable', [
-           'items' => $items,
-           'resourceName' => 'author',
-           'resourcePlural' => 'authors',
-           'headers' => [
-               'Author name',
-               'Description',
-               ''],
-           'values' => ['about'],
-       ])
+@extends('layouts.app', [
+    'hasTitleHeader' => true,
+    'title' => 'Authors',
+    'breadcrumbs' => [
+        [
+            'name' => 'Authors',
+            'href' => route('authors.index')
+        ],
+    ],
+])
 
-@endsection('content')
+@section('content')
+
+    @include('partials.custom.index_resource', [
+        'items' => $items,
+        'resourceName' => 'author',
+        'resourcePlural' => 'authors',
+        'headers' => ['Name', 'About'],
+        'values' => ['about'],
+    ])
+
+@endsection()

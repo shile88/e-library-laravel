@@ -160,7 +160,7 @@
             {{-- Second column --}}
             <div class="mx-[30px]">
                 {{-- Main picture --}}
-                <img src="{{ getBookPicturePath($book->picture) }}" alt="Book picture" width="500">
+                <img src="{{ getPicturePath($book->picture) }}" alt="Book picture" width="500">
             </div>
 
             {{-- Third column --}}

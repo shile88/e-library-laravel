@@ -88,8 +88,7 @@
             </div>
 
             {{-- Picture --}}
-            <img src="{{ getBookPicturePath($author->picture) }}" class="w-[500px] mt-[20px] border border-gray-300"
-                onerror="this.onerror=null; this.src='{{ \App\Models\Author::DEFAULT_AUTHOR_PICTURE_PATH }}'">
+            <img src="{{ getPicturePath($author->picture, 'author') }}" class="w-[500px] mt-[20px] border border-gray-300">
         </div>
     </div>
 

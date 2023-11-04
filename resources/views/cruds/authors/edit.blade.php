@@ -83,8 +83,7 @@
 
                                     {{-- Display of picture --}}
                                     <img id="image-output-author" name="picture" alt="Author picture"
-                                        src="{{ getBookPicturePath($author->picture) }}"
-                                        onerror="this.onerror=null; this.src='{{ \App\Models\Author::DEFAULT_AUTHOR_PICTURE_PATH }}'"
+                                        src="{{ getPicturePath($author->picture, 'author') }}"
                                         class="w-[300px] h-[300px] absolute top-0 left-0 transition-opacity opacity-100 hover:opacity-80" />
                                 </div>
 

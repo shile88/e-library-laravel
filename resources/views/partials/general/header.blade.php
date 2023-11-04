@@ -84,7 +84,7 @@
                     <a href="#" class="relative inline-block px-3 py-2 focus:outline-none " id="dropdownProfile"
                         aria-label="User profile">
                         <div class="flex items-center h-5 my-2">
-                            <img class="h-[50px] rounded-full" src="{{ getUserPicturePath(auth()->user()->picture) }}"
+                            <img class="h-[50px] rounded-full" src="{{ getPicturePath(auth()->user()->picture, 'user') }}"
                                 width="50" alt="User image">
                         </div>
                     </a>

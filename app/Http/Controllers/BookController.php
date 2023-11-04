@@ -26,9 +26,9 @@ class BookController extends BaseController
     public function index(Request $request)
     {
         // Sort, filter and paginate data
-        $books = $this->processIndexData($request, Book::query());
+        $items = $this->processIndexData($request, Book::query());
 
-        return view('cruds.books.index', compact('books'));
+        return view('cruds.books.index', compact('items'));
     }
 
     /**

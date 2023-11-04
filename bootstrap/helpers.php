@@ -1,25 +1,13 @@
 <?php
 
 // Finds the right path for Book picture
-function getBookPicturePath($url)
+function getPicturePath($url, $model = 'book')
 {
     if (empty($url)) {
+        if ($model == 'author' || $model == 'user')
+            return getDefaultUserPicturePath();
+
         return getDefaultBookPicturePath();
-    }
-
-    // If url has "images" in it, it means that the picture is in different folder (in /public)
-    if (str_contains($url, 'images')) {
-        return $url;
-    }
-
-    return '/storage/' . $url;
-}
-
-// Finds the right path for User picture
-function getUserPicturePath($url)
-{
-    if (empty($url)) {
-        return getDefaultUserPicturePath();
     }
 
     // If url has "images" in it, it means that the picture is in different folder (in /public)
