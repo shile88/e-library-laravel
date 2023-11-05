@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('about');
-            $table->string('picture')->default(Author::DEFAULT_AUTHOR_PICTURE_PATH);
             $table->timestamps();
         });
     }

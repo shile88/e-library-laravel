@@ -364,18 +364,4 @@ class BookSeeder extends Seeder
         ]);
     }
 
-    private function generateImages($bookId, $count)
-    {
-        $images = [];
-        
-        for ($i = 1; $i <= $count; $i++) {
-            $images[] = [
-                'book_id' => $bookId,
-                'url' => "path/to/image{$i}.jpg", // Zamijeni s putanjom do tvojih slika
-            ];
-        }
-    
-        return $images;
-    }
-
 }

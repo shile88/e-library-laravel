@@ -70,8 +70,13 @@
                     </td>
 
                     <td class="flex flex-row items-center px-4 py-3">
-                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getUserPicturePath($item->profileImage->path)) }}" alt="default image" />
-                        <a href="autorProfile.php">
+                    @if ($item->getImage)
+                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getUserPicturePath($item->getImage->path)) }}" alt="Profile user image" />
+                    @else
+                        <!-- Handle the case when $item->image is null -->
+                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getDefaultUserPicturePath()) }}" alt="Default user image" />
+                    @endif
+                                        <a href="autorProfile.php">
                             <span class="mr-2 font-medium text-center">{{ $item->title ?? $item->name}}</span>
                         </a>
                     </td>

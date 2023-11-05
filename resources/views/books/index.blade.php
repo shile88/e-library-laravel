@@ -58,8 +58,13 @@
                                 </label>
                             </td>
                             <td class="flex flex-row items-center px-4 py-4">
-                                <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getBookPicturePath($book->profileImage->path)) }}" alt="default image">
-                                <a href="{{ route('books.show', $book) }}">
+                            @if ($book->getImage)
+                                <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getBookPicturePath($book->getImage->path)) }}" alt="Profile book image" />
+                            @else
+                                <!-- Handle the case when $item->image is null -->
+                                <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getDefaultBookPicturePath()) }}" alt="Default book image" />
+                            @endif
+                            <a href="{{ route('books.show', $book) }}">
                                     <span class="font-medium text-center">{{ $book->title }}</span>
                                 </a>
                             </td>

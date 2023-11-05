@@ -73,18 +73,19 @@ class BookController extends BaseController
                 'path' => $photoPath,
                 'is_profile' => true, 
             ]);
-            $book->images()->save($image);
-
-
-        } else {
-            $photoPath = Author::DEFAULT_AUTHOR_PICTURE_PATH;
             
-            $image = new Image([
-                'path' => $photoPath,
-                'is_profile' => true, 
-            ]);
             $book->images()->save($image);
+
         }
+        // } else {
+        //     $photoPath = Author::DEFAULT_AUTHOR_PICTURE_PATH;
+            
+        //     $image = new Image([
+        //         'path' => $photoPath,
+        //         'is_profile' => true, 
+        //     ]);
+        //     $book->images()->save($image);
+        // }
 
         return redirect()->route('books.index');
     }

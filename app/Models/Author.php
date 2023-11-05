@@ -11,17 +11,12 @@ class Author extends Model
 {
     use HasFactory;
     use Imageable;
-    const DEFAULT_AUTHOR_PICTURE_PATH = 'images/user.jpg';
+    const DEFAULT_AUTHOR_PICTURE_PATH = '/storage/images/user.jpg';
 
-    protected $fillable = ['name', 'about', 'picture'];
+    protected $fillable = ['name', 'about'];
 
     public function books()
     {
         return $this->belongsToMany(Book::class);
     }
-
-    public function image(){
-        return $this->morphOne(Image::class, 'imageable');
-    }
-
 }
