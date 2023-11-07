@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', $author->name)
+
 @section('content')
     <div class="heading">
         <div class="flex justify-between border-b-[1px] border-[#e4dfdf]">
@@ -70,26 +70,35 @@
         </div>
     </div>
 
-    {{-- Content --}}
-    <div class="pl-[30px] height-profile pb-[30px] scroll">
-        <div class="mr-[30px]">
-            {{-- Name --}}
-            <div class="mt-[20px]">
-                <span class="text-gray-500">Ime i prezime</span>
-                <p class="font-medium">{{ $author->name }}</p>
+
+    {{-- Main content --}}
+    <div class="flex flex-row overflow-auto">
+        <div class="grid grid-cols-2 mt-[20px] pl-[30px] w-[100%]">
+
+            {{-- First column --}}
+            <div class="row-1">
+                {{-- Name --}}
+                <div>
+                    <span class="text-gray-500">Name</span>
+                    <p class="font-medium">{{ $author->name }}</p>
+                </div>
+
+                {{-- About --}}
+                <div class="mt-[20px]">
+                    <span class="text-gray-500">About</span>
+                    <p class="font-medium max-w-[550px]">
+                        {{ $author->about }}
+                    </p>
+                </div>
             </div>
 
-            {{-- About --}}
-            <div class="mt-[20px]">
-                <span class="text-gray-500">Opis</span>
-                <p class="font-medium max-w-[550px]">
-                    {{ $author->about }}
-                </p>
+            {{-- Second column --}}
+            <div class="row-1">
+                {{-- Picture --}}
+                <img class="w-[500px] border border-gray-300" src="{{ getPicturePath($author->picture, 'author') }}"
+                    onerror="this.onerror=null; this.src='{{ getDefaultUserPicturePath() }}'" />
             </div>
 
-            {{-- Picture --}}
-            <img src="{{ getPicturePath($author->picture, 'author') }}" class="w-[500px] mt-[20px] border border-gray-300">
         </div>
     </div>
-
-@endsection('content')
+@endsection

@@ -4,8 +4,8 @@
 
         {{-- Hamburger Icon --}}
         <div
-            class="cursor-pointer text-[#707070] pl-[30px] pt-[28px] pb-[27px] text-[25px] border-b-[1px] border-[#e4dfdf] ">
-            <i id="hamburger" class="fas fa-bars"></i>
+            class="text-[#707070] pl-[30px] pt-[28px] pb-[27px] text-[25px] border-b-[1px] border-[#e4dfdf] ">
+            <i id="hamburger" class="fas fa-bars cursor-pointer"></i>
         </div>
 
         {{-- Links --}}
@@ -15,14 +15,14 @@
                 @include('partials.general.sidebar-button', [
                     'items' => [
                         [
-                            'title' => 'Books',
-                            'href' => route('books.index'),
-                            'icon' => 'fas fa-book',
-                        ],
-                        [
                             'title' => 'Dashboard',
                             'href' => route('dashboard'),
                             'icon' => 'fas fa-chart-line',
+                        ],
+                        [
+                            'title' => 'Books',
+                            'href' => route('books.index'),
+                            'icon' => 'fas fa-book',
                         ],
                         [
                             'title' => 'Authors',
@@ -83,7 +83,7 @@
                                     str_contains(request()->route()->getName(),
                                         'sizes') ||
                                     str_contains(request()->route()->getName(),
-                                        'scripts')) text-[#576cdf] @else text-[#707070] @endif"></i>
+                                        'scripts')) text-[#576cdf]@else text-[#707070] @endif"></i>
 
                             <div class="hidden sidebar-item">
                                 <p class="group-hover:text-blue-600 inline text-[15px] ml-[20px]">

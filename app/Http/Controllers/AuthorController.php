@@ -101,7 +101,7 @@ class AuthorController extends BaseController
         $author->delete();
 
         // After the operation is finished redirects back
-        return redirect()->back();
+        return redirect()->route('authors.index');
     }
 
     /**

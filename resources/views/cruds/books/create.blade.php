@@ -4,16 +4,17 @@
     'breadcrumbs' => [['name' => 'Books', 'href' => route('books.index')], ['name' => 'New book', 'href' => route('books.create')]],
 ])
 
-@section('title', 'Books')
-
 @section('content')
     <div class="scroll height-content pb-[100px] section-content">
+
         <form class="text-gray-700 forma" method="post" action="{{ route('books.store') }}" enctype="multipart/form-data">
             @csrf
             @method('post')
             <div class="flex flex-row overflow-auto">
                 <div class="pl-[30px] w-[100%]">
                     <div class="grid grid-cols-3">
+
+                        {{-- First column --}}
                         <div class="row-1">
                             {{-- Title input --}}
                             @include('partials.inputs.text-input', [
@@ -62,6 +63,7 @@
                             ])
                         </div>
 
+                        {{-- Second column --}}
                         <div class="row-2">
                             {{-- Authors input --}}
                             @include('partials.inputs.multiple-select-input', [
@@ -108,28 +110,20 @@
                             ])
                         </div>
 
+                        {{-- Third column --}}
                         <div class="row-3">
                             {{-- Description input --}}
-                            <div class="mt-[20px]">
-                                <p>Description<span class="text-red-500">*</span></p>
-                                <textarea required name="description" rows="8" minlength="20"
-                                    placeholder="Enter a short description about the book (min. 20 characters)"
-                                    class="w-[90%] mt-2 px-2 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#576cdf]">{{ old('description') }}</textarea>
-                                @if ($errors->first('description'))
-                                    <p class="text-red-600">{{ $errors->first('description') }}</p>
-                                @endif
-                            </div>
+                            @include('partials.inputs.textarea-input', [
+                                'label' => 'Description',
+                                'placeholder' => "Enter a short description about the book (min. 20 characters)",
+                                'attributes' => "minlength=20",
+                                'field_name' => 'description',
+                            ])
 
                             {{-- Picure input --}}
-                            <div class="mt-[20px]">
-                                <p>Add a photo</p>
-                                <input type="file" id="image-upload-input" name="picture" accept="image/*"
-                                    class="shadow-md w-[360px]" onchange="loadBookImage(event)" />
-                                <img id="image-upload-output" width="360" class="mt-[20px] p-2 border-2 border-gray-300"
-                                    alt="Book image" src="{{ asset(\App\Models\Book::DEFAULT_BOOK_PICTURE_PATH) }}" />
-                            </div>
-                            <h5 class="shadow-lg mt-2 py-2 text-white px-5 w-[150px] text-sm bg-[#F44336] rounded-[5px]"
-                                onclick="removeUploadedBookImage(event)">Remove picture</h5>
+                            @include('partials.inputs.picture-input', [
+                                'model' => 'book',
+                            ])
                         </div>
 
                         {{-- Buttons --}}
@@ -139,6 +133,6 @@
                 </div>
             </div>
         </form>
-    </div>
 
+    </div>
 @endsection

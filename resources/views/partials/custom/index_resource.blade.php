@@ -1,7 +1,4 @@
-@section('title', 'Books')
-
 @section('content')
-
     @include('partials.custom.search-bar', [
         'resourceName' => $resourceName,
         'resourcePlural' => $resourcePlural,
@@ -50,7 +47,9 @@
                             {{-- Title (name) and picture --}}
                             <td class="flex flex-row items-center px-4 py-3">
                                 <img class="object-cover w-8 mr-2 h-11"
-                                    src="{{ getPicturePath($item->picture, $resourceName) }}" />
+                                    src="{{ getPicturePath($item->picture, $resourceName) }}"
+                                    onerror="this.onerror=null; this.src='{{ $resourceName == 'book' ? getDefaultBookPicturePath() : getDefaultUserPicturePath() }}'" />
+
                                 <a href="{{ route($resourcePlural . '.show', $item) }}">
                                     <span class="mr-2 font-medium text-center">{{ $item->title ?? $item->name }}</span>
                                 </a>
@@ -70,7 +69,7 @@
                             {{-- Values of other attributes --}}
                             @foreach ($values as $value)
                                 <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                    {{ $item->$value }}
+                                    {{ Str::limit($item->$value, 300) }}
                                 </td>
                             @endforeach
 
@@ -128,5 +127,4 @@
 
         </div>
     </div>
-
 @endsection

@@ -8,7 +8,6 @@
         ['name' => $book->title, 'href' => route('books.show', $book)],
     ]
 ]) --}}
-@section('title', $book->title)
 
 @section('content')
     {{-- Heading --}}
@@ -87,12 +86,6 @@
                                     </button>
                                 </p>
                             </form>
-                            {{-- <a href="#" tabindex="0"
-                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                role="menuitem">
-                                <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                <span class="px-4 py-0">Destroy book</span>
-                            </a> --}}
                         </div>
                     </div>
                 </div>
@@ -159,8 +152,10 @@
 
             {{-- Second column --}}
             <div class="mx-[30px]">
-                {{-- Main picture --}}
-                <img src="{{ getPicturePath($book->picture) }}" alt="Book picture" width="500">
+
+                {{-- Picture --}}
+                <img src="{{ getPicturePath($book->picture) }}" alt="Book picture" width="500"
+                    onerror="this.onerror=null; this.src='{{ getDefaultBookPicturePath() }}'" />
             </div>
 
             {{-- Third column --}}
@@ -210,7 +205,7 @@
                     <p class="font-medium">{{ $book->binding->name }}</p>
                 </div>
             </div>
+            
         </div>
     </div>
-
 @endsection

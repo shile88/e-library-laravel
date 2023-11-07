@@ -34,7 +34,7 @@
                                     </a>
                                 </li>
 
-                                {{-- Add "/" separator if not at the end of the array --}}
+                                {{-- Add ">" separator if not at the end of the array --}}
                                 @if (sizeof($breadcrumbs) - 1 != $id)
                                     <li>
                                         <span class="mx-1">></span>
