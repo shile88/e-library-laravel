@@ -45,14 +45,8 @@ class AuthorController extends BaseController
         $authorData = $request->validated();
         $author =  Author::create($authorData);
 
-        $photoPath = Storage::disk('public')->put('authors', $authorData['picture']);
-
-        $image = new Image;
-        $image->path = $photoPath;
-        $image->is_profile = false;
-
-        $author->image()->save($image);
-        $author->setProfilePicture($image);
+        //Image handling; Imageable trait method
+        $author->setProfilePicture('authors', $request);
 
         return redirect()->route('authors.index');
     }
@@ -74,19 +68,15 @@ class AuthorController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specfied resource in storage.
      */
     public function update(UpdateAuthorRequest $request, Author $author)
     {
         $authorData = $request->validated();
-
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $photoPath = Storage::disk('public')->put('authors', $file);
-            $authorData['picture'] = $photoPath;
-        }
-
         $author->update($authorData);
+
+
+        $author->setProfilePicture('authors', $request); 
 
         return redirect()->route('authors.index');
     }
