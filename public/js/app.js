@@ -132,9 +132,9 @@ function AddReadMore() {
   //This limit you can set after how much characters you want to show Read More.
   var carLmt = 1000;
   // Text to show when text is collapsed
-  var readMoreTxt = " ... Prikazi vise &#8681;";
+  var readMoreTxt = "... Show more &#8681;";
   // Text to show when text is expanded
-  var readLessTxt = " Prikazi manje &#8657;";
+  var readLessTxt = "... Show less &#8657;";
 
 
   //Traverse all selectors with this class and manupulate HTML part to show Read More

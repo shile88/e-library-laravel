@@ -1,6 +1,5 @@
 {{-- Title Header --}}
 @if (isset($hasTitleHeader) && $hasTitleHeader == true)
-
     <div class="heading border-b-[1px] border-[#e4dfdf]">
 
         {{-- Set margins and padding whether $breadrumbs is set or not --}}
@@ -45,8 +44,10 @@
                 @endif
             </div>
 
-            {{-- Dropdown options --}}
-            @yield('dropdown-options')
+            {{-- Header dropdown --}}
+            @if(isset($hasDropdown) && $hasDropdown == true)
+                @include('partials.custom.header-dropdown')
+            @endif
 
         </div>
     </div>
