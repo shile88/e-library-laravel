@@ -91,14 +91,14 @@
                                                 <i class="far fa-file mr-[5px] ml-[5px] py-1"></i>
                                                 <span class="px-4 py-0">Show details</span>
                                             </a>
-                                            <a href="{{ route($resourcePlural . '.edit', $item->id) }}" tabindex="0"
+                                            <a href="{{ route($resourcePlural . '.edit', $item) }}" tabindex="0"
                                                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                 role="menuitem">
                                                 <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                                                 <span class="px-4 py-0">Edit {{ $resourceName }}</span>
                                             </a>
 
-                                            <form action="{{ route($resourcePlural . '.destroy', $item->id) }}"
+                                            <form action="{{ route($resourcePlural . '.destroy', $item) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')

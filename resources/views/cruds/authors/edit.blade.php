@@ -10,7 +10,7 @@
 @section('content')
     <div class="scroll height-content section-content">
 
-        <form action="{{ route('authors.update', $author->id) }}" method="POST" class="text-gray-700 forma"
+        <form action="{{ route('authors.update', $author) }}" method="POST" class="text-gray-700 forma"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
