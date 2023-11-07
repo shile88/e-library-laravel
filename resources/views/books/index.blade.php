@@ -58,8 +58,8 @@
                                 </label>
                             </td>
                             <td class="flex flex-row items-center px-4 py-4">
-                            @if ($book->profilePicture)
-                                <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getBookPicturePath($book->profilePicture->path)) }}" alt="Profile book image" />
+                            @if ($book->profilePictureMany())
+                                <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getBookPicturePath($book->profilePictureMany()->path)) }}" alt="Profile book image" />
                             @else
                                 <!-- Handle the case when $item->image is null -->
                                 <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getDefaultBookPicturePath()) }}" alt="Default book image" />

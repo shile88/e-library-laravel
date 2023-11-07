@@ -65,26 +65,8 @@ class BookController extends BaseController
         $book->authors()->attach($inputs['authors']);
         $book->categories()->attach($inputs['categories']);
         $book->genres()->attach($inputs['genres']);
-
-        foreach ($inputs['pictures'] as $picture) {
-            $photoPath = Storage::disk('public')->put('books', $picture);
-        
-            $image = new Image();
-            $image->path = $photoPath;
-            $image->is_profile = false;
-        
-            $book->images()->save($image);
-        }
-
-        $firstImage = $book->images->first();
-        
-        if($firstImage) {   
-            $book->setProfilePicture($firstImage);
-        }
-        
-
-        // $this->setProfileImage();
-
+                
+        $book->savePicturesAndSetProfilePicture('books', $request);
 
         return redirect()->route('books.index');
     }
@@ -122,7 +104,7 @@ class BookController extends BaseController
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $book->savePicturesAndSetProfilePicture('books', $request);
     }
 
     /**

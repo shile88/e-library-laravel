@@ -46,7 +46,7 @@ class AuthorController extends BaseController
         $author =  Author::create($authorData);
 
         //Image handling; Imageable trait method
-        $author->setProfilePicture('authors', $request);
+        $author->saveAndSetProfilePicture('authors', $request);
 
         return redirect()->route('authors.index');
     }
