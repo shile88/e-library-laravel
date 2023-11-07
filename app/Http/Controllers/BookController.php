@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\Imageable;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
@@ -19,6 +20,7 @@ use Illuminate\Http\Request;
 
 class BookController extends BaseController
 {
+    use Imageable;
     protected $orderBy = 'title';
 
     /**
@@ -64,28 +66,25 @@ class BookController extends BaseController
         $book->categories()->attach($inputs['categories']);
         $book->genres()->attach($inputs['genres']);
 
-        if ($request['picture']) {
-            $file = $request->file('picture');
-            $photoPath = Storage::disk('public')->put('books', $file);
-
-
-            $image = new Image([
-                'path' => $photoPath,
-                'is_profile' => true, 
-            ]);
-            
+        foreach ($inputs['pictures'] as $picture) {
+            $photoPath = Storage::disk('public')->put('books', $picture);
+        
+            $image = new Image();
+            $image->path = $photoPath;
+            $image->is_profile = false;
+        
             $book->images()->save($image);
-
         }
-        // } else {
-        //     $photoPath = Author::DEFAULT_AUTHOR_PICTURE_PATH;
-            
-        //     $image = new Image([
-        //         'path' => $photoPath,
-        //         'is_profile' => true, 
-        //     ]);
-        //     $book->images()->save($image);
-        // }
+
+        $firstImage = $book->images->first();
+        
+        if($firstImage) {   
+            $book->setProfilePicture($firstImage);
+        }
+        
+
+        // $this->setProfileImage();
+
 
         return redirect()->route('books.index');
     }

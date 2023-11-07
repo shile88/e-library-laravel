@@ -70,8 +70,8 @@
                     </td>
 
                     <td class="flex flex-row items-center px-4 py-3">
-                    @if ($item->getImage)
-                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getUserPicturePath($item->getImage->path)) }}" alt="Profile user image" />
+                    @if ($item->profilePicture)
+                        <img class="object-cover w-8 mr-2 h-11" src="{{ asset( getUserPicturePath($item->profilePicture->path)) }}" alt="Profile user image" />
                     @else
                         <!-- Handle the case when $item->image is null -->
                         <img class="object-cover w-8 mr-2 h-11" src="{{ asset(getDefaultUserPicturePath()) }}" alt="Default user image" />

@@ -40,24 +40,19 @@ class AuthorController extends BaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAuthorRequest $request)
     {
-        $authorData = $request->all();
-        $author = Author::create($authorData);
-        
-        if ($request['picture']) {
-            $file = $request->file('picture');
-            $photoPath = Storage::disk('public')->put('authors', $file);
+        $authorData = $request->validated();
+        $author =  Author::create($authorData);
 
+        $photoPath = Storage::disk('public')->put('authors', $authorData['picture']);
 
-            $image = new Image([
-                'path' => $photoPath,
-                'is_profile' => true, 
-            ]);
+        $image = new Image;
+        $image->path = $photoPath;
+        $image->is_profile = false;
 
-            //image method is defined in imageable trait
-           $author->saveImage()->save($image);
-            }
+        $author->image()->save($image);
+        $author->setProfilePicture($image);
 
         return redirect()->route('authors.index');
     }

@@ -6,16 +6,17 @@ use App\Models\Image;
 
 trait Imageable{   
 
-    public function saveImage(){
-        return $this->morphOne(Image::class, 'imageable');
-    }
-    public function getImage()
-    {
-        return $this->morphOne(Image::class, 'imageable')
-                    ->where('is_profile', true);
-    }
+        
 
-    public function images(){
-        return $this->morphMany(Image::class, 'imageable')->where('is_profile', false);
-    }
+    public function profilePicture(){
+
+        return $this->morphOne(Image::class, 'imageable');
+    }   
+
+    public function setProfilePicture($image){
+       $image->is_profile = true;
+       $image->save();
+     }
+
+
 }
