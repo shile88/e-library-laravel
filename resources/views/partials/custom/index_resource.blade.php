@@ -59,8 +59,10 @@
                             @isset($pivots)
                                 @foreach ($pivots as $pivot)
                                     <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                        @foreach ($item->$pivot as $pivotData)
-                                            {{ $pivotData->name . ($loop->last ? '' : ',') }} <br>
+                                        @foreach ($item->$pivot as $key => $pivotData)
+                                            {{ $pivotData->name }} <br>
+
+                                            @if ($key == 2) @break @endif
                                         @endforeach
                                     </td>
                                 @endforeach

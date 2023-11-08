@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Imageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
     use HasFactory;
-
+    use Imageable;
     const DEFAULT_BOOK_PICTURE_PATH = '/images/book.jpg';
 
     protected $guarded = ['id'];
@@ -45,5 +46,10 @@ class Book extends Model
     public function size()
     {
         return $this->belongsTo(Size::class);
+    }
+
+
+    public function images(){
+        return $this->morphMany(Image::class,'imageable');
     }
 }

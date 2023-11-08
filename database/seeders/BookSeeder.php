@@ -363,4 +363,5 @@ class BookSeeder extends Seeder
             ]
         ]);
     }
+
 }

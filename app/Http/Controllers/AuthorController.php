@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\Imageable;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class AuthorController extends BaseController
 {
+
+    //Trait for image handling
+    use Imageable;
+
     /**
      * Display a listing of the resource.
      */
@@ -37,17 +43,10 @@ class AuthorController extends BaseController
     public function store(StoreAuthorRequest $request)
     {
         $authorData = $request->validated();
+        $author =  Author::create($authorData);
 
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $photoPath = Storage::disk('public')->put('authors', $file);
-            $authorData['picture'] = $photoPath;
-        } else {
-            $photoPath = Author::DEFAULT_AUTHOR_PICTURE_PATH;
-            $authorData['picture'] = $photoPath;
-        }
-
-        Author::create($authorData);
+        //Image handling; Imageable trait method
+        $author->saveAndSetProfilePicture('authors', $request);
 
         return redirect()->route('authors.index');
     }
@@ -69,19 +68,15 @@ class AuthorController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specfied resource in storage.
      */
     public function update(UpdateAuthorRequest $request, Author $author)
     {
         $authorData = $request->validated();
-
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $photoPath = Storage::disk('public')->put('authors', $file);
-            $authorData['picture'] = $photoPath;
-        }
-
         $author->update($authorData);
+
+
+        $author->setProfilePicture('authors', $request); 
 
         return redirect()->route('authors.index');
     }

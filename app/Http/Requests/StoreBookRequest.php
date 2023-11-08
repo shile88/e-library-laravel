@@ -36,7 +36,7 @@ class StoreBookRequest extends FormRequest
             'size_id' => 'required|exists:sizes,id',
             'page_count' => 'required|integer|min:1',
             'total_count' => 'required|integer|min:1',
-            'picture' => 'sometimes'
+            'pictures.*' => 'sometimes'
         ];
     }
 }
