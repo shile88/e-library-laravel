@@ -9,6 +9,8 @@
     <title> {{ isset($title) ? $title : 'Dashboard' }} | {{ config('app.name') }}</title>
 
     {{-- Styles and fonts --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /> 
     @include('partials.general.styles')
 </head>
 
@@ -35,7 +37,13 @@
     @include('partials.general.inProgress')
 
     {{-- Scripts --}}
-    @include('partials.general.scripts')
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+    <!-- File upload -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://unpkg.com/create-file-list"></script>
 
     {{-- Custom page cripts --}}
     @yield('page-scripts')
