@@ -87,8 +87,10 @@ class AuthorController extends BaseController
     public function destroy(Author $author)
     {
         // Delete author image
-        Storage::disk('public')->delete($author->picture);
 
+        Storage::disk('public')->delete($author->image()->where('is_profile', true)->first()->path);
+
+        $author->image()->delete(); 
         //Delete row in pivot table
         $author->books()->detach();
 
