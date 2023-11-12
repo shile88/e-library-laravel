@@ -13,7 +13,7 @@
                         <input type="checkbox" class="form-checkbox">
                     </label>
                 </th>
-                
+
                 {{-- Name --}}
                 <th class="px-4 py-4 leading-4 tracking-wider text-left">Name
                     @include('partials.custom.order-arrow-link', ['resourcePlural' => $resourcePlural])
@@ -42,6 +42,7 @@
 
                     {{-- Name --}}
                     <td class="flex flex-row items-center px-4 py-4">
+                        <i class="{{ $item->icon }} fa-lg text-[#707070]"></i>
                         <p class="ml-4 text-center">{{ $item->name }}</p>
                     </td>
 

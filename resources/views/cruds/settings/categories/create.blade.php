@@ -9,5 +9,6 @@
         'resourceName' => 'category',
         'resourcePlural' => 'categories',
         'hasDescription' => true,
+        'hasIcon' => true,
     ])
 @endsection

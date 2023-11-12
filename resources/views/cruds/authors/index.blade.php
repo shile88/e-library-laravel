@@ -19,4 +19,4 @@
         'values' => ['about'],
     ])
 
-@endsection()
+@endsection

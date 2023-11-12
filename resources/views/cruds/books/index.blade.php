@@ -4,7 +4,7 @@
     'breadcrumbs' => [
         [
             'name' => 'Books',
-            'href' => route('books.index')
+            'href' => route('books.index'),
         ],
     ],
 ])
@@ -20,4 +20,4 @@
         'values' => ['#', '#', '#', '#', 'total_count'],
     ])
 
-@endsection()
+@endsection

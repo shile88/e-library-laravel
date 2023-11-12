@@ -11,7 +11,7 @@
                 <h1>{{ $title }}</h1>
 
                 {{-- Breadcrumbs --}}
-                @if (isset($breadcrumbs))
+                @if (isset($breadcrumbs) && count($breadcrumbs) >= 1)
                     <div>
                         <nav class="w-full rounded">
                             <ul class="flex list-reset">
