@@ -59,13 +59,13 @@ class BookController extends BaseController
      */
     public function store(StoreBookRequest $request)
     {
-        $inputs = $request->validated();      
+        $inputs = $request->validated();
 
         $book = Book::create($inputs);
         $book->authors()->attach($inputs['authors']);
         $book->categories()->attach($inputs['categories']);
         $book->genres()->attach($inputs['genres']);
-                
+
         $book->savePicturesAndSetProfilePicture('books', $request);
 
         return redirect()->route('books.index');
@@ -117,13 +117,14 @@ class BookController extends BaseController
     }
 
     /**
-     * Filters data for index page.
+     * Filters data for index page by book title, description or ISBN.
      */
     protected function filter($query, $searchTerm)
     {
         if (!empty($searchTerm)) {
             $query->where('title', 'LIKE', "%$searchTerm%");
             $query->orWhere('description', 'LIKE', "%$searchTerm%");
+            $query->orWhere('isbn', 'LIKE', "%$searchTerm%");
         }
     }
 }
