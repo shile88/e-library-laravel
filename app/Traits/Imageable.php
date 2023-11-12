@@ -45,29 +45,29 @@ trait Imageable{
        
      }
 
-     public function savePicturesAndSetProfilePicture($path, $request){
+     public function savePicturesAndSetProfilePicture($path, $inputs){
 
-        //If we want to update profile picture, delete old picture from storage and delete relation
-        //If profile picture exists delete relation and delete file from storage 
+        //If profile picture exists delete relation and delete picture from storage 
         if($this->images()->where('is_profile', true)->first()){
             Storage::disk('public')->delete($this->images()->where('is_profile', true)->first()->path);
             $this->images()->delete();
         }
 
         //Handle picture from request; Save picture into storage and add relation
-        if ($request->hasFile('pictures')) {
-
-            foreach ($request['pictures'] as $picture) {
-                $photoPath = Storage::disk('public')->put($path, $picture);
+        if ($inputs['pictures']) {
             
+            
+            foreach ($inputs['pictures'] as $key => $picture) {
+                $photoPath = Storage::disk('public')->put($path, $picture);
+                //Check if image is profile image
+               $isProfile = ($key == $inputs['chosen_image']);
+                
                 $this->images()->create([
                     'path'=> $photoPath,
-                    'is_profile'=> false
+                    'is_profile'=> $isProfile
                 ]);
             }
-
-            $this->images()->first()->update(['is_profile' => true]);
-
+            
             return true;
         }
 

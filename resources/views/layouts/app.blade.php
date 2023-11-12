@@ -37,8 +37,7 @@
     @include('partials.general.inProgress')
 
     {{-- Scripts --}}
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/app.js"></script>
+    @include('partials.general.scripts')
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
     <!-- File upload -->

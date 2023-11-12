@@ -66,7 +66,7 @@ class BookController extends BaseController
         $book->categories()->attach($inputs['categories']);
         $book->genres()->attach($inputs['genres']);
                 
-        $book->savePicturesAndSetProfilePicture('books', $request);
+        $book->savePicturesAndSetProfilePicture('books', $inputs);
 
         return redirect()->route('books.index');
     }
@@ -111,8 +111,16 @@ class BookController extends BaseController
      * Remove the specified resource from storage.
      */
     public function destroy(Book $book)
-    {
+    {   
+        $images = $book->images;
+       
+        foreach ($images as $image) {
+            Storage::disk('public')->delete($image->path);
+        }
+
+        $book->images()->delete();  
         $book->delete();
+
         return redirect()->route('books.index');
     }
 
