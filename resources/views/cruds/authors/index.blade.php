@@ -15,8 +15,8 @@
         'items' => $items,
         'resourceName' => 'author',
         'resourcePlural' => 'authors',
-        'headers' => ['Name', 'About'],
-        'values' => ['about'],
+        'headers' => ['Name'],
+        'values' => [],
     ])
 
 @endsection
