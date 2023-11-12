@@ -1,7 +1,7 @@
 @extends('cruds.settings.index', [
     'hasTitleHeader' => true,
-    'title' => 'Edit - ' . $globalVariable->name,
-    'breadcrumbs' => [['name' => 'Settings', 'href' => route('settings.index')], ['name' => 'Global variables', 'href' => route('global_variables.index')], ['name' => 'Edit - ' . $globalVariable->name, 'href' => route('global_variables.edit', $globalVariable)]],
+    'title' => 'Edit : ' . $globalVariable->name,
+    'breadcrumbs' => [['name' => 'Settings', 'href' => route('settings.index')], ['name' => 'Global variables', 'href' => route('global_variables.index')], ['name' => 'Edit : ' . $globalVariable->name, 'href' => route('global_variables.edit', $globalVariable)]],
 ])
 
 @section('content')
