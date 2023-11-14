@@ -78,7 +78,7 @@
             <div class="">
 
                 {{-- Picture --}}
-                <img src="{{ getPicturePath($book->picture) }}" alt="Book picture" width="500"
+                <img src="{{ getPicturePath($book->profilePicture) }}" alt="Book picture" width="500"
                     onerror="this.onerror=null; this.src='{{ getDefaultBookPicturePath() }}'" />
             </div>
 

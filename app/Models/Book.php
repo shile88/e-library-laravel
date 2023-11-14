@@ -49,7 +49,15 @@ class Book extends Model
     }
 
 
-    public function images(){
-        return $this->morphMany(Image::class,'imageable');
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function getProfilePictureAttribute()
+    {
+        if($this->images()->where('is_profile', true)->first())
+            return $this->images()->where('is_profile', true)->first()->path;
+    }
+
 }

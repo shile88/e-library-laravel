@@ -36,7 +36,7 @@
             {{-- Second column --}}
             <div class="row-1">
                 {{-- Picture --}}
-                <img class="w-[500px] border border-gray-300" src="{{ getPicturePath($author->picture, 'author') }}"
+                <img class="w-[500px] border border-gray-300" src="{{ getPicturePath($author->profilePicture, 'author') }}"
                     onerror="this.onerror=null; this.src='{{ getDefaultUserPicturePath() }}'" />
             </div>
 

@@ -9,9 +9,10 @@ class Image extends Model
 {
     use HasFactory;
     protected $fillable = ['path', 'is_profile'];
-    public function imageable(){
-        return $this->morphTo();   
+    public function imageable()
+    {
+        return $this->morphTo();
     }
 
-    
+
 }
