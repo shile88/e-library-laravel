@@ -20,7 +20,7 @@
         {{-- Sidebar --}}
         @include('partials.general.sidebar')
 
-        <section class="w-screen h-screen pl-[83px] text-[#212121]">
+        <section class="w-screen h-screen pl-[83px] scroll pb-[80px] text-[#212121]">
 
             {{-- Title Header --}}
             @include('partials.custom.title-header')

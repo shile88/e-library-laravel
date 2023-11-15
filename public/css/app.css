@@ -173,7 +173,7 @@
 }
 
 .height-autori {
-  height: calc(100% - 105px);
+  height: calc(130%);
 }
 
 .height-evidencija {
@@ -2118,6 +2118,9 @@ h4 {
 }
 .pb-\[21px\]{
   padding-bottom: 21px;
+}
+.pb-\[80px\]{
+  padding-bottom: 80px;
 }
 .pl-2{
   padding-left: 0.5rem;
