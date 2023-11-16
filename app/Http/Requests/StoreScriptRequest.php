@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-
 class StoreScriptRequest extends FormRequest
 {
     /**
@@ -13,6 +12,7 @@ class StoreScriptRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Authorizes this request only if user is logged in
         return Auth::check();
     }
 

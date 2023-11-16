@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateAuthorRequest extends FormRequest
 {
@@ -12,8 +12,8 @@ class UpdateAuthorRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        // Authorizes this request only if user is logged in
         return Auth::check();
-
     }
 
     /**

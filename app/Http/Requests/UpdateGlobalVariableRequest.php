@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateGlobalVariableRequest extends FormRequest
 {
@@ -11,9 +12,8 @@ class UpdateGlobalVariableRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // If this method returns false, 403 error (Forbidden) will be shown
-        // Maybe we should use Auth::check() here just to be sure
-        return true;
+        // Authorizes this request only if user is logged in
+        return Auth::check();
     }
 
     /**
