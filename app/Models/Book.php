@@ -10,9 +10,12 @@ class Book extends Model
 {
     use HasFactory;
     use Imageable;
+
     const DEFAULT_BOOK_PICTURE_PATH = '/images/book.jpg';
+    const STORAGE_FOLDER_NAME = 'books';
 
     protected $guarded = ['id'];
+
     public function authors()
     {
         return $this->belongsToMany(Author::class);
@@ -47,7 +50,6 @@ class Book extends Model
     {
         return $this->belongsTo(Size::class);
     }
-
 
     public function images()
     {

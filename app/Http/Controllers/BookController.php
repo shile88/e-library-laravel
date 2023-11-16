@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Traits\Imageable;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
@@ -18,6 +19,7 @@ use Illuminate\Http\Request;
 
 class BookController extends BaseController
 {
+    // Trait for handling images
     use Imageable;
     protected $orderBy = 'title';
 
@@ -60,17 +62,18 @@ class BookController extends BaseController
         // Validates form data
         $inputs = $request->validated();
 
-        // Create book with validated inputs
+        // Create book with validated data
         $book = Book::create($inputs);
 
-        // Make book connection to pivot tables
+        // Make book connections to pivot tables
         $book->authors()->attach($inputs['authors']);
         $book->categories()->attach($inputs['categories']);
         $book->genres()->attach($inputs['genres']);
 
-        // Saves uploaded images to storage, links them to the book and sets profile picture
-        $book->savePicturesAndSetProfilePicture('books', $request);
+        // Save uploaded profile picture
+        $book->saveProfilePicture(Book::STORAGE_FOLDER_NAME, $request);
 
+        // After the operation is finished redirects back
         return redirect()->route('books.index');
     }
 
@@ -110,14 +113,15 @@ class BookController extends BaseController
         // Validate form data
         $inputs = $request->validated();
 
-        // Update book with new validated inputs
+        // Update book with new validated data
         $book->update($inputs);
 
-        // Update book connection to pivot tables
+        // Update book connections to pivot tables
         $book->authors()->sync($inputs['authors']);
         $book->categories()->sync($inputs['categories']);
         $book->genres()->sync($inputs['genres']);
 
+        // After the operation is finished redirects back
         return redirect()->route('books.index');
     }
 
@@ -126,15 +130,18 @@ class BookController extends BaseController
      */
     public function destroy(Book $book)
     {
-        $images = $book->images;
-
-        foreach ($images as $image) {
+        foreach ($book->images as $image) {
+            // Delete book images from storage
             Storage::disk('public')->delete($image->path);
         }
 
+        // Delete book images from Images table
         $book->images()->delete();
+
+        // Delete book from table Books
         $book->delete();
 
+        // After the operation is finished redirects back
         return redirect()->route('books.index');
     }
 
