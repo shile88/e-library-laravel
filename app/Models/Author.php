@@ -21,7 +21,13 @@ class Author extends Model
         return $this->belongsToMany(Book::class);
     }
 
-    public function image(){
+    public function image()
+    {
         return $this->morphOne(Image::class, 'imageable');
+    }
+    public function getProfilePictureAttribute()
+    {
+        if ($this->image)
+            return $this->image->path;
     }
 }

@@ -23,4 +23,6 @@
     @if ($errors->first($resourcePlural))
         <p class="text-red-600">{{ $errors->first($resourcePlural) }}</p>
     @endif
+
 </div>
+

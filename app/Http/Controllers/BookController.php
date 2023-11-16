@@ -126,7 +126,15 @@ class BookController extends BaseController
      */
     public function destroy(Book $book)
     {
+        $images = $book->images;
+
+        foreach ($images as $image) {
+            Storage::disk('public')->delete($image->path);
+        }
+
+        $book->images()->delete();
         $book->delete();
+
         return redirect()->route('books.index');
     }
 
