@@ -39,7 +39,7 @@
                     {{-- Picure input --}}
                     @include('partials.inputs.picture-input', [
                         'model' => 'author',
-                        'value' => $author->picture
+                        'value' => $author->profilePicture
                     ])
                 </div>
 

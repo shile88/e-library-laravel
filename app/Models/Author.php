@@ -13,6 +13,7 @@ class Author extends Model
     use Imageable;
 
     const DEFAULT_AUTHOR_PICTURE_PATH = '/images/user.jpg';
+    const STORAGE_FOLDER_NAME = 'authors';
 
     protected $fillable = ['name', 'about'];
 
@@ -21,13 +22,15 @@ class Author extends Model
         return $this->belongsToMany(Book::class);
     }
 
-    public function image()
+    public function images()
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
     public function getProfilePictureAttribute()
     {
-        if ($this->image)
-            return $this->image->path;
+        if ($this->images)
+            return $this->images->path;
     }
+    
 }

@@ -7,19 +7,16 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
-use App\Models\Image;
 use Illuminate\Http\Request;
 
 class AuthorController extends BaseController
 {
-
-    //Trait for image handling
+    // Trait for handling images
     use Imageable;
 
     /**
      * Display a listing of the resource.
      */
-
     public function index(Request $request)
     {
         // Sort, filter and paginate data
@@ -27,7 +24,6 @@ class AuthorController extends BaseController
 
         return view('cruds.authors.index', compact('items'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -42,12 +38,16 @@ class AuthorController extends BaseController
      */
     public function store(StoreAuthorRequest $request)
     {
-        $authorData = $request->validated();
-        $author =  Author::create($authorData);
+        // Validates form data
+        $inputs = $request->validated();
 
-        //Image handling; Imageable trait method
-        $author->saveAndSetProfilePicture('authors', $request);
+        // Create author with validated data
+        $author = Author::create($inputs);
 
+        // Save uploaded profile picture
+        $author->saveProfilePicture(Author::STORAGE_FOLDER_NAME, $request);
+
+        // After the operation is finished redirects back
         return redirect()->route('authors.index');
     }
 
@@ -72,12 +72,16 @@ class AuthorController extends BaseController
      */
     public function update(UpdateAuthorRequest $request, Author $author)
     {
-        $authorData = $request->validated();
-        $author->update($authorData);
+        // Validate form data
+        $inputs = $request->validated();
 
+        // Update author with new validated data
+        $author->update($inputs);
 
-        $author->setProfilePicture('authors', $request); 
+        // Update profile picture
+        $author->saveProfilePicture(Author::STORAGE_FOLDER_NAME, $request);
 
+        // After the operation is finished redirects back
         return redirect()->route('authors.index');
     }
 
@@ -86,15 +90,16 @@ class AuthorController extends BaseController
      */
     public function destroy(Author $author)
     {
-        // Delete author image
+        // Delete author image from storage
+        Storage::disk('public')->delete($author->images()->path);
 
-        Storage::disk('public')->delete($author->image()->where('is_profile', true)->first()->path);
+        // Delete author images from Images table
+        $author->images()->delete();
 
-        $author->image()->delete(); 
-        //Delete row in pivot table
+        // Delete row in author_book pivot table
         $author->books()->detach();
 
-        // Delete author
+        // Delete author from table Authors
         $author->delete();
 
         // After the operation is finished redirects back
@@ -102,7 +107,7 @@ class AuthorController extends BaseController
     }
 
     /**
-     * Delete all selected rows
+     * Delete all selected rows.
      */
     public function bulkDelete(Request $request)
     {
