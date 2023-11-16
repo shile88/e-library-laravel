@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Traits\Imageable;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Models\Author;
@@ -15,7 +14,6 @@ use App\Models\Script;
 use App\Models\Size;
 use App\Models\Binding;
 use App\Models\Publisher;
-use App\Models\Image;
 use Illuminate\Http\Request;
 
 class BookController extends BaseController
@@ -59,13 +57,18 @@ class BookController extends BaseController
      */
     public function store(StoreBookRequest $request)
     {
+        // Validates form data
         $inputs = $request->validated();
 
+        // Create book with validated inputs
         $book = Book::create($inputs);
+
+        // Make book connection to pivot tables
         $book->authors()->attach($inputs['authors']);
         $book->categories()->attach($inputs['categories']);
         $book->genres()->attach($inputs['genres']);
 
+        // Saves uploaded images to storage, links them to the book and sets profile picture
         $book->savePicturesAndSetProfilePicture('books', $request);
 
         return redirect()->route('books.index');
@@ -104,7 +107,18 @@ class BookController extends BaseController
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        $book->savePicturesAndSetProfilePicture('books', $request);
+        // Validate form data
+        $inputs = $request->validated();
+
+        // Update book with new validated inputs
+        $book->update($inputs);
+
+        // Update book connection to pivot tables
+        $book->authors()->sync($inputs['authors']);
+        $book->categories()->sync($inputs['categories']);
+        $book->genres()->sync($inputs['genres']);
+
+        return redirect()->route('books.index');
     }
 
     /**

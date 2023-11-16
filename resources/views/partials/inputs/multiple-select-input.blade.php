@@ -5,8 +5,15 @@
         class="w-[90%] mt-2 focus:outline-none multiple-select">
 
         @foreach ($items as $item)
-            <option @if (old($resourcePlural) and in_array($item->id, old($resourcePlural)))
-                 selected @endif value="{{ $item->id }}">
+            <option
+                {{-- If current values are provided --}}
+                @if(isset($values))
+                    @if (in_array($item->id, $values)) selected @endif
+
+                {{-- If old values exist --}}
+                @elseif (old($resourcePlural) and in_array($item->id, old($resourcePlural))) selected @endif
+
+                value="{{ $item->id }}">
                 {{ $item->name }}
             </option>
         @endforeach

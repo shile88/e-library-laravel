@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             ['name' => 'Umjetnost i fotografija', 'icon' => 'fas fa-palette', 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit'],
-            ['name' => 'Biogrfija', 'icon' => 'fas fa-address-book', 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit'],
+            ['name' => 'Biografija', 'icon' => 'fas fa-address-book', 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit'],
             ['name' => 'Dječije knjige', 'icon' => 'fas fa-children', 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit'],
             ['name' => 'Zanat i hobiji', 'icon' => 'fas fa-screwdriver-wrench', 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit'],
             ['name' => 'Krimi i triler', 'icon' => 'fas fa-gun', 'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit'],
