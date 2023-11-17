@@ -108,6 +108,7 @@ class BookController extends BaseController
     /**
      * Update the specified resource in storage.
      */
+    // Update all data except pictures
     public function update(UpdateBookRequest $request, Book $book)
     {
         // Validate form data

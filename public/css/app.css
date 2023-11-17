@@ -1047,6 +1047,9 @@ h4 {
 .top-\[248px\]{
   top: 248px;
 }
+.bottom-30{
+  bottom: 30px;
+}
 .bottom-0{
   bottom: 0px;
 }
@@ -1268,6 +1271,9 @@ h4 {
 }
 .mb-\[100px\]{
   margin-bottom: 100px;
+}
+.mb-\[80px\]{
+  margin-bottom: 80px;
 }
 .mt-\[50px\]{
   margin-top: 50px;

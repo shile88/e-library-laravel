@@ -5,7 +5,7 @@
 ])
 
 @section('content')
-    <div class="scroll height-content pb-[100px] section-content">
+    <div class="scroll pb-[100px] section-content">
 
         <form class="text-gray-700 forma" method="post" action="{{ route('books.update', $book) }}" enctype="multipart/form-data">
             @csrf
@@ -134,11 +134,11 @@
                                 'field_name' => 'description',
                                 'value' => $book->description,
                             ])
+
+                            {{-- Buttons --}}
+                            @include('partials.custom.submit-cancel-buttons')
+
                         </div>
-
-                        {{-- Buttons --}}
-                        @include('partials.custom.submit-cancel-buttons')
-
                     </div>
                 </div>
             </div>
