@@ -22,6 +22,7 @@ class BookController extends BaseController
     // Trait for handling images
     use Imageable;
     protected $orderBy = 'title';
+    protected $resultsCount = 0;
 
     /**
      * Display a listing of the resource.
@@ -30,8 +31,9 @@ class BookController extends BaseController
     {
         // Sort, filter and paginate data
         $items = $this->processIndexData($request, Book::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.books.index', compact('items'));
+        return view('cruds.books.index', compact('items', 'resultsCount'));
     }
 
     /**

@@ -2,6 +2,7 @@
     @include('partials.custom.search-bar', [
         'resourceName' => $resourceName,
         'resourcePlural' => $resourcePlural,
+        'resultsCount' => $resultsCount,
     ])
 
     <div class="px-[30px] pt-2 bg-white">

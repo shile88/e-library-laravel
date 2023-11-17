@@ -22,11 +22,15 @@ trait HasPagination
         $orderBy = ($orderBy == $this->orderBy) ? $orderBy : $this->orderBy;
         $orderDir = (in_array($orderDir, $this->orderDirArray)) ? $orderDir : $this->orderDirArray[0];
 
-
         // Order, filter and paginate data
         $this->order($query, $orderBy, $orderDir);
 
         $this->filter($query, $searchTerm);
+
+        // Count number of total results
+        $this->resultsCount = $query->count();
+
+        // Paginate the data
         $paginator = $this->paginate($query, $rowsPerPage);
 
         // Append attributes to paginator

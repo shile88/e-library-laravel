@@ -22,5 +22,10 @@
                 placeholder="Search" autocomplete="off">
         </div>
     </form>
-
 </div>
+
+@if (isset($resultsCount))
+    <div class="ml-[30px] text-sm">
+        Number of results: {{ $resultsCount }}
+    </div>
+@endif

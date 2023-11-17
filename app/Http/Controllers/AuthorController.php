@@ -14,6 +14,8 @@ class AuthorController extends BaseController
     // Trait for handling images
     use Imageable;
 
+    protected $resultsCount = 0;
+
     /**
      * Display a listing of the resource.
      */
@@ -21,8 +23,9 @@ class AuthorController extends BaseController
     {
         // Sort, filter and paginate data
         $items = $this->processIndexData($request, Author::query());
+        $resultsCount = $this->resultsCount;
 
-        return view('cruds.authors.index', compact('items'));
+        return view('cruds.authors.index', compact('items', 'resultsCount'));
     }
 
     /**
