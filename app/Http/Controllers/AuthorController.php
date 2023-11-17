@@ -94,7 +94,7 @@ class AuthorController extends BaseController
     public function destroy(Author $author)
     {
         // Delete author image from storage
-        Storage::disk('public')->delete($author->images()->path);
+        Storage::disk('public')->delete($author->profilePicture);
 
         // Delete author images from Images table
         $author->images()->delete();

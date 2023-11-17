@@ -47,7 +47,7 @@
 
                             {{-- Title (name) and picture --}}
                             <td class="flex flex-row items-center px-4 py-3">
-                                <img class="object-cover w-8 mr-2 h-11"
+                            <img class="object-cover w-12 mr-2"
                                     src="{{ getPicturePath($item->profilePicture, $resourceName) }}"
                                     onerror="this.onerror=null; this.src='{{ $resourceName == 'book' ? getDefaultBookPicturePath() : getDefaultUserPicturePath() }}'" />
 
