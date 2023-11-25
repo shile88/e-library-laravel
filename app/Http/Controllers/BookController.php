@@ -159,4 +159,13 @@ class BookController extends BaseController
             $query->orWhere('isbn', 'LIKE', "%$searchTerm%");
         }
     }
+
+    public function showMultimedia(Book $book){
+        $multimedia = $book->images();
+        return view('cruds.books.multimedia', compact('multimedia'));
+    }
+
+    public function saveMultimedia(Request $request){
+        return 'TEST';
+    }
 }

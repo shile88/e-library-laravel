@@ -19,7 +19,16 @@
 ])
 
 @section('content')
+<div class="border-b-[1px] border-[#e4dfdf] py-4 text-gray-500 pl-[30px]">
+<a href="{{ route('books.show', $book->id) }}" class="inline active-book-nav hover:text-blue-800">
+        Specifikacije
+    </a>
+    <a href="{{ route('books.showMultimedia', $book->id) }}" class="inline ml-[70px]  hover:text-blue-800">
+        Multimedija
+    </a>
+</div>
     <div class="pl-[30px] mt-[20px]">
+   
         <div class="flex flex-row justify-between">
 
             {{-- First column --}}
