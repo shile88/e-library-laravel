@@ -10,7 +10,7 @@
                     <div class="w-[90%] mx-auto bg-white rounded p7 mt-[20px]">
                         <div x-data="dataFileDnD()"
                             class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
-                           <form action="{{ route('books.saveMultimedia') }}" method="POST" enctype="multipart/form-data">
+                           <form action="{{ route('books.saveMultimedia', $book->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div x-ref="dnd"
                                     class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
