@@ -34,6 +34,7 @@
                                         <p class="m-0">Drag your files here or click in this area.</p>
                                     </div>
                                 </div>
+                                <button id="uploadButton" class="text-white bg-[#4558BE] font-medium rounded-lg px-5 py-2.5 mt-6" type="submit">Sačuvaj izmjene</button>
                            </form> 
 
                             <!-- <template x-if="files.length > 0"> -->
@@ -45,24 +46,7 @@
                                     @foreach ($multimedia as $image )
                                         <div class="relative flex flex-col p-2 text-xs bg-white bg-opacity-50">
                                             <img src="{{ asset('storage/' . $image->path) }}" alt="" class="h-[300px]">
-                                            <!-- Checkbox -->
-                                            <button
-                                                class="absolute bottom-[5px] right-[6px] z-50 p-1 bg-white rounded-bl focus:outline-none"
-                                                type="button">
-                                                <svg class="w-[25px] h-[25px] text-gray-700"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    nviewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                            <div
-                                                class="absolute bottom-[20px] left-0 right-0 flex flex-col p-2 text-xs bg-white bg-opacity-50 text-center">
-                                                <span
-                                                    class="w-full font-bold text-gray-900 truncate">Naziv slike sa ekstenzijom</span>
-                                                <span class="text-xs text-gray-900">89kB</span>
-                                            </div>
+
                                         </div>
                                         <!-- End of images -->
                                     @endforeach

@@ -167,34 +167,17 @@ class BookController extends BaseController
     }
 
     public function saveMultimedia(Request $request, $id){
-        return 'TEST';
-    }
+        $validatedData = $request->validate([
+                    'images.*' => 'mimes:jpeg,png,jpg,gif,svg', // Svaka slika mora biti tipa image i određenih formata
+                ]);
 
-    // public function updateBookMedia(Request $request, $id){
-
-    //     // $request->validate([
-    //     //     'image' => 'required', // Bar jedna slika je obavezna
-    //     //     'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048', // Svaka slika mora biti tipa image i određenih formata
-    //     // ]);
-    
-    //     //Ako su uploadovane slike sacuvaj, ako nisu postavi defaultnu sliku
-    //     if($request->hasFile('image')){
-    //         $images = $request->file('image');
+        $book = Book::find($id);
         
-    //         foreach($images as $img){
-    //             $path = Storage::disk('public')->put('books', $img);
-    
-    //             // Kreiraj novi zapis u tabeli books_image
-    //             $bookImage = new BookImage(['path' => $path]);
-                
-    //             $bookImage->book_id = $id;
-    
-    //             $bookImage->save();
-    //         } 
-    //     }
+        //Save images into storage and database
+        $book->saveImages($validatedData['images']);
 
-    //     return redirect()->route('books.index');
-    // }
-
+        return redirect()->route('books.showMultimedia' , compact('id'));
+        
+    }
 
 }

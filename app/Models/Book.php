@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Traits\Imageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
 
 class Book extends Model
 {
@@ -60,6 +62,18 @@ class Book extends Model
     {
         if($this->images()->where('is_profile', true)->first())
             return $this->images()->where('is_profile', true)->first()->path;
+    }
+
+    public function saveImages($images){
+        foreach($images as $image){
+            $path = Storage::disk('public')->put('books', $image);
+            $this->images()->create([
+                'path' => $path,
+                'is_profile' => false
+            ]);
+
+        }
+
     }
 
 }
