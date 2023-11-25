@@ -160,8 +160,9 @@ class BookController extends BaseController
         }
     }
 
-    public function showMultimedia(Book $book){
-        $multimedia = $book->images();
+    public function showMultimedia($id){
+        $book = Book::where('id', $id)->first();
+        $multimedia = $book->images;
         return view('cruds.books.multimedia', compact('multimedia', 'book'));
     }
 
