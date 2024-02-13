@@ -5,15 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        // Sort, filter and paginate data
+        $items = $this->processIndexData($request, User::query()->where('role_id', 3));
+        $resultsCount = $this->resultsCount;
+
+        return view('cruds.students.index', compact('items', 'resultsCount'));
     }
 
     /**

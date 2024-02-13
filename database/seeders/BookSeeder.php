@@ -29,7 +29,7 @@ class BookSeeder extends Seeder
             [
                 'title' => 'Harri Poter i Dvorana tajni',
                 'isbn' => '978-80728-158',
-                'description' => '',
+                'description' => 'Hari Poter i dvorana tajni je knjiga Dž. K. Rouling. Drugi je deo serijala Hari Poter od sedam knjiga. Roman je objavljen 2. jula 1998. u Ujedinjenom Kraljevstvu. Po knjizi je 2002. godine snimljen istoimeni film.',
                 'page_count' => 384,
                 'size_id' => 1,
                 'script_id' => 1,
@@ -363,4 +363,5 @@ class BookSeeder extends Seeder
             ]
         ]);
     }
+
 }

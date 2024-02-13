@@ -2,18 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\Imageable;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
 use App\Models\Author;
+use Illuminate\Http\Request;
 
-class AuthorController extends Controller
+class AuthorController extends BaseController
 {
+    // Trait for handling images
+    use Imageable;
+
+    protected $resultsCount = 0;
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Sort, filter and paginate data
+        $items = $this->processIndexData($request, Author::query());
+        $resultsCount = $this->resultsCount;
+
+        return view('cruds.authors.index', compact('items', 'resultsCount'));
     }
 
     /**
@@ -21,7 +33,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('cruds.authors.create');
     }
 
     /**
@@ -29,7 +41,17 @@ class AuthorController extends Controller
      */
     public function store(StoreAuthorRequest $request)
     {
-        //
+        // Validates form data
+        $inputs = $request->validated();
+
+        // Create author with validated data
+        $author = Author::create($inputs);
+
+        // Save uploaded profile picture
+        $author->saveProfilePicture(Author::STORAGE_FOLDER_NAME, $request);
+
+        // After the operation is finished redirects back
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -37,7 +59,7 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        return view('cruds.authors.show', compact('author'));
     }
 
     /**
@@ -45,25 +67,25 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        return view('cruds.authors.edit', compact('author'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specfied resource in storage.
      */
     public function update(UpdateAuthorRequest $request, Author $author)
     {
-        $authorData = $request->validated();
+        // Validate form data
+        $inputs = $request->validated();
 
-        //Saving author's photo in public folder
-        if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('author_photos', 'public');
-            $authorData['photo'] = $photoPath;
-        }
+        // Update author with new validated data
+        $author->update($inputs);
 
-        $author->update($authorData);
+        // Update profile picture
+        $author->saveProfilePicture(Author::STORAGE_FOLDER_NAME, $request);
 
-        return redirect()->route('author.index');
+        // After the operation is finished redirects back
+        return redirect()->route('authors.index');
     }
 
     /**
@@ -71,15 +93,45 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //Delete photo of author
-        if ($author->photo) {
-            Storage::disk('public')->delete($author->photo);
-        }
+        // Delete author image from storage
+        Storage::disk('public')->delete($author->profilePicture);
 
+        // Delete author images from Images table
+        $author->images()->delete();
 
+        // Delete row in author_book pivot table
+        $author->books()->detach();
+
+        // Delete author from table Authors
         $author->delete();
 
-        return redirect()->route('author.index');
-
+        // After the operation is finished redirects back
+        return redirect()->route('authors.index');
     }
+
+    /**
+     * Delete all selected rows.
+     */
+    public function bulkDelete(Request $request)
+    {
+        // From string make array of IDs
+        $selectedIds = explode(',', $request->input('selected_ids'));
+
+        // Delete all authors with selected IDs
+        Author::whereIn('id', $selectedIds)->delete();
+
+        return redirect()->route('authors.index');
+    }
+
+    /**
+     * Filters data for index page.
+     */
+    protected function filter($query, $searchTerm)
+    {
+        if (!empty($searchTerm)) {
+            $query->where('name', 'LIKE', "%$searchTerm%");
+            $query->orWhere('about', 'LIKE', "%$searchTerm%");
+        }
+    }
+
 }

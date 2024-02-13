@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreAuthorRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class StoreAuthorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Authorizes this request only if user is logged in
+        return Auth::check();
     }
 
     /**
@@ -22,7 +24,10 @@ class StoreAuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string',
+            'about' => 'required|string',
+            'picture' => 'sometimes|image|mimes:jpeg,png,jpg,gif',
         ];
+
     }
 }

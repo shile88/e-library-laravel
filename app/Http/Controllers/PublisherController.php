@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePublisherRequest;
 use App\Http\Requests\UpdatePublisherRequest;
 use App\Models\Publisher;
+use Illuminate\Http\Request;
 
-class PublisherController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+class PublisherController extends BaseController
+{ /**
+  * Display a listing of the resource.
+  */
+    public function index(Request $request)
     {
-        //
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Publisher::query());
+
+        return view('cruds.settings.publishers.index', compact('items'));
     }
 
     /**
@@ -21,7 +24,8 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        // Shows a page for creating a new publisher
+        return view('cruds.settings.publishers.create');
     }
 
     /**
@@ -29,7 +33,11 @@ class PublisherController extends Controller
      */
     public function store(StorePublisherRequest $request)
     {
-        //
+        // Stores new publisher in DB with the validated fields from StorePublisherRequest
+        Publisher::create($request->validated());
+
+        // After the operation is finished redirects to a different page
+        return redirect()->route('publishers.index');
     }
 
     /**
@@ -37,7 +45,7 @@ class PublisherController extends Controller
      */
     public function show(Publisher $publisher)
     {
-        //
+        // We do not use show method since there is not much to show (only a name)
     }
 
     /**
@@ -45,7 +53,8 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        //
+        // Shows a page for editing the publisher
+        return view('cruds.settings.publishers.edit', compact('publisher'));
     }
 
     /**
@@ -53,14 +62,22 @@ class PublisherController extends Controller
      */
     public function update(UpdatePublisherRequest $request, Publisher $publisher)
     {
-        //
+        // Updates publisher fields with the validated parameters from UpdatePublisherRequest
+        $publisher->update($request->validated());
+
+        // After the operation is finished redirects to a different page
+        return redirect()->route('publishers.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publisher $publisher)
+    public function destroy(Publisher $publisher, Request $request)
     {
-        //
+        // Deletes publisher from the DB
+        $publisher->delete();
+
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

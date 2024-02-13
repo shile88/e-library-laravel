@@ -20,14 +20,16 @@ class DatabaseSeeder extends Seeder
             PublisherSeeder::class,
             ScriptSeeder::class,
             SizeSeeder::class,
-            SettingSeeder::class,
+            LanguageSeeder::class,
+            GlobalVariableSeeder::class,
             RoleSeeder::class,
 
             BookSeeder::class,
             UserSeeder::class,
             AuthorBookSeeder::class,
             BookCategorySeeder::class,
-            BookGenreSeeder::class
+            BookGenreSeeder::class,
+            ImageSeeder::class,
         ]);
     }
 }

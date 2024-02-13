@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreScriptRequest;
 use App\Http\Requests\UpdateScriptRequest;
 use App\Models\Script;
+use Illuminate\Http\Request;
 
-class ScriptController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+class ScriptController extends BaseController
+{ /**
+  * Display a listing of the resource.
+  */
+    public function index(Request $request)
     {
-        //
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Script::query());
+
+        return view('cruds.settings.scripts.index', compact('items'));
     }
 
     /**
@@ -21,7 +25,7 @@ class ScriptController extends Controller
      */
     public function create()
     {
-        //
+        return view('cruds.settings.scripts.create');
     }
 
     /**
@@ -29,7 +33,8 @@ class ScriptController extends Controller
      */
     public function store(StoreScriptRequest $request)
     {
-        //
+        Script::create($request->validated());
+        return redirect()->route('scripts.index');
     }
 
     /**
@@ -45,7 +50,7 @@ class ScriptController extends Controller
      */
     public function edit(Script $script)
     {
-        //
+        return view('cruds.settings.scripts.edit', compact('script'));
     }
 
     /**
@@ -53,14 +58,19 @@ class ScriptController extends Controller
      */
     public function update(UpdateScriptRequest $request, Script $script)
     {
-        //
+        $script->update($request->validated());
+        return redirect()->route('scripts.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Script $script)
+    public function destroy(Script $script, Request $request)
     {
-        //
+        // Deletes genre from the DB
+        $script->delete();
+
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

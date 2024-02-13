@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreScriptRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class StoreScriptRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Authorizes this request only if user is logged in
+        return Auth::check();
     }
 
     /**
@@ -22,7 +24,7 @@ class StoreScriptRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'min:3|unique:scripts,name,' . $this->request->get('id')
         ];
     }
 }

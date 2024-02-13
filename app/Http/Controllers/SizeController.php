@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSizeRequest;
 use App\Http\Requests\UpdateSizeRequest;
 use App\Models\Size;
+use Illuminate\Http\Request;
 
-class SizeController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+class SizeController extends BaseController
+{ /**
+  * Display a listing of the resource.
+  */
+    public function index(Request $request)
     {
-        //
+        // Order, filter and paginate data
+        $items = $this->processIndexData($request, Size::query());
+
+        return view('cruds.settings.sizes.index', compact('items'));
     }
 
     /**
@@ -21,15 +25,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSizeRequest $request)
-    {
-        //
+        return view('cruds.settings.sizes.create');
     }
 
     /**
@@ -37,7 +33,16 @@ class SizeController extends Controller
      */
     public function show(Size $size)
     {
-        //
+        // We do not use show method since there is not much to show (only a name)
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreSizeRequest $request)
+    {
+        Size::create($request->validated());
+        return redirect()->route('sizes.index');
     }
 
     /**
@@ -45,7 +50,8 @@ class SizeController extends Controller
      */
     public function edit(Size $size)
     {
-        //
+        return view('cruds.settings.sizes.edit', compact('size'));
+
     }
 
     /**
@@ -53,14 +59,19 @@ class SizeController extends Controller
      */
     public function update(UpdateSizeRequest $request, Size $size)
     {
-        //
+        $size->update($request->validated());
+        return redirect()->route('sizes.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Size $size)
+    public function destroy(Size $size, Request $request)
     {
-        //
+        // Deletes genre from the DB
+        $size->delete();
+
+        // After the operation is finished redirects back
+        return redirect()->back();
     }
 }

@@ -1,72 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <!-- Meta -->
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="content-language" content="en" />
-    <meta name="description" content="ICT Cortex Library - project for high school students..." />
-    <meta name="keywords" content="ict cortex, cortex, bild, bildstudio, highschool, students, coding" />
-    <meta name="author" content="bildstudio" />
-    <!-- End Meta -->
+    {{-- Meta --}}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Title -->
-    <title>Library - ICT Cortex student project</title>
-    <link rel="shortcut icon" href="img/library-favicon.ico" type="image/vnd.microsoft.icon" />
-    <!-- End Title -->
+    <title> {{ isset($title) ? $title : 'Dashboard' }} | {{ config('app.name') }}</title>
 
-    <!-- Styles -->
-    <!-- @include('layouts.partials.styles') -->
-    <!-- End Styles -->
-
-    @vite('resources/css/app.css')
-    @include('layouts.partials.styles')
-
-
-
+    {{-- Styles and fonts --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" /> 
+    @include('partials.general.styles')
 </head>
 
 <body class="overflow-hidden small:bg-gradient-to-r small:from-green-400 small:to-blue-500">
-    <!-- Header -->
-    @include('layouts.partials.header')
-    <!-- Header -->
+    {{-- App Header --}}
+    @include('partials.general.header')
 
-    <!-- Main content -->
     <main class="flex flex-row small:hidden">
-        <!-- Sidebar -->
-        @include('layouts.partials.sidebar')
-        <!-- End Sidebar -->
+        {{-- Sidebar --}}
+        @include('partials.general.sidebar')
 
-        <!-- Content -->
-        <section class="w-screen h-screen py-4 pl-[60px] text-[#212121]">
-            <!-- Heading of content -->
-            <div class="heading">
-                <h1 class="pl-[50px] pb-[20px] text-[35px] text-[#5c5c5c] font-bold border-b-[2px] border-[#e4dfdf]">
-                    @yield('title')
-                </h1>
-            </div>
-            <!-- Space for content -->
+        <section class="w-screen h-screen pl-[83px] scroll pb-[80px] text-[#212121]">
 
-                @yield('content')
+            {{-- Title Header --}}
+            @include('partials.custom.title-header')
+
+            {{-- Main Content --}}
+            @yield('content')
 
         </section>
-        <!-- End Content -->
     </main>
-    <!-- End Main content -->
 
+    {{-- Notification for small devices --}}
+    @include('partials.general.inProgress')
 
-    <!-- Notification for small devices -->
-    @include('layouts.partials.inProgress')
+    {{-- Scripts --}}
+    @include('partials.general.scripts')
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
+    <!-- File upload -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://unpkg.com/create-file-list"></script>
 
-    <!-- Scripts -->
-    @vite('resources/js/jquery.min.js')
-    @vite('resources/js/app.js')
-    <!-- End Scripts -->
-
-
+    {{-- Custom page cripts --}}
+    @yield('page-scripts')
 </body>
 
 </html>

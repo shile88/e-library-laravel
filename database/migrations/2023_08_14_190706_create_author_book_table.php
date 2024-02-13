@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('author_book', function (Blueprint $table) {
             $table->id();
+
+            // cascadeOnDelete() means the row in this table will be deleted if
+            // the foreign id is deleted from the it's own table
+            $table->foreignId('author_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('book_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
-            $table->foreignId('author_id')->constrained();
-            $table->foreignId('book_id')->constrained();
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StorePublisherRequest extends FormRequest
 {
@@ -11,7 +12,8 @@ class StorePublisherRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // Authorizes this request only if user is logged in
+        return Auth::check();
     }
 
     /**
@@ -21,8 +23,9 @@ class StorePublisherRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Name of a publisher must be provided, have min. length of 3 characters and have unique value in table publishers
         return [
-            //
+            'name' => 'required|min:3|unique:publishers'
         ];
     }
 }
