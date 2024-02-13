@@ -1,9 +1,11 @@
 <div class="flex items-center py-4 space-x-3 rounded-lg justify-between ml-[30px]">
     {{-- Create new item --}}
-    <a href="{{ route($resourcePlural . '.create') }}"
-        class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
-        <i class="fas fa-plus mr-[15px]"></i>New {{ $resourceName }}
-    </a>
+    @if(auth()->user()->role_id != 3)
+        <a href="{{ route($resourcePlural . '.create') }}"
+           class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 rounded-[5px] tracking-wider text-white bg-[#3f51b5] hover:bg-[#4558BE]">
+            <i class="fas fa-plus mr-[15px]"></i>New {{ $resourceName }}
+        </a>
+    @endif
 
     {{-- Search --}}
     <form action="{{ route($resourcePlural . '.index') }}" method="get">

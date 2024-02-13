@@ -1,10 +1,10 @@
 @extends('layouts.app', [
     'hasTitleHeader' => true,
-    'title' => 'Authors',
+    'title' => 'Students',
     'breadcrumbs' => [
         [
-            'name' => 'Authors',
-            'href' => route('authors.index')
+            'name' => 'Students',
+            'href' => route('users.index')
         ],
     ],
 ])
@@ -13,10 +13,10 @@
 
     @include('partials.custom.index_resource', [
         'items' => $items,
-        'resourceName' => 'author',
-        'resourcePlural' => 'authors',
-        'headers' => ['Name', 'About'],
-        'values' => ['about'],
+        'resourceName' => 'student',
+        'resourcePlural' => 'users',
+        'headers' => ['Name', 'Email', 'User role', 'JMBG'],
+        'values' => ['email', 'role_id', 'jmbg'],
         'dropdowns' => ['Show details', 'Edit', 'Delete'],
         'functions' => ['.show', '.edit', '.destroy'],
         'icons' => ['far fa-file', 'fas fa-edit', 'fa fa-trash']

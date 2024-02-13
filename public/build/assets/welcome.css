@@ -51,8 +51,9 @@ h6 {
 }
 
 a {
-    color: inherit;
-    text-decoration: inherit
+    color: white;
+    text-decoration: inherit;
+    font-size: 1.5rem;
 }
 
 b,
@@ -570,8 +571,9 @@ video {
 }
 
 .text-xl {
-    font-size: 1.25rem;
-    line-height: 1.75rem
+    font-size: 2.3rem;
+    line-height: 2.5rem;
+    color:white
 }
 
 .text-sm {
@@ -580,7 +582,7 @@ video {
 }
 
 .font-semibold {
-    font-weight: 600
+    font-weight: 600;
 }
 
 .leading-relaxed {

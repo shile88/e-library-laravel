@@ -11,57 +11,75 @@
         {{-- Links --}}
         <div>
             <ul class="text-[#2D3B48] sidebar-nav">
+                @if(auth()->user()->role_id === 3)
+                    @include('partials.general.sidebar-button', [
+                        'items' => [
+                            [
+                                'title' => 'Dashboard',
+                                'href' => route('dashboard'),
+                                'icon' => 'fas fa-chart-line',
+                            ],
+                            [
+                                'title' => 'Books',
+                                'href' => route('books.index'),
+                                'icon' => 'fas fa-book',
+                            ],
+                        ],
+                    ])
+                @else
+                    @include('partials.general.sidebar-button', [
+                   'items' => [
+                       [
+                           'title' => 'Dashboard',
+                           'href' => route('dashboard'),
+                           'icon' => 'fas fa-chart-line',
+                       ],
+                       [
+                           'title' => 'Books',
+                           'href' => route('books.index'),
+                           'icon' => 'fas fa-book',
+                       ],
+                       [
+                           'title' => 'Authors',
+                           'href' => route('authors.index'),
+                           'icon' => 'fas fa-user-pen',
+                       ],
+                       [
+                           'title' => 'Students',
+                           'href' => route('users.index'),
+                           'icon' => 'fas fa-user-graduate',
+                       ],
+                       [
+                           'title' => 'Transactions',
+                           'href' => route('books.index'),
+                           'icon' => 'fas fa-repeat',
+                       ],
+                       [
+                           'title' => 'Librarians',
+                           'href' => route('books.index'),
+                           'icon' => 'fas fa-user-tie',
+                       ],
+                       [
+                           'title' => 'Admins',
+                           'href' => route('books.index'),
+                           'icon' => 'fas fa-user-shield',
+                       ],
+                   ],
+               ])
+                @endif
 
-                @include('partials.general.sidebar-button', [
-                    'items' => [
-                        [
-                            'title' => 'Dashboard',
-                            'href' => route('dashboard'),
-                            'icon' => 'fas fa-chart-line',
-                        ],
-                        [
-                            'title' => 'Books',
-                            'href' => route('books.index'),
-                            'icon' => 'fas fa-book',
-                        ],
-                        [
-                            'title' => 'Authors',
-                            'href' => route('authors.index'),
-                            'icon' => 'fas fa-user-pen',
-                        ],
-                        [
-                            'title' => 'Students',
-                            'href' => route('books.index'),
-                            'icon' => 'fas fa-user-graduate',
-                        ],
-                        [
-                            'title' => 'Transactions',
-                            'href' => route('books.index'),
-                            'icon' => 'fas fa-repeat',
-                        ],
-                        [
-                            'title' => 'Librarians',
-                            'href' => route('books.index'),
-                            'icon' => 'fas fa-user-tie',
-                        ],
-                        [
-                            'title' => 'Admins',
-                            'href' => route('books.index'),
-                            'icon' => 'fas fa-user-shield',
-                        ],
-                    ],
-                ])
 
             </ul>
         </div>
     </div>
 
     {{-- Settings icon --}}
-    <div class="sidebar-nav py-[10px] border-t-[1px] border-[#e4dfdf] pt-[23px] pb-[29px] hover:bg-[#EAEAEA]">
-        <ul>
+    @if(auth()->user()->role_id != 3)
+        <div class="sidebar-nav py-[10px] border-t-[1px] border-[#e4dfdf] pt-[23px] pb-[29px] hover:bg-[#EAEAEA]">
+            <ul>
 
-            <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
-                <div class="ml-[30px]">
+                <li class="pt-[18px] pb-[14px] group hover:bg-[#EAEAEA] h-[60px]">
+                    <div class="ml-[30px]">
                     <span class="flex justify-between w-full whitespace-nowrap" title="Settings">
                         <a href="{{ route('settings.index') }}">
                             <i
@@ -92,9 +110,9 @@
                             </div>
                         </a>
                     </span>
-                </div>
-            </li>
-
-        </ul>
-    </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    @endif
 </nav>

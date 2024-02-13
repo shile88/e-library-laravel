@@ -88,8 +88,8 @@
                                         aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
                                         role="menu">
                                         <div class="py-1">
+{{--
 
-                                            {{-- Show button --}}
                                             <a href="{{ route($resourcePlural . '.show', $item) }}" tabindex="0"
                                                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                 role="menuitem">
@@ -97,7 +97,7 @@
                                                 <span class="px-4 py-0">Show details</span>
                                             </a>
 
-                                            {{-- Show button --}}
+
                                             <a href="{{ route($resourcePlural . '.edit', $item) }}" tabindex="0"
                                                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                 role="menuitem">
@@ -105,7 +105,7 @@
                                                 <span class="px-4 py-0">Edit {{ $resourceName }}</span>
                                             </a>
 
-                                            {{-- Delete button --}}
+
                                             <form action="{{ route($resourcePlural . '.destroy', $item) }}"
                                                 method="POST">
                                                 @csrf
@@ -116,7 +116,32 @@
                                                     <span class="px-4 py-0">Delete {{ $resourceName }}</span>
                                                 </button>
                                             </form>
-
+                                            --}}
+                                            @foreach($dropdowns as $index => $dropdown)
+                                                @if($dropdown === 'Delete')
+                                                    <form action="{{ route($resourcePlural . '.destroy', $item) }}"
+                                                          method="POST">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button id="deleteAuthors" type="submit" tabindex="0"
+                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600">
+                                                            <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
+                                                            <span class="px-4 py-0">{{$dropdown}} {{ $resourceName }}</span>
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    @php
+                                                        $function = $functions[$index];
+                                                        $icon = $icons[$index];
+                                                    @endphp
+                                                        <a href="{{ route($resourcePlural . $function, $item) }}" tabindex="0"
+                                                           class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                           role="menuitem">
+                                                            <i class="{{$icon}} mr-[1px] ml-[5px] py-1"></i>
+                                                            <span class="px-4 py-0">{{$dropdown}} {{ $resourceName }}</span>
+                                                        </a>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
